@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+nixver=nixos-23.11
+
+tarball=${nixver}.tar.gz
+
+github=https://github.com/nixos/nixpkgs/archive/${tarball}
+
+if [ -f tainted-canvas.patch -a -f common-nix.patch ]; then
+  rm -rf chromium
+
+  wget -O - ${github} | tar -xzv --strip-components=5 -f - \
+    nixpkgs-${nixver}/pkgs/applications/networking/browsers/chromium/
+
+  cp tainted-canvas.patch chromium/patches
+
+  patch -p 5 < common-nix.patch
+fi
