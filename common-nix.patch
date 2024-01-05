@@ -1,5 +1,5 @@
 diff --git a/pkgs/applications/networking/browsers/chromium/common.nix b/pkgs/applications/networking/browsers/chromium/common.nix
-index a322a171051f..dcf3bb3f3626 100644
+index 50d11ff39d84..c77ee52006cd 100644
 --- a/pkgs/applications/networking/browsers/chromium/common.nix
 +++ b/pkgs/applications/networking/browsers/chromium/common.nix
 @@ -246,6 +246,7 @@ let

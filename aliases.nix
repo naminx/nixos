@@ -1,14 +1,13 @@
 {
+  cat = "bat";
   copy = "cp -i";
-  chrome = "chromium --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime";
   cls = "clear";
   cp = "cp -i";
   del = "rm -i";
-  dir = "lsd -lF --color=auto";
+  dir = "lss -lF";
   ffwh = "ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of csv=s=x:p=0";
-  ldir = "/etc/profiles/per-user/namin/bin/ls -lF --color=auto";
-  ls = "lsd -F --color=auto";
-  lls = "/etc/profiles/per-user/namin/bin/ls -F --color=auto";
+  ipv6-off = "sudo sysctl -w net.ipv6.conf.enp5s0.disable_ipv6=1";
+  ls = "lss -F";
   md = "mkdir";
   move = "mv -i";
   mv = "mv -i";
