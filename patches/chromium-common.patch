@@ -1,0 +1,13 @@
+diff --git a/pkgs/applications/networking/browsers/chromium/common.nix b/pkgs/applications/networking/browsers/chromium/common.nix
+index ec355dccd19..f2bb6a4f9f4 100644
+--- a/pkgs/applications/networking/browsers/chromium/common.nix
++++ b/pkgs/applications/networking/browsers/chromium/common.nix
+@@ -236,7 +236,7 @@ let
+       ++ lib.optionals cupsSupport [ libgcrypt cups ]
+       ++ lib.optional pulseSupport libpulseaudio;
+ 
+-    patches = [
++    patches = [ ./patches/tainted-canvas.patch ] ++ [
+       ./patches/cross-compile.patch
+       # Optional patch to use SOURCE_DATE_EPOCH in compute_build_timestamp.py (should be upstreamed):
+       ./patches/no-build-timestamps.patch

@@ -6,13 +6,13 @@ tarball=${nixver}.tar.gz
 
 github=https://github.com/nixos/nixpkgs/archive/${tarball}
 
-if [ -f tainted-canvas.patch -a -f common-nix.patch ]; then
+if [ -f patches/chromium-tainted-canvas.patch -a -f patches/chromium-common.patch ]; then
   rm -rf chromium
 
   wget -O - ${github} | tar -xzv --strip-components=5 -f - \
     nixpkgs-${nixver}/pkgs/applications/networking/browsers/chromium/
 
-  cp tainted-canvas.patch chromium/patches
+  cp patches/chromium-tainted-canvas.patch chromium/patches
 
-  patch -p 5 < common-nix.patch
+  patch -p 5 < patches/chromium-common.patch
 fi

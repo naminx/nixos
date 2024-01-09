@@ -11,17 +11,31 @@ vnoremap <BS> d
 " clipboard with win32yank.exe
 " in ~/.local/bin/win32yank.exe
 " let g:clipboard = {
-"             \   'name': 'WslClipboard',
-"             \   'copy': {
-"             \      '+': '/mnt/c/Windows/System32/clip.exe',
-"             \      '*': '/mnt/c/Windows/System32/clip.exe',
-"             \    },
-"             \   'paste': {
-"             \      '+': '/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
-"             \      '*': '/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
-"             \   },
-"             \   'cache_enabled': 0,
-"             \ }
+"   \   'name': 'WslClipboard',
+"   \   'copy': {
+"   \     '+': '/mnt/c/Windows/System32/clip.exe',
+"   \     '*': '/mnt/c/Windows/System32/clip.exe',
+"   \    },
+"   \   'paste': {
+"   \     '+': '/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+"   \     '*': '/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+"   \   },
+"   \   'cache_enabled': 0,
+"   \ }
+if (!empty($WAYLAND_DISPLAY) && executable("wl-copy") && executable("wl-paste"))
+  let g:clipboard = {
+    \   'name': 'wl-copy',
+    \   'copy': {
+    \     '+': 'wl-copy --type text/plain',
+    \     '*': 'wl-copy --primary --type text/plain',
+    \   },
+    \   'paste': {
+    \     '+': 'wl-paste --no-newline',
+    \     '*': 'wl-paste --no-newline --primary',
+    \   },
+    \   'cache_enabled': 0,
+    \ }
+endif
 
 if 1
   " CTRL-X and SHIFT-Del are Cut

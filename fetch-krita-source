@@ -1,0 +1,12 @@
+#!/usr/bin/env bash 
+
+# wget https://download.kde.org/stable/krita/5.1.5/krita-5.1.5.tar.gz | tar -xvf -
+# cd krita-5.1.5
+
+mkdir krita
+cd krita
+git init
+git sparse-checkout init
+git sparse-checkout set "libs/ui/input/kis_pan_action.cpp"
+git pull https://github.com/KDE/krita f031626b82a503f3b168cf89ce559146cd6a38b0
+# git checkout FETCH_HEAD

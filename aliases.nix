@@ -4,10 +4,10 @@
   cls = "clear";
   cp = "cp -i";
   del = "rm -i";
-  dir = "lss -lF";
+  dir = "ansi lsd --icon=never -lF";
   ffwh = "ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of csv=s=x:p=0";
   ipv6-off = "sudo sysctl -w net.ipv6.conf.enp5s0.disable_ipv6=1";
-  ls = "lss -F";
+  ls = "ansi ls -CF --width=$(tput cols)";
   md = "mkdir";
   move = "mv -i";
   mv = "mv -i";

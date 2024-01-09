@@ -195,7 +195,7 @@ let
       buildPlatformLlvmStdenv.cc
       pkg-config
       libuuid
-      libpng # needed for "host/generate_colors_info"
+      (libpng.override { apngSupport = false; }) # needed for "host/generate_colors_info"
     ]
     # When cross-compiling, chromium builds a huge proportion of its
     # components for both the `buildPlatform` (which it calls
@@ -237,6 +237,7 @@ let
       ++ lib.optional pulseSupport libpulseaudio;
 
     patches = [
+      ./patches/chromium-tainted-canvas.patch
       ./patches/cross-compile.patch
       # Optional patch to use SOURCE_DATE_EPOCH in compute_build_timestamp.py (should be upstreamed):
       ./patches/no-build-timestamps.patch
@@ -246,18 +247,9 @@ let
       # (we currently package 1.26 in Nixpkgs while Chromium bundles 1.21):
       # Source: https://bugs.chromium.org/p/angleproject/issues/detail?id=7582#c1
       ./patches/angle-wayland-include-protocol.patch
-      ./patches/tainted-canvas.patch
-    ] ++ lib.optionals (!chromiumVersionAtLeast "120") [
-      # We need to revert this patch to build M114+ with LLVM 16:
-      (githubPatch {
-        # Reland [clang] Disable autoupgrading debug info in ThinLTO builds
-        commit = "54969766fd2029c506befc46e9ce14d67c7ed02a";
-        hash = "sha256-Vryjg8kyn3cxWg3PmSwYRG6zrHOqYWBMSdEMGiaPg6M=";
-        revert = true;
-      })
     ] ++ lib.optionals (chromiumVersionAtLeast "120") [
-      # We need to revert this patch to build M120+ with LLVM 16:
-      ./patches/chromium-120-llvm-16.patch
+      # We need to revert this patch to build M120+ with LLVM 17:
+      ./patches/chromium-120-llvm-17.patch
     ] ++ lib.optionals (!chromiumVersionAtLeast "119.0.6024.0") [
       # Fix build with at-spi2-core ≥ 2.49
       # This version is still needed for electron.
