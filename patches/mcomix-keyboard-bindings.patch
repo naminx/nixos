@@ -1,0 +1,30 @@
+diff --git a/mcomix/event.py b/mcomix/event.py
+index dbeb8f6..0742360 100644
+--- a/mcomix/event.py
++++ b/mcomix/event.py
+@@ -60,10 +60,10 @@ class EventHandler(object):
+ 
+         # Navigation keys
+         manager.register('previous_page',
+-            ['Page_Up', 'KP_Page_Up', 'BackSpace'],
++            ['Left', 'KP_Page_Up', 'BackSpace'],
+             self._flip_page, kwargs={'number_of_pages': -1})
+         manager.register('next_page',
+-            ['Page_Down', 'KP_Page_Down'],
++            ['Right', 'KP_Page_Down'],
+             self._flip_page, kwargs={'number_of_pages': 1})
+         manager.register('previous_page_singlestep',
+             ['<Ctrl>Page_Up', '<Ctrl>KP_Page_Up', '<Ctrl>BackSpace'],
+@@ -79,10 +79,10 @@ class EventHandler(object):
+             self._left_right_page_progress, kwargs={'number_of_pages': 1})
+ 
+         manager.register('previous_page_ff',
+-            ['<Shift>Page_Up', '<Shift>KP_Page_Up', '<Shift>BackSpace', '<Shift><Mod1>Left'],
++            ['Page_Up', '<Shift>KP_Page_Up', '<Shift>BackSpace', '<Shift><Mod1>Left'],
+             self._flip_page, kwargs={'number_of_pages': -10})
+         manager.register('next_page_ff',
+-            ['<Shift>Page_Down', '<Shift>KP_Page_Down', '<Shift><Mod1>Right'],
++            ['Page_Down', '<Shift>KP_Page_Down', '<Shift><Mod1>Right'],
+             self._flip_page, kwargs={'number_of_pages': 10})
+ 
+ 

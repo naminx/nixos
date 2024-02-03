@@ -1,0 +1,48 @@
+diff --git a/mcomix/main.py b/mcomix/main.py
+index 177fa8a..7986cb6 100644
+--- a/mcomix/main.py
++++ b/mcomix/main.py
+@@ -41,6 +41,8 @@ from mcomix.transform import Matrix, Transform
+ from mcomix.i18n import _
+ 
+ from typing import List
++from pathlib import Path
++from send2trash import send2trash
+ 
+ 
+ class MainWindow(Gtk.Window):
+@@ -1039,7 +1041,8 @@ class MainWindow(Gtk.Window):
+         current_file = self.imagehandler.get_real_path()
+         dialog = message_dialog.MessageDialog(self, Gtk.DialogFlags.MODAL, Gtk.MessageType.QUESTION,
+                 Gtk.ButtonsType.NONE)
+-        dialog.set_should_remember_choice('delete-opend-file', (Gtk.ResponseType.OK,))
++        if not Path(current_file).suffix.lower() in [ ".cbz", ".cbr", ".zip", ".rar" ]:
++            dialog.set_should_remember_choice('delete-opend-file', (Gtk.ResponseType.OK,))
+         dialog.set_text(
+                 _('Delete "%s"?') % os.path.basename(current_file),
+                 _('The file will be deleted from your harddisk.'))
+@@ -1060,7 +1063,7 @@ class MainWindow(Gtk.Window):
+                     self.filehandler.close_file()
+ 
+                 if os.path.isfile(current_file):
+-                    os.unlink(current_file)
++                    send2trash(current_file)
+             else:
+                 if self.imagehandler.get_number_of_pages() > 1:
+                     # Open the next/previous file
+@@ -1070,13 +1073,13 @@ class MainWindow(Gtk.Window):
+                         self.flip_page(+1)
+                     # Unlink the desired file
+                     if os.path.isfile(current_file):
+-                        os.unlink(current_file)
++                        send2trash(current_file)
+                     # Refresh the directory
+                     self.filehandler.refresh_file()
+                 else:
+                     self.filehandler.close_file()
+                     if os.path.isfile(current_file):
+-                        os.unlink(current_file)
++                        send2trash(current_file)
+ 
+     def show_info_panel(self):
+         """ Shows an OSD displaying information about the current page. """
