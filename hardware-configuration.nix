@@ -30,43 +30,43 @@
   fileSystems."/mnt/c" = {
     device = "/dev/disk/by-partuuid/575a639e-5cbb-4b13-8731-d6f64911d3a2";
     fsType = "ntfs3";
-    options = [ "nosuid" "nodev" "uid=1000" "gid=100" "iocharset=utf8" "uhelper=udisks2" ];
+    options = ["nosuid" "nodev" "uid=1000" "gid=100" "iocharset=utf8" "uhelper=udisks2"];
   };
 
   fileSystems."/mnt/m" = {
     device = "/dev/disk/by-partuuid/af5c36a0-2efa-4003-89f0-12a42fa484fc";
     fsType = "ntfs3";
-    options = [ "nosuid" "nodev" "uid=1000" "gid=100" "iocharset=utf8" "uhelper=udisks2" ];
+    options = ["nosuid" "nodev" "uid=1000" "gid=100" "iocharset=utf8" "uhelper=udisks2"];
   };
 
   fileSystems."/mnt/n" = {
     device = "/dev/disk/by-partuuid/034a8284-8025-4afd-94d8-647ee30e1b54";
     fsType = "ntfs3";
-    options = [ "nosuid" "nodev" "uid=1000" "gid=100" "iocharset=utf8" "uhelper=udisks2" ];
+    options = ["nosuid" "nodev" "uid=1000" "gid=100" "iocharset=utf8" "uhelper=udisks2"];
   };
 
   fileSystems."/mnt/o" = {
     device = "/dev/disk/by-partuuid/0ff501b0-7da3-407b-b0f8-570821d5a6a8";
     fsType = "ntfs3";
-    options = [ "nosuid" "nodev" "uid=1000" "gid=100" "iocharset=utf8" "uhelper=udisks2" ];
+    options = ["nosuid" "nodev" "uid=1000" "gid=100" "iocharset=utf8" "uhelper=udisks2"];
   };
 
   fileSystems."/mnt/p" = {
     device = "/dev/disk/by-partuuid/5632fa0b-6268-4308-953c-8cd4eb3a4f20";
     fsType = "ntfs3";
-    options = [ "nosuid" "nodev" "uid=1000" "gid=100" "iocharset=utf8" "uhelper=udisks2" ];
+    options = ["nosuid" "nodev" "uid=1000" "gid=100" "iocharset=utf8" "uhelper=udisks2"];
   };
 
   fileSystems."/mnt/q" = {
     device = "/dev/disk/by-uuid/cc4b40dd-6534-4056-babc-afacf96710f5";
     fsType = "ext4";
-    options = [ "nosuid" "nodev" "errors=remount-ro" "uhelper=udisks2" ];
+    options = ["nosuid" "nodev" "errors=remount-ro" "uhelper=udisks2"];
   };
 
   fileSystems."/mnt/r" = {
     device = "/dev/disk/by-partuuid/00016c1d-a940-4b26-c00b-da013ad80200";
     fsType = "ext4";
-    options = [ "nosuid" "nodev" "errors=remount-ro" "uhelper=udisks2" ];
+    options = ["nosuid" "nodev" "errors=remount-ro" "uhelper=udisks2"];
   };
 
   swapDevices = [];
@@ -77,12 +77,14 @@
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   # networking.useDHCP = lib.mkDefault true;
   # networking.interfaces.enp5s0.useDHCP = lib.mkDefault true;
-  networking.interfaces.eth0.ipv4.addresses = [ {
-    address = "192.168.1.2";
-    prefixLength = 24;
-  } ];
+  networking.interfaces.eth0.ipv4.addresses = [
+    {
+      address = "192.168.1.2";
+      prefixLength = 24;
+    }
+  ];
   networking.defaultGateway = "192.168.1.1";
-  networking.nameservers = [ "1.1.1.1" "8.8.8.8" ];
+  networking.nameservers = ["1.1.1.1" "8.8.8.8"];
   networking.enableIPv6 = false;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";

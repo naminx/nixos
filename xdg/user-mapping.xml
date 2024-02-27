@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<user-mapping>
+  <authorize
+    username="namin"
+    password="51af63f4723fbf3c0132acec2b654c2ecade791e892abe9cdad9bae7fd38d12c"
+    encoding="sha256">
+    <connection name="tokyo-ssh">
+      <protocol>ssh</protocol>
+      <param name="hostname">localhost</param>
+      <param name="username">namin</param>
+      <param name="private-key">
+-----BEGIN RSA PRIVATE KEY-----
+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
+-----END RSA PRIVATE KEY-----
+      </param>
+      <param name="font-name">FiraCode Nerd Font</param>
+      <param name="font-size">12</param>
+    </connection>
+    <connection name="tokyo-vnc">
+      <protocol>vnc</protocol>
+      <param name="hostname">localhost</param>
+      <param name="port">5900</param>
+      <param name="password">${GUAC_PASSWORD}</param>
+    </connection>
+    <connection name="shibuya">
+      <protocol>rdp</protocol>
+      <param name="hostname">192.168.1.4</param>
+      <param name="port">3389</param>
+      <param name="security">rdp</param>
+      <param name="user">namin</param>
+      <param name="password">${GUAC_PASSWORD}</param>
+    </connection>
+  </authorize>
+</user-mapping>

@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+nixver=nixos-23.11
+
+tarball=${nixver}.tar.gz
+
+selfdir=$(dirname "$0")
+
+github=https://github.com/nixos/nixpkgs/archive/${tarball}
+
+if [ -f "${selfdir}/../patches/chromium-tainted-canvas.patch" -a -f "${selfdir}/../patches/chromium-common-nix.patch" ]; then
+  rm -rf "${selfdir}/../chromium"
+
+  wget -O - ${github} | tar -xzv --strip-components=5 -C "${selfdir}/.." -f - \
+    nixpkgs-${nixver}/pkgs/applications/networking/browsers/chromium/
+
+  cp "${selfdir}/../patches/chromium-tainted-canvas.patch" "${selfdir}/../chromium/patches"
+
+  patch -d "${selfdir}/.." -p 5 < "${selfdir}/../patches/chromium-common-nix.patch"
+fi

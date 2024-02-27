@@ -1,0 +1,139 @@
+diff --git a/src/app.rs b/src/app.rs
+index bd6defa..c59feef 100644
+--- a/src/app.rs
++++ b/src/app.rs
+@@ -33,7 +33,7 @@ pub struct Cli {
+     pub indicators: bool,
+ 
+     /// Display extended file metadata as a table
+-    #[arg(short, long)]
++    #[arg(short, long, conflicts_with = "column")]
+     pub long: bool,
+ 
+     /// Ignore the configuration file
+@@ -45,7 +45,7 @@ pub struct Cli {
+     pub config_file: Option<PathBuf>,
+ 
+     /// Display one entry per line
+-    #[arg(short = '1', long)]
++    #[arg(short = '1', long, conflicts_with_all = [ "column", "tree" ])]
+     pub oneline: bool,
+ 
+     /// Recurse into directories
+@@ -56,8 +56,16 @@ pub struct Cli {
+     #[arg(short, long)]
+     human_readable: bool,
+ 
++    // List entries by columns
++    #[arg(short = 'C', long, conflicts_with_all = [ "oneline", "tree", "long", "inode", "context", "blocks" ])]
++    pub column: bool,
++
++    // Set output width to COLS.  0 means no limit
++    #[arg(short, long, value_name = "COLS")]
++    pub width: Option<usize>,
++
+     /// Recurse into directories and present the result as a tree
+-    #[arg(long)]
++    #[arg(long, conflicts_with_all = [ "oneline", "column" ])]
+     pub tree: bool,
+ 
+     /// Stop recursing into directories after reaching specified depth
+@@ -134,6 +142,7 @@ pub struct Cli {
+     long,
+     value_delimiter = ',',
+     value_parser = ["permission", "user", "group", "context", "size", "date", "name", "inode", "links", "git"],
++    conflicts_with = "column",
+     )]
+     pub blocks: Vec<String>,
+ 
+@@ -151,7 +160,7 @@ pub struct Cli {
+     pub ignore_glob: Vec<String>,
+ 
+     /// Display the index number of each file
+-    #[arg(short, long)]
++    #[arg(short, long, conflicts_with = "column")]
+     pub inode: bool,
+ 
+     /// Show git status on file and directory"
+@@ -165,7 +174,7 @@ pub struct Cli {
+     pub dereference: bool,
+ 
+     /// Print security context (label) of each file
+-    #[arg(short = 'Z', long)]
++    #[arg(short = 'Z', long, conflicts_with = "column")]
+     pub context: bool,
+ 
+     /// Attach hyperlink to filenames [default: never]
+diff --git a/src/core.rs b/src/core.rs
+index b0d0efc..fcbc986 100644
+--- a/src/core.rs
++++ b/src/core.rs
+@@ -42,8 +42,6 @@ impl Core {
+         #[cfg(target_os = "windows")]
+         let console_color_ok = crossterm::ansi_support::supports_ansi();
+ 
+-        let mut inner_flags = flags.clone();
+-
+         let color_theme = match (tty_available && console_color_ok, flags.color.when) {
+             (_, ColorOption::Never) | (false, ColorOption::Auto) => ThemeOption::NoColor,
+             _ => flags.color.theme.clone(),
+@@ -69,7 +67,6 @@ impl Core {
+             //
+             // Most of the programs does not handle correctly the ansi colors
+             // or require a raw output (like the `wc` command).
+-            inner_flags.layout = Layout::OneLine;
+ 
+             flags.should_quote = false;
+         };
+diff --git a/src/display.rs b/src/display.rs
+index 6fea6e9..8a97bae 100644
+--- a/src/display.rs
++++ b/src/display.rs
+@@ -22,7 +22,11 @@ pub fn grid(
+     icons: &Icons,
+     git_theme: &GitTheme,
+ ) -> String {
+-    let term_width = terminal_size().map(|(w, _)| w.0 as usize);
++    let termsize_width = terminal_size().map(|(w, _)| w.0 as usize);
++    let term_width = match flags.forced_column {
++        true => flags.width.or(termsize_width).or(Some(80)),
++        false => termsize_width.and_then(|_| flags.width.or(termsize_width)),
++    };
+ 
+     inner_display_grid(
+         &DisplayOption::None,
+diff --git a/src/flags.rs b/src/flags.rs
+index a73ac65..60f7f71 100644
+--- a/src/flags.rs
++++ b/src/flags.rs
+@@ -73,6 +73,8 @@ pub struct Flags {
+     pub hyperlink: HyperlinkOption,
+     pub header: Header,
+     pub should_quote: bool,
++    pub forced_column: bool,
++    pub width: Option<usize>,
+ }
+ 
+ impl Flags {
+@@ -103,6 +105,8 @@ impl Flags {
+             hyperlink: HyperlinkOption::configure_from(cli, config),
+             header: Header::configure_from(cli, config),
+             should_quote: true,
++            forced_column: cli.column,
++            width: cli.width.map(|w| { if w == 0 { return usize::MAX; } w }),
+         })
+     }
+ }
+diff --git a/src/flags/layout.rs b/src/flags/layout.rs
+index d0d44aa..1c3bac6 100644
+--- a/src/flags/layout.rs
++++ b/src/flags/layout.rs
+@@ -32,6 +32,8 @@ impl Configurable<Layout> for Layout {
+         // TODO: handle this differently
+         {
+             Some(Self::OneLine)
++        } else if cli.column {
++            Some(Self::Grid)
+         } else {
+             None
+         }

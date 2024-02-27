@@ -16,6 +16,7 @@ with pkgs; {
       vim-nix # nix source file highlight
       vim-ormolu # format haskell source file when saving
       # vim-prettier
+      nvim-lspconfig
     ];
     opt = [];
   };

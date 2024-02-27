@@ -1,7 +1,7 @@
 {
   "languageserver": {
     "haskell": {
-      "command": "haskell-language-server",
+      "command": "haskell-language-server-wrapper",
       "args": ["--lsp"],
       "rootPatterns": ["*.cabal"],
       "filetypes": ["haskell", "lhaskell"],
@@ -10,6 +10,10 @@
           "formattingProvider": "fourmolu"
         }
       }
+    },
+    "nix": {
+      "command": "nixd",
+      "filetypes": ["nix"]
     }
   },
   "prettier.enable": true,

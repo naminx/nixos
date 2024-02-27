@@ -1,21 +1,21 @@
-{ lib
-, fetchurl
-, gdk-pixbuf
-, gobject-introspection
-, gtk3
-, mcomix
-, python3
-, testers
-, wrapGAppsHook
-
+{
+  lib,
+  fetchurl,
+  gdk-pixbuf,
+  gobject-introspection,
+  gtk3,
+  mcomix,
+  python3,
+  testers,
+  wrapGAppsHook,
   # Recommended Dependencies:
-, p7zip
-, unrar
-, chardetSupport ? true
-, pdfSupport ? true
-, unrarSupport ? true
+  p7zip,
+  unrar,
+  chardetSupport ? true,
+  pdfSupport ? true,
+  unrarSupport ? true,
+  ...
 }:
-
 python3.pkgs.buildPythonApplication rec {
   pname = "mcomix";
   version = "3.1.0";
@@ -36,6 +36,8 @@ python3.pkgs.buildPythonApplication rec {
     ./patches/mcomix-file-sorting-order.patch
     ./patches/mcomix-keyboard-bindings.patch
     ./patches/mcomix-send-to-trash.patch
+    ./patches/mcomix-mouse-wheel.patch
+    ./patches/mcomix-reset-zoom.patch
   ];
 
   nativeBuildInputs = [
@@ -44,14 +46,15 @@ python3.pkgs.buildPythonApplication rec {
     wrapGAppsHook
   ];
 
-  propagatedBuildInputs = with python3.pkgs; [
-    pillow
-    pycairo
-    pygobject3
-    send2trash
-  ]
-  ++ lib.optionals chardetSupport [ chardet ]
-  ++ lib.optionals pdfSupport [ pymupdf ];
+  propagatedBuildInputs = with python3.pkgs;
+    [
+      pillow
+      pycairo
+      pygobject3
+      send2trash
+    ]
+    ++ lib.optionals chardetSupport [chardet]
+    ++ lib.optionals pdfSupport [pymupdf];
 
   # No tests included in .tar.gz
   doCheck = false;
@@ -62,7 +65,7 @@ python3.pkgs.buildPythonApplication rec {
   preFixup = ''
     makeWrapperArgs+=(
       "''${gappsWrapperArgs[@]}"
-      "--prefix" "PATH" ":" "${lib.makeBinPath ([ p7zip ] ++ lib.optional unrarSupport unrar)}"
+      "--prefix" "PATH" ":" "${lib.makeBinPath ([p7zip] ++ lib.optional unrarSupport unrar)}"
     )
   '';
 
@@ -79,6 +82,6 @@ python3.pkgs.buildPythonApplication rec {
     '';
     homepage = "https://sourceforge.net/projects/mcomix/";
     license = licenses.gpl2Plus;
-    maintainers = with maintainers; [ thiagokokada ];
+    maintainers = with maintainers; [thiagokokada];
   };
 }

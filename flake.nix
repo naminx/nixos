@@ -43,10 +43,19 @@
               inherit (prev) system;
               inherit config;
             };
+            lsd = prev.lsd.overrideAttrs (o: {
+              patches =
+                (o.patches or [])
+                ++ [
+                  ./patches/lsd-list-by-column.patch
+                ];
+            });
             krita = prev.krita.overrideAttrs (o: {
-              patches = (o.patches or [ ]) ++ [
-                ./patches/krita-pan-action.patch
-              ];
+              patches =
+                (o.patches or [])
+                ++ [
+                  ./patches/krita-pan-action.patch
+                ];
             });
           })
         ];
@@ -91,7 +100,7 @@
       formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
 
       nixosConfigurations.nixos = mkNixosConfiguration {
-        hostname = "nixos";
+        hostname = "tokyo";
         username = "namin"; # FIXME: replace with your own username!
         modules = [
           # nixos-wsl.nixosModules.wsl
