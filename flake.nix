@@ -42,6 +42,26 @@
             unstable = import nixpkgs-unstable {
               inherit (prev) system;
               inherit config;
+              overlays = [
+                (_final: prev: {
+                  mcomix = prev.mcomix.overrideAttrs (o: {
+                    propagatedBuildInputs = with prev.python3.pkgs;
+                      o.propagatedBuildInputs
+                      ++ [
+                        send2trash
+                      ];
+
+                    patches = [
+                      ./patches/mcomix-disable-click-to-flip.patch
+                      ./patches/mcomix-file-sorting-order.patch
+                      ./patches/mcomix-keyboard-bindings.patch
+                      ./patches/mcomix-send-to-trash.patch
+                      ./patches/mcomix-mouse-wheel.patch
+                      ./patches/mcomix-reset-zoom.patch
+                    ];
+                  });
+                })
+              ];
             };
             lsd = prev.lsd.overrideAttrs (o: {
               patches =

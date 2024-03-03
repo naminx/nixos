@@ -45,7 +45,10 @@ in {
 
     users.groups.chrome-remote-desktop = {};
 
-    users.users.${cfg.user}.extraGroups = ["chrome-remote-desktop"];
+    users.users.${cfg.user} = {
+      extraGroups = ["chrome-remote-desktop"];
+      linger = true;
+    };
 
     systemd.packages = [
       pkgs.chrome-remote-desktop
@@ -69,7 +72,7 @@ in {
         StandardError = "inherit";
         RestartForceExitStatus = "41";
       };
-      wantedBy = ["multi-user.target"];
+      wantedBy = ["graphical.target"];
     };
   };
 }

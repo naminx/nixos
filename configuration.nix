@@ -19,6 +19,7 @@
   programs = {
     fish.enable = true;
     xwayland.enable = true;
+    evince.enable = false;
   };
 
   environment = {
@@ -49,15 +50,18 @@
       xorg.libXtst
       xorg.libXdamage
       xorg.libXfixes
-      libpulseaudio
+      # libpulseaudio
       gtk3
       # END required for dwservice
       glib
+      xorg.xhost
+      libcamera
+      gnome.nautilus
+      webp-pixbuf-loader
     ];
     unixODBCDrivers = with pkgs.unixODBCDrivers; [sqlite];
     sessionVariables = {
       CACHIX_AUTH_TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI1MGJlYzI3Ni1lNmY2LTQyOTMtYmM0MC01Yzk2NzMzZDllNzAiLCJzY29wZXMiOiJ0eCJ9.mJzOYgW1h0MERQQwH1-RKWMKYdD5tGZxp7Lm-L--fN0";
-      PLASMA_USE_QT_SCALING = "1";
     };
     etc."odbc.ini".text = ''
       [mansuki]
@@ -187,6 +191,10 @@
 
   # List services that you want to enable:
   services = {
+    chrome-remote-desktop = {
+      enable = true;
+      user = "namin";
+    };
     dbus.enable = true;
     # FIXME: uncomment the next line to enable SSH
     openssh = {
@@ -203,8 +211,12 @@
       dpi = 192;
       # Enable the KDE Plasma Desktop Environment.
       displayManager.sddm.enable = true;
+      displayManager.setupCommands = ''
+        ${pkgs.xorg.xhost}/bin/xhost +
+      '';
       displayManager.defaultSession = "plasma"; # or "plasmawayland"
       desktopManager.plasma5.enable = true;
+      desktopManager.plasma5.useQtScaling = true;
 
       # Enable the Gnome Desktop Environment.
       # displayManager.gdm.enable = true;
@@ -257,10 +269,6 @@
         ingress = { "oreo.namon.xyz" = "http://localhost:80"; };
         default = "http_status:404";
       };
-    };
-    chrome-remote-desktop = {
-      enable = true;
-      user = "namin";
     };
     onedrive.enable = true;
     # Enable CUPS to print documents.
@@ -315,8 +323,8 @@
   ];
 
   # Enable sound with pipewire.
-  sound.enable = true;
-  hardware.pulseaudio.enable = false;
+  sound.enable = false; # Only meant for ALSA-based configurations.
+  hardware.pulseaudio.enable = pkgs.lib.mkForce false; # Disable Pulseaudio because Pipewire is used.
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -324,7 +332,7 @@
     alsa.support32Bit = true;
     pulse.enable = true;
     # If you want to use JACK applications, uncomment this
-    jack.enable = true;
+    # jack.enable = true;
     # use the example session manager (no others are packaged yet so this is enabled by default,
     # no need to redefine it in your config for now)
     wireplumber.enable = true;

@@ -29,7 +29,7 @@ in
     version = "122.0.6261.0";
     src = fetchurl {
       url = "https://deb.rug.nl/ppa/mirror/dl.google.com/linux/chrome-remote-desktop/deb/pool/main/c/chrome-remote-desktop/chrome-remote-desktop_${version}_amd64.deb";
-      hash = "sha256-CfqjCq8jgnlzW5Ep+BDaswHMrV8xs08Fi7uKkTcHNFU="; # 122.0.6261.0
+      sha256 = "0m9l0wvr32mvic2lzcribynwq0dkv88ghacibdrpk0i3mw5a7yh9";
     };
 
     nativeBuildInputs = [
@@ -105,7 +105,8 @@ in
           continue
         fi
         if [[ ! -d "$i" ]]; then
-          wrapProgram "$i" --set XDG_DATA_DIRS "${lib.makeLibraryPath [ "$GSETTINGS_SCHEMAS_PATH" ]}"
+          wrapProgram "$i" --set XDG_DATA_DIRS "${lib.makeLibraryPath [ "$GSETTINGS_SCHEMAS_PATH" ]}" \
+                           --set XDG_RUNTIME_DIR "/run/user/1000"
         fi
         ln -s "$i" "$out/bin/"
       done
