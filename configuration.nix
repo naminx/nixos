@@ -4,6 +4,7 @@
   username,
   hostname,
   pkgs,
+  config,
   ...
 }: {
   # Set your time zone.
@@ -14,12 +15,15 @@
 
   networking.hostName = "${hostname}";
   boot.kernel.sysctl."net.ipv6.conf.enp5s0.disable_ipv6" = true;
+  boot.kernel.sysctl."vm.compaction_proactiveness" = 0;
+  boot.kernel.sysctl."vm.extfrag_threshold" = 1000;
+  boot.kernelParams = ["transparent_hugepage=never"];
 
   # FIXME: change your shell here if you don't want zsh
   programs = {
     fish.enable = true;
     xwayland.enable = true;
-    evince.enable = false;
+    evince.enable = true;
   };
 
   environment = {
@@ -54,14 +58,21 @@
       gtk3
       # END required for dwservice
       glib
-      xorg.xhost
       libcamera
-      gnome.nautilus
+      evince
+      shared-mime-info
+      gdk-pixbuf
       webp-pixbuf-loader
+      gnome.gnome-session
+      # comic-thumbnailers
     ];
     unixODBCDrivers = with pkgs.unixODBCDrivers; [sqlite];
     sessionVariables = {
       CACHIX_AUTH_TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI1MGJlYzI3Ni1lNmY2LTQyOTMtYmM0MC01Yzk2NzMzZDllNzAiLCJzY29wZXMiOiJ0eCJ9.mJzOYgW1h0MERQQwH1-RKWMKYdD5tGZxp7Lm-L--fN0";
+      # QT_QPA_PLATFORM = "wayland";
+      QT_QPA_PLATFORM = "xcb";
+      QT_QPA_PLATFORMTHEME = "qt5ct";
+      # CHROME_REMOTE_DESKTOP_HOST_EXTRA_PARAMS = "--enable-wayland";
     };
     etc."odbc.ini".text = ''
       [mansuki]
@@ -130,7 +141,6 @@
   i18n = {
     defaultLocale = "en_US.UTF-8";
     extraLocaleSettings = {
-      LC_ALL = "en_US.UTF-8";
       LC_ADDRESS = "en_GB.UTF-8";
       LC_IDENTIFICATION = "en_GB.UTF-8";
       LC_MEASUREMENT = "en_GB.UTF-8";
@@ -152,12 +162,18 @@
       ];
     };
   };
+  console = {
+    earlySetup = true;
+    font = "${pkgs.namin-fonts}/share/fonts/console/firacode.psfu.gz";
+    packages = [pkgs.namin-fonts];
+    keyMap = "us";
+  };
 
   security = {
     sudo.wheelNeedsPassword = false;
     pam.services.kwallet = {
-        name = "namin";
-        enableKwallet = true;
+      name = "namin";
+      enableKwallet = true;
     };
     polkit = {
       enable = true;
@@ -191,6 +207,7 @@
 
   # List services that you want to enable:
   services = {
+    # gnome.gnome-remote-desktop.enable = true;
     chrome-remote-desktop = {
       enable = true;
       user = "namin";
@@ -210,18 +227,22 @@
       enable = true;
       dpi = 192;
       # Enable the KDE Plasma Desktop Environment.
-      displayManager.sddm.enable = true;
+      # displayManager.sddm.enable = true;
+      # displayManager.setupCommands = ''
+      #   ${pkgs.xorg.xhost}/bin/xhost +
+      #   ${pkgs.xorg.xinput}/bin/xinput --set-prop 'YICHIP Wireless Device Mouse' 'libinput Accel Speed' 1.0
+      # '';
+      # displayManager.defaultSession = "plasma"; # or "plasmawayland"
+      # desktopManager.plasma5.enable = true;
+      # desktopManager.plasma5.useQtScaling = true;
+
+      # Enable the Gnome Desktop Environment.
+      displayManager.gdm.enable = true;
+      displayManager.defaultSession = "gnome-xorg"; # "gnome"
       displayManager.setupCommands = ''
         ${pkgs.xorg.xhost}/bin/xhost +
       '';
-      displayManager.defaultSession = "plasma"; # or "plasmawayland"
-      desktopManager.plasma5.enable = true;
-      desktopManager.plasma5.useQtScaling = true;
-
-      # Enable the Gnome Desktop Environment.
-      # displayManager.gdm.enable = true;
-      # displayManager.defaultSession = "gnome-xorg";
-      # desktopManager.gnome.enable = true;
+      desktopManager.gnome.enable = true;
       # Configure keymap in X11
       layout = "us";
       xkbVariant = "";
@@ -229,9 +250,9 @@
       # libinput.enable = true;
     };
     # xrdp = {
-    # enable = true;
-    # defaultWindowManager = "startplasma-wayland";
-    # openFirewall = true;
+    #   enable = true;
+    #   defaultWindowManager = "${pkgs.gnome.gnome-session}/bin/gnome-session";
+    #   openFirewall = true;
     # };
     guacamole-server = {
       enable = true;
@@ -266,7 +287,7 @@
       user = "namin";
       tunnels."3cd7c453-197f-4ae1-b23a-cc71281df85b" = {
         credentialsFile = "/home/namin/.cloudflared/3cd7c453-197f-4ae1-b23a-cc71281df85b.json";
-        ingress = { "oreo.namon.xyz" = "http://localhost:80"; };
+        ingress = {"oreo.namon.xyz" = "http://localhost:80";};
         default = "http_status:404";
       };
     };
@@ -316,11 +337,11 @@
     };
   };
 
-  nixpkgs.overlays = [
-    (_final: prev: {
-      chrome-remote-desktop = prev.callPackage ./chrome-remote-desktop/default.nix {};
-    })
-  ];
+# nixpkgs.overlays = [
+#   (_final: prev: {
+#     chrome-remote-desktop = prev.callPackage ./chrome-remote-desktop/default.nix {};
+#   })
+# ];
 
   # Enable sound with pipewire.
   sound.enable = false; # Only meant for ALSA-based configurations.
@@ -368,7 +389,7 @@
   };
 
   # QT
-  qt.platformTheme = "qt5ct";
+  # qt.platformTheme = "qt5ct";
 
   # Open ports in the firewall.
   # SSH / RDP open necessary ports by default
@@ -382,8 +403,8 @@
     trustedInterfaces = ["tailscale0"];
     #or allow you to SSH in over the public internet
     # allowedTCPPorts = [ 22 ];
-    allowedTCPPorts = [80 443 39135];
-    allowedUDPPorts = [80 443 39135 41641];
+    allowedTCPPorts = [80 443 3389 39135];
+    allowedUDPPorts = [80 443 3389 39135 41641];
   };
 
   # This value determines the NixOS release from which the default
@@ -398,9 +419,7 @@
     # enableDefaultPackages = true;
     packages = with pkgs; [
       (nerdfonts.override {fonts = ["FiraCode"];})
-      (import ./fonts.nix {
-        inherit lib fetchzip;
-      })
+      namin-fonts
     ];
     fontconfig = {
       defaultFonts = {
@@ -461,4 +480,8 @@
   #     done
   #   '';
   # };
+
+  systemd.tmpfiles.rules = [
+    "L+ /run/gdm/.config/monitors.xml - - - - ${./xdg/monitors.xml}"
+  ];
 }

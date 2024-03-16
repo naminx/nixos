@@ -9,9 +9,12 @@ in
     };
     phases = ["buildPhase" "installPhase"];
 
-    buildInputs = with pkgs; [
+    nativeBuildInputs = with pkgs; [
       gcc
       gnumake
+    ];
+
+    buildInputs = with pkgs; [
       python3
       xorg.libX11.dev
       xorg.libXpm.dev

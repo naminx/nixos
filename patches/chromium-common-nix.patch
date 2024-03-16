@@ -1,5 +1,5 @@
 diff --git a/pkgs/applications/networking/browsers/chromium/common.nix b/pkgs/applications/networking/browsers/chromium/common.nix
-index 0798be93..fef1f802 100644
+index 45fc2054..079d84aa 100644
 --- a/pkgs/applications/networking/browsers/chromium/common.nix
 +++ b/pkgs/applications/networking/browsers/chromium/common.nix
 @@ -209,7 +209,7 @@ let
@@ -11,3 +11,16 @@ index 0798be93..fef1f802 100644
        ./patches/cross-compile.patch
        # Optional patch to use SOURCE_DATE_EPOCH in compute_build_timestamp.py (should be upstreamed):
        ./patches/no-build-timestamps.patch
+diff --git a/pkgs/applications/networking/browsers/chromium/default.nix b/pkgs/applications/networking/browsers/chromium/default.nix
+index 438e1429..b711e1b7 100644
+--- a/pkgs/applications/networking/browsers/chromium/default.nix
++++ b/pkgs/applications/networking/browsers/chromium/default.nix
+@@ -19,7 +19,7 @@
+ , commandLineArgs ? ""
+ , pkgsBuildTarget
+ , pkgsBuildBuild
+-, pkgs
++, pkgs, ...
+ }:
+ 
+ let

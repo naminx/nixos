@@ -5,14 +5,14 @@
   copy = "cp --interactive";
   cp = "cp --interactive";
   del = "rm --interactive=always";
-  dir = "lsd --long --classify --color=always --icon=never";
+  dir = "eza -l";
   fe = "vi $(fzf --ansi --color=16)";
   find = "fd";
   fzf = "fzf --ansi --color=16";
   grep = "rg";
   less = "less --quit-if-one-screen --raw-control-chars --no-init";
-  ls = "lsd --classify --color=auto --icon=never";
-  lw = "lsd -C --width=$(tput cols) --classify --color=always --icon=never";
+  ls = "eza";
+  lw = "eza -G";
   md = "mkdir";
   move = "mv --interactive";
   mv = "mv --interactive";

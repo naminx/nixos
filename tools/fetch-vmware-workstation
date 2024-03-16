@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+nixver=nixos-23.11
+
+tarball=${nixver}.tar.gz
+
+selfdir=$(dirname "$0")
+
+github=https://github.com/nixos/nixpkgs/archive/${tarball}
+
+wget -O - ${github} | tar -xzv --strip-components=4 -C "${selfdir}/.." -f - \
+  nixpkgs-${nixver}/pkgs/applications/virtualization/vmware-workstation/

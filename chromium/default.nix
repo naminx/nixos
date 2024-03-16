@@ -19,8 +19,7 @@
 , commandLineArgs ? ""
 , pkgsBuildTarget
 , pkgsBuildBuild
-, pkgs
-, ...
+, pkgs, ...
 }:
 
 let
