@@ -9,7 +9,7 @@
 }: let
   unstable-packages = with pkgs.unstable; [
     # FIXME: select your core binaries that you always want on the bleeding-edge
-    # mathematica
+    mathematica
     mcomix
   ];
 
@@ -155,8 +155,11 @@
     cargo
     rustc
     ngrok
-    libsForQt5.krfb
+    # libsForQt5.krfb
     libsForQt5.kate
+    brc
+    mht2img
+    mansuki
   ];
 in {
   imports = [
@@ -203,8 +206,10 @@ in {
   # home.file.".config/lvim/config.lua".source = ./lvim_config.lua;
 
   programs = {
-    bash.enable = true;
-    bash.shellAliases = import ./aliases.nix;
+    bash = {
+      enable = true;
+      shellAliases = import ./aliases.nix;
+    };
     # better cat
     bat = {
       enable = true;
@@ -220,8 +225,10 @@ in {
     # better top (btm)
     bottom.enable = true;
     # better tree (br)
-    broot.enable = true;
-    broot.enableFishIntegration = true;
+    broot = {
+      enable = true;
+      enableFishIntegration = true;
+    };
     fish = {
       enable = true;
       shellAliases = import ./aliases.nix;
@@ -229,7 +236,7 @@ in {
         fish_add_path ~/.local/bin
       '';
       functions = with pkgs.lib.strings; {
-        ffwh = fileContents ./fish/ffwh.fish;
+        # ffwh = fileContents ./fish/ffwh.fish;
       };
     };
     # direnv.enable = true;
@@ -240,8 +247,10 @@ in {
       enable = true;
       git = true;
     };
-    fzf.enable = true;
-    fzf.enableFishIntegration = true;
+    fzf = {
+      enable = true;
+      enableFishIntegration = true;
+    };
     git = {
       enable = true;
       package = pkgs.git;
@@ -327,10 +336,13 @@ in {
   xdg = {
     configFile = with pkgs.lib.strings; {
       "nvim/coc-settings.json".text = fileContents ./xdg/coc-settings.json;
-      "chromium/NativeMessagingHosts/dev.namin.mansuki.json".text = fileContents ./xdg/dev.namin.mansuki.json;
-      # "chromium/NativeMessagingHosts/com.google.chrome.remote_desktop.json".source = "${pkgs.chrome-remote-desktop}/etc/opt/chrome/native-messaging-hosts/com.google.chrome.remote_desktop.json";
-      "google-chrome/NativeMessagingHosts/dev.namin.mansuki.json".text = fileContents ./xdg/dev.namin.mansuki.json;
-      # "google-chrome/NativeMessagingHosts/com.google.chrome.remote_desktop.json".source = "${pkgs.chrome-remote-desktop}/etc/opt/chrome/native-messaging-hosts/com.google.chrome.remote_desktop.json";
+
+      "chromium/NativeMessagingHosts/dev.namin.mansuki.json".text = builtins.replaceStrings ["@mansuki@"] ["${pkgs.mansuki}/bin/mansuki"] (fileContents ./xdg/dev.namin.mansuki.json);
+      "google-chrome/NativeMessagingHosts/dev.namin.mansuki.json".text = builtins.replaceStrings ["@mansuki@"] ["${pkgs.mansuki}/bin/mansuki"] (fileContents ./xdg/dev.namin.mansuki.json);
+
+      "chromium/NativeMessagingHosts/com.google.chrome.remote_desktop.json".source = "${pkgs.chrome-remote-desktop}/etc/opt/chrome/native-messaging-hosts/com.google.chrome.remote_desktop.json";
+      "google-chrome/NativeMessagingHosts/com.google.chrome.remote_desktop.json".source = "${pkgs.chrome-remote-desktop}/etc/opt/chrome/native-messaging-hosts/com.google.chrome.remote_desktop.json";
+
       "fourmolu.yaml".text = fileContents ./xdg/fourmolu.yaml;
     };
   };

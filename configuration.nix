@@ -5,6 +5,7 @@
   hostname,
   pkgs,
   config,
+  inputs,
   ...
 }: {
   # Set your time zone.
@@ -32,40 +33,42 @@
     enableAllTerminfo = true;
     # List packages installed in system profile. To search, run:
     # $ nix search wget
-    systemPackages = with pkgs; [
-      cachix
-      neovim
-      # (import ./win32yank.nix {inherit pkgs;})
-      canon-cups-ufr2
-      sqlite
-      unixODBC
-      unixODBCDrivers.sqlite
-      xwayland
-      cloudflared
-      # BEGIN required for dwservice
-      dpkg
-      xdummy
-      xorg.xdpyinfo
-      xorg.xhost
-      xorg.libX11
-      xorg.libXpm
-      xorg.libXi
-      xorg.libXext
-      xorg.libXtst
-      xorg.libXdamage
-      xorg.libXfixes
-      # libpulseaudio
-      gtk3
-      # END required for dwservice
-      glib
-      libcamera
-      evince
-      shared-mime-info
-      gdk-pixbuf
-      webp-pixbuf-loader
-      gnome.gnome-session
-      # comic-thumbnailers
-    ];
+    systemPackages = with pkgs;
+      [
+        cachix
+        neovim
+        # (import ./win32yank.nix {inherit pkgs;})
+        canon-cups-ufr2
+        sqlite
+        unixODBC
+        unixODBCDrivers.sqlite
+        xwayland
+        cloudflared
+        # BEGIN required for dwservice
+        dpkg
+        xdummy
+        xorg.xdpyinfo
+        xorg.xhost
+        xorg.libX11
+        xorg.libXpm
+        xorg.libXi
+        xorg.libXext
+        xorg.libXtst
+        xorg.libXdamage
+        xorg.libXfixes
+        # libpulseaudio
+        gtk3
+        # END required for dwservice
+        glib
+        libcamera
+        evince
+        shared-mime-info
+        gdk-pixbuf
+        webp-pixbuf-loader
+        gnome.gnome-session
+        gnome.gnome-remote-desktop
+        # comic-thumbnailers
+      ];
     unixODBCDrivers = with pkgs.unixODBCDrivers; [sqlite];
     sessionVariables = {
       CACHIX_AUTH_TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI1MGJlYzI3Ni1lNmY2LTQyOTMtYmM0MC01Yzk2NzMzZDllNzAiLCJzY29wZXMiOiJ0eCJ9.mJzOYgW1h0MERQQwH1-RKWMKYdD5tGZxp7Lm-L--fN0";
@@ -175,6 +178,7 @@
       name = "namin";
       enableKwallet = true;
     };
+    pam.services.login.enableGnomeKeyring = true;
     polkit = {
       enable = true;
       extraConfig = ''
@@ -207,7 +211,6 @@
 
   # List services that you want to enable:
   services = {
-    # gnome.gnome-remote-desktop.enable = true;
     chrome-remote-desktop = {
       enable = true;
       user = "namin";
@@ -254,6 +257,8 @@
     #   defaultWindowManager = "${pkgs.gnome.gnome-session}/bin/gnome-session";
     #   openFirewall = true;
     # };
+    gnome.gnome-remote-desktop.enable = true;
+    gnome.gnome-keyring.enable = true;
     guacamole-server = {
       enable = true;
       host = "127.0.0.1";
@@ -337,11 +342,11 @@
     };
   };
 
-# nixpkgs.overlays = [
-#   (_final: prev: {
-#     chrome-remote-desktop = prev.callPackage ./chrome-remote-desktop/default.nix {};
-#   })
-# ];
+  # nixpkgs.overlays = [
+  #   (_final: prev: {
+  #     chrome-remote-desktop = prev.callPackage ./chrome-remote-desktop/default.nix {};
+  #   })
+  # ];
 
   # Enable sound with pipewire.
   sound.enable = false; # Only meant for ALSA-based configurations.

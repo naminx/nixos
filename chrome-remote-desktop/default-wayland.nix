@@ -98,7 +98,7 @@ in
           continue
         fi
         if [[ ! -d "$i" ]]; then
-          wrapProgram "$i" --set XDG_DATA_DIRS "${lib.makeLibraryPath [ "$GSETTINGS_SCHEMAS_PATH" ]}" \
+          wrapProgram "$i" --set XDG_DATA_DIRS "${lib.makeLibraryPath ["$GSETTINGS_SCHEMAS_PATH"]}" \
                            --set XDG_RUNTIME_DIR "/run/user/1000"
         fi
         ln -s "$i" "$out/bin/"
