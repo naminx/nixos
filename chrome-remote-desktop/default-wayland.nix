@@ -20,16 +20,17 @@
   wrapGAppsHook,
   makeWrapper,
   gsettings-desktop-schemas,
+  gnome,
   ...
 }: let
   replacePrefix = "/opt/google/chrome-remote-desktop";
 in
   stdenvNoCC.mkDerivation rec {
     name = "chrome-remote-desktop";
-    version = "122.0.6261.0";
+    version = "123.0.6312.16";
     src = fetchurl {
       url = "https://deb.rug.nl/ppa/mirror/dl.google.com/linux/chrome-remote-desktop/deb/pool/main/c/chrome-remote-desktop/chrome-remote-desktop_${version}_amd64.deb";
-      sha256 = "0m9l0wvr32mvic2lzcribynwq0dkv88ghacibdrpk0i3mw5a7yh9";
+      sha256 = "1bwzam79f2njx9iw23n35wbzg1cgisxqkcriw7m2rb6jhqbagvl4";
     };
 
     nativeBuildInputs = [
@@ -80,6 +81,7 @@ in
         --replace '"Xvfb"' '"${xorg.xorgserver}/bin/Xvfb"' \
         --replace '"Xorg"' '"${xorg.xorgserver}/bin/Xorg"' \
         --replace '"xrandr"' '"${xorg.xrandr}/bin/xrandr"' \
+        --replace '/etc/X11/Xsession' '${gnome.gnome-session}/bin/gnome-session' \
         --replace /usr/lib/xorg/modules ${xorg.xorgserver}/lib/xorg/modules \
         --replace xdpyinfo ${xorg.xdpyinfo}/bin/xdpyinfo \
         --replace /usr/bin/sudo /run/wrappers/bin/sudo \
@@ -99,7 +101,8 @@ in
         fi
         if [[ ! -d "$i" ]]; then
           wrapProgram "$i" --set XDG_DATA_DIRS "${lib.makeLibraryPath ["$GSETTINGS_SCHEMAS_PATH"]}" \
-                           --set XDG_RUNTIME_DIR "/run/user/1000"
+                           --set XDG_RUNTIME_DIR "/run/user/1000" \
+                           --set CHROME_REMOTE_DESKTOP_HOST_EXTRA_PARAMS "--enable-wayland"
         fi
         ln -s "$i" "$out/bin/"
       done

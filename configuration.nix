@@ -67,7 +67,11 @@
         webp-pixbuf-loader
         gnome.gnome-session
         gnome.gnome-remote-desktop
+        gnome.gnome-tweaks
+        gnomeExtensions.kimpanel
         # comic-thumbnailers
+        gobject-introspection
+        (python3.withPackages (p: with p; [pygobject3]))
       ];
     unixODBCDrivers = with pkgs.unixODBCDrivers; [sqlite];
     sessionVariables = {
@@ -212,7 +216,7 @@
   # List services that you want to enable:
   services = {
     chrome-remote-desktop = {
-      enable = true;
+      enable = false;
       user = "namin";
     };
     dbus.enable = true;
@@ -241,9 +245,11 @@
 
       # Enable the Gnome Desktop Environment.
       displayManager.gdm.enable = true;
-      displayManager.defaultSession = "gnome-xorg"; # "gnome"
+      # displayManager.defaultSession = "gnome-xorg";
+      displayManager.defaultSession = "gnome"; # wayland
       displayManager.setupCommands = ''
-        ${pkgs.xorg.xhost}/bin/xhost +
+        # ${pkgs.xorg.xhost}/bin/xhost +
+        ${pkgs.gnome.gnome-remote-desktop}/libexec/gnome-remote-desktop-daemon &
       '';
       desktopManager.gnome.enable = true;
       # Configure keymap in X11
@@ -297,16 +303,24 @@
       };
     };
     onedrive.enable = true;
-    # Enable CUPS to print documents.
-    # printing = {
-    # enable = true;
-    # drivers = [pkgs.canon-cups-ufr2];
-    # };
+    printing = {
+      enable = true;
+      drivers = with pkgs; [ gutenprint canon-cups-ufr2 cups-filters ];
+      browsing = true;
+      browsedConf = ''
+        BrowseDNSSDSubTypes _cups,_print
+        BrowseLocalProtocols all
+        BrowseRemoteProtocols all
+        CreateIPPPrinterQueues All
+
+        BrowseProtocols all
+      '';
+    };
     # Enable avahi for printer discovery
-    # avahi = {
-    # enable = true;
-    # nssmdns = true;
-    # };
+    avahi = {
+      enable = true;
+      nssmdns = true;
+    };
     expressvpn.enable = true;
     openvpn.servers = let
       express-vpn-userpass = {

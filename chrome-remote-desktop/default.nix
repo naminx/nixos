@@ -1,1 +1,1 @@
-default-x11.nix
+default-wayland.nix

@@ -46,10 +46,6 @@
           nur.overlay
           (_final: prev: rec {
             # this allows us to reference pkgs.unstable
-            #           pkgs' = import nixpkgs {
-            #             inherit (_final) system;
-            #             inherit config;
-            #           };
             unstable = import nixpkgs-unstable {
               inherit (prev) system;
               inherit config;
@@ -95,49 +91,6 @@
             brc = inputs.brc.packages."x86_64-linux".default;
             mht2img = inputs.mht2img.packages."x86_64-linux".default;
             mansuki = inputs.mansuki.packages."x86_64-linux".default;
-            #           gnome =
-            #             prev.gnome
-            #             // {
-            #               nautilus = prev.symlinkJoin {
-            #                 name = "${prev.gnome.nautilus.name}-with-thumbnailers";
-            #                 version = prev.gnome.nautilus.version;
-            #                 paths = [prev.gnome.nautilus];
-            #                 nativeBuildInputs = with _final; [gnused makeBinaryWrapper];
-            #                 buildInputs = with _final; [bash unzip rar imagemagick];
-            #                 postBuild = with _final; ''
-            #                   chmod +w $out/share
-            #                   mkdir -p $out/share/thumbnailers
-            #                   cat > $out/share/thumbnailers/cbz.thumbnailer <<EOF
-            #                   [Thumbnailer Entry]
-            #                   TryExec=${bash}/bin/bash
-            #                   Exec=${bash}/bin/bash -c '${unzip}/bin/unzip -p -- "%i" | ${imagemagick}/bin/magick - -resize "x%s" "%o"'
-            #                   MimeType=application/vnd.comicbook+zip;application/x-cbz;application/x-ext-cbz
-            #                   EOF
-
-            #                   cat > $out/share/thumbnailers/cbr.thumbnailer <<EOF
-            #                   [Thumbnailer Entry]
-            #                   TryExec=${bash}/bin/bash
-            #                   Exec=${bash}/bin/bash -c '${rar}/bin/unrar p -- "%i" | ${imagemagick}/bin/magick - -resize "x%s" "%o"'
-            #                   MimeType=application/vnd.comicbook-rar;application/x-cbr;application/x-ext-cbr
-            #                   EOF
-
-            #                   cat > $out/share/thumbnailers/magick.thumbnailer <<EOF
-            #                   [Thumbnailer Entry]
-            #                   TryExec=${imagemagick}/bin/magick
-            #                   Exec=${imagemagick}/bin/magick -define profile:skip=icc -- %i -resize x%s %o
-            #                   MimeType=image/jpeg;image/webp;image/png
-            #                   EOF
-
-            #                   for i in nautilus nautilus-autorun-software; do
-            #                     rm $out/bin/$i
-            #                     makeBinaryWrapper "$out/bin/.''${i}-wrapped" "$out/bin/$i" \
-            #                       $(${gnused}/bin/sed -n '/${beginMark}/,/${endMark}/p' "${prev.gnome.nautilus}/bin/$i" \
-            #                         | ${gnused}/bin/sed -E 's/[[:space:]]/ /g;s/'"'"'|\\//g;1,4d;:a;$d;N;7ba;P;D') \
-            #                         --prefix XDG_DATA_DIRS : "$out/share"
-            #                   done
-            #                 '';
-            #               };
-            #             };
             evince = prev.symlinkJoin {
               name = "${prev.evince.name}-fixed";
               version = prev.evince.version;
@@ -164,8 +117,8 @@
                         $(${gnused}/bin/sed -n '/${beginMark}/,/${endMark}/p' "${prev.evince}/bin/$i" \
                           | ${gnused}/bin/sed -E 's/[[:space:]]/ /g;s/'"'"'|\\//g''
                   + '';s#(${set-pixbuf-module}) ${old-loader}#\1 '"${new-loader}"'#''
-                  + ''                    ;1,4d;:a;$d;N;7ba;P;D')
-                                      done
+                  + '';1,4d;:a;$d;N;7ba;P;D')
+                    done
                   '';
             };
           })

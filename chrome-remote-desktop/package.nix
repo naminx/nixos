@@ -1,1 +1,1 @@
-package-x11.nix
+package-wayland.nix

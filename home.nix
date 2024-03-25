@@ -65,8 +65,6 @@
     # go
     # lua
     nodejs
-    # python
-    python3
     # typescript
 
     # haskell
@@ -157,6 +155,7 @@
     ngrok
     # libsForQt5.krfb
     libsForQt5.kate
+    remmina
     brc
     mht2img
     mansuki
