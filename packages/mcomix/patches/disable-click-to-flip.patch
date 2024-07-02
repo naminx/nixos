@@ -1,0 +1,42 @@
+diff --git a/mcomix/event.py b/mcomix/event.py
+index dbeb8f6..02c2717 100644
+--- a/mcomix/event.py
++++ b/mcomix/event.py
+@@ -552,7 +552,8 @@ class EventHandler(object):
+ 
+             if event.x_root == self._pressed_pointer_pos_x and \
+                 event.y_root == self._pressed_pointer_pos_y and \
+-                not self._window.was_out_of_focus:
++                not self._window.was_out_of_focus and \
++                prefs['flip with click']:
+ 
+                 if event.get_state() & Gdk.ModifierType.SHIFT_MASK:
+                     self._flip_page(10)
+diff --git a/mcomix/preferences.py b/mcomix/preferences.py
+index d808280..0da03f0 100644
+--- a/mcomix/preferences.py
++++ b/mcomix/preferences.py
+@@ -54,6 +54,7 @@ prefs = {
+     'invert smart scroll': False,
+     'smart scroll percentage': 0.5,
+     'flip with wheel': True,
++    'flip with click': False,
+     'store recent file info': True,
+     'hide all': False,
+     'hide all in fullscreen': True,
+diff --git a/mcomix/preferences_dialog.py b/mcomix/preferences_dialog.py
+index 43c0197..3924a1c 100644
+--- a/mcomix/preferences_dialog.py
++++ b/mcomix/preferences_dialog.py
+@@ -151,6 +151,11 @@ class _PreferencesDialog(Gtk.Dialog):
+             'flip with wheel',
+             _('Flip pages when scrolling "off the page" with the scroll wheel or with the arrow keys. It takes n consecutive "steps" with the scroll wheel or the arrow keys for the pages to be flipped.')))
+ 
++        page.add_row(self._create_pref_check_button(
++            _('Flip pages with left-click'),
++            'flip with click',
++            _('Click on the page to turn to the next one.')))
++
+         page.add_row(self._create_pref_check_button(
+             _('Automatically open the next archive'),
+             'auto open next archive',

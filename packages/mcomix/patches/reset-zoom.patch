@@ -1,0 +1,12 @@
+diff --git a/mcomix/main.py b/mcomix/main.py
+index 177fa8a..00ca5c6 100644
+--- a/mcomix/main.py
++++ b/mcomix/main.py
+@@ -682,6 +682,7 @@ class MainWindow(Gtk.Window):
+             new_page = number_of_pages
+ 
+         if new_page != current_page:
++            self.zoom.reset_user_zoom()
+             self.set_page(new_page, at_bottom=(-1 == step))
+ 
+     def first_page(self):
