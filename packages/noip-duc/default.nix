@@ -1,5 +1,5 @@
 {pkgs}:
-pkgs.stdenv.mkDerivation rec {
+pkgs.stdenv.mkDerivation {
   pname = "noip-duc";
   version = "3.1.1";
 
@@ -8,7 +8,8 @@ pkgs.stdenv.mkDerivation rec {
     sha256 = "sha256-7/27l3xt8HWu5MS40yxUUgGjtyDPcDFXyYvxZkGgoFA=";
   };
 
-  # The source file name is "noip-duc_x.x.x.tar.gz"
+  # The source file format is ".tar.gz" but this cannot be derived from
+  # the URL, so tell nix not to unpack. We will unpack it later manually.
   dontUnpack = true;
 
   buildInputs = with pkgs; [gnutar dpkg];
@@ -23,6 +24,7 @@ pkgs.stdenv.mkDerivation rec {
     rm -r -f $out/noip-duc_3.1.1 $out/usr
   '';
 
+  # Do not patchElf
   fixupPhase = ":";
 
   meta = with pkgs.lib; {

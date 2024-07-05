@@ -4,7 +4,7 @@
   pkgs,
   ...
 }:
-with lib; let
+let
   cfg = config.programs.onlyoffice;
 
   x11Fonts = pkgs.runCommand "X11-fonts" {preferLocalBuild = true;} ''
@@ -20,7 +20,7 @@ with lib; let
   '';
 
   mkFHSEnv = onlyofficeUnwrapped:
-    pkgs.buildFHSUserEnvBubblewrap rec {
+    pkgs.buildFHSUserEnvBubblewrap {
       name = "onlyoffice";
 
       # Originally `runScript = "DesktopEditors";` This does not work for me.
@@ -53,7 +53,7 @@ with lib; let
       # in a future version.
 
       runScript = "${
-        lists.findFirst
+        lib.lists.findFirst
         (p: builtins.match "onlyoffice-desktopeditors" p.pname != null)
         null
         (onlyofficeUnwrapped.args.targetPkgs {})
@@ -76,17 +76,17 @@ with lib; let
 in {
   options = {
     programs.onlyoffice = {
-      enable = mkOption {
-        type = types.bool;
+      enable = lib.mkOption {
+        type = lib.types.bool;
         default = false;
-        defaultText = literalExpression "false";
+        defaultText = lib.literalExpression "false";
         description = lib.mdDoc ''
           Whether to install the onlyoffice desktop application with access to system fonts.
         '';
       };
 
-      package = mkOption {
-        type = types.package;
+      package = lib.mkOption {
+        type = lib.types.package;
         default = pkgs.onlyoffice-bin;
         defaultText = lib.literalExpression "pkgs.onlyoffice-bin";
         description = "The package providing onlyoffice.";
@@ -94,7 +94,7 @@ in {
     };
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     environment.systemPackages = [(mkFHSEnv cfg.package)];
   };
 }

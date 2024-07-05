@@ -1,32 +1,29 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
 {
   secrets,
   username,
   hostname,
   pkgs,
-  config,
-  inputs,
-  lib,
+  # config,
+  # inputs,
+  # lib,
   ...
 }: {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ./packages/onlyoffice/onlyoffice.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ./packages/onlyoffice/default.nix
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
   # There are required for VMWare workstation
-  boot.kernel.sysctl = {
-    "vm.compaction_proactiveness" = 0;
-    "vm.extfrag_threshold" = 1000;
-  };
+  boot.kernel.sysctl."vm.compaction_proactiveness" = 0;
+  boot.kernel.sysctl."vm.extfrag_threshold" = 1000;
 
   boot.kernelParams = [
     # This is required for VMWare workstation
@@ -38,10 +35,12 @@
 
   # nix.package = pkgs.nixFlakes;
   nix.package = pkgs.nixVersions.stable;
-  nix.settings.trusted-users = [ "root" username ];
+  nix.settings.trusted-users = ["root" username];
   nix.settings.accept-flake-config = true;
   nix.settings.auto-optimise-store = true;
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = ["nix-command" "flakes"];
+
+  # setup binary cache server, include cachix
   nix.settings.substituters = [
     "https://cache.nixos.org"
     "https://cache.iog.io"
@@ -76,12 +75,19 @@
   #   prefixLength = 24;
   # } ];
   # networking.defaultGateway = "192.168.1.1";
+
   networking.nameservers = [
-    "1.1.1.2" # CloudFlare DNS
-    "1.0.0.2" # CloudFlare DNS
-    "2606:4700:4700::1112"
-    "2606:4700:4700::1002"
+    "1.1.1.1" # CloudFlare DNS
+    "1.0.0.1" # CloudFlare DNS
+    "2606:4700:4700::1111"
+    "2606:4700:4700::1001"
   ];
+
+  networking.hosts = {
+    "192.168.1.3" = ["osaka"];
+    "192.168.1.4" = ["shibuya"];
+    "192.168.1.5" = ["mf643cdw"];
+  };
 
   # Set your time zone.
   time.timeZone = "Asia/Bangkok";
@@ -129,6 +135,19 @@
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
+  services.printing.browsing = true;
+
+  # Enable avahi for printer discovery
+  services.avahi.enable = true;
+  services.avahi.nssmdns4 = true;
+
+  hardware.printers.ensurePrinters = [
+    {
+      name = "mf643cdw";
+      deviceUri = "ipp://192.168.1.5/ipp/print";
+      model = "everywhere";
+    }
+  ];
 
   # Enable sound with pipewire.
   hardware.pulseaudio.enable = false;
@@ -153,17 +172,25 @@
   users.users.${username} = {
     isNormalUser = true;
     description = "Nawamin M.";
-    extraGroups = [ "networkmanager" "wheel" "storage" "docker" ];
+    extraGroups = ["networkmanager" "wheel" "storage" "docker"];
     shell = pkgs.fish;
-    packages = with pkgs; [
-    #  thunderbird
-    ];
+    packages =
+      # with pkgs;
+      [
+        #  thunderbird
+      ];
     openssh.authorizedKeys.keys = ["${secrets.openssh_authorized_keys."namin@tokyo"}"];
   };
   # These users do not have to enter password on `sudo`
   security.sudo.extraRules = [
-    { users = [ username ];
-      commands = [ { command = "ALL"; options = [ "NOPASSWD" ]; } ];
+    {
+      users = [username];
+      commands = [
+        {
+          command = "ALL";
+          options = ["NOPASSWD"];
+        }
+      ];
     }
   ];
 
@@ -224,6 +251,7 @@
     neovim
     nixd # Nix language server
     nodejs # For coc
+    python3
     rar
     sqlite
     wget # Needed by some packages
@@ -244,7 +272,19 @@
     ripgrep # better grep (rg)
     sd # better sed
     tree
+    unixODBC
+    unixODBCDrivers.mariadb
+    unixODBCDrivers.sqlite
+    unixODBCDrivers.psql
   ];
+
+  environment.unixODBCDrivers = with pkgs.unixODBCDrivers; [mariadb sqlite psql];
+
+  environment.etc."odbc.ini".text = ''
+    [mansuki]
+    Driver = SQLite
+    Database = /home/namin/haskell/mansuki/mansuki.db
+  '';
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -256,24 +296,24 @@
 
   # List services that you want to enable:
 
+  # Enable Gnome Remote Desktop and Remote Login
+  services.gnome.gnome-remote-desktop.enable = true;
+
+  # OneDrive cloud storage
+  services.onedrive.enable = true;
+
   # Enable the OpenSSH daemon.
-  services.openssh = {
-    enable = true;
-    settings = {
-      PermitRootLogin = "no";
-      PasswordAuthentication = true;
-    };
-  };
+  services.openssh.enable = true;
+  services.openssh.settings.PermitRootLogin = "no";
+  services.openssh.settings.PasswordAuthentication = true;
 
   home-manager.users.${username} = {
     imports = [./home.nix];
   };
 
-  services.gnome.gnome-remote-desktop.enable = true;
-
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [ 3389 3390 ];
-  networking.firewall.allowedUDPPorts = [ 3389 3390 ];
+  networking.firewall.allowedTCPPorts = [3389 3390];
+  networking.firewall.allowedUDPPorts = [3389 3390];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
   # networking.enableIPv6 = false;
@@ -289,26 +329,26 @@
 
   # Enable Dynamic Update Client (DUC) for No-IP
   systemd.services.noip-duc = {
-    wantedBy = [ "multi-user.target" ];
-    after    = [ "network.target" "auditd.service" ];
+    wantedBy = ["multi-user.target"];
+    after = ["network.target" "auditd.service"];
     serviceConfig = {
       Type = "simple";
       User = "root";
       # ExecStart = ''${pkgs.noip}/bin/noip2 -d -c ${pkgs.noip}/etc/no-ip2.conf'';
       ExecStart = ''
-          ${pkgs.noip-duc}/bin/noip-duc \
-            --username ${secrets.noip_group_update.username} \
-            --password ${secrets.noip_group_update.password} \
-            -g namin.ddns.net \
-            --ip-method http://ip1.dynupdate6.no-ip.com/
+        ${pkgs.noip-duc}/bin/noip-duc \
+          --username ${secrets.noip_group_update.username} \
+          --password ${secrets.noip_group_update.password} \
+          -g namin.ddns.net \
+          --ip-method http://ip1.dynupdate6.no-ip.com/
       '';
     };
   };
 
   # Enable Gnome Remote Login on boot.
   systemd.services."gnome-remote-login" = {
-    wantedBy = [ "multi-user.target" ];
-    after = [ "network.target" ];
+    wantedBy = ["multi-user.target"];
+    after = ["network.target"];
     script = ''
       ${pkgs.systemd}/bin/systemctl start gnome-remote-desktop.service
     '';
@@ -323,13 +363,13 @@
     # enableDefaultPackages = true;
     packages = with pkgs; [
       (nerdfonts.override {fonts = ["FiraCode"];})
-      (callPackage ./packages/fonts/custom-fonts.nix {})
+      (callPackage ./packages/custom-fonts/default.nix {})
     ];
     fontconfig = {
       defaultFonts = {
-        serif = ["Google Sans" "DroidSans"];
-        sansSerif = ["Google Sans" "DroidSans"];
-        monospace = ["FiraCode" "DroidSans" ];
+        serif = ["DroidSans"];
+        sansSerif = ["DroidSans"];
+        monospace = ["FiraCode" "DroidSans"];
       };
     };
     # fontconfig.localConf = ''
@@ -347,6 +387,4 @@
     docker.enableOnBoot = false;
     docker.extraOptions = "--data-root /mnt/q/docker";
   };
-
 }
-

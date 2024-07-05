@@ -3,7 +3,8 @@ set nocompatible
 syntax on
 
 " set 'selection', 'selectmode', 'mousemodel' and 'keymodel' for MS-Windows
-behave mswin
+" behave mswin
+source $VIMRUNTIME/mswin.vim
 
 " backspace in Visual mode deletes selection
 vnoremap <BS> d

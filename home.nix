@@ -1,13 +1,14 @@
 {
   # FIXME: uncomment the next line if you want to reference your GitHub/GitLab access tokens and other secrets
   secrets,
-  config,
+  # config,
   pkgs,
   username,
   nix-index-database,
   ...
 }: let
-  unstable-packages = with pkgs.unstable; [
+  unstable-packages = # with pkgs.unstable;
+    [
     # FIXME: select your core binaries that you always want on the bleeding-edge
   ];
 
@@ -20,7 +21,7 @@
     dos2unix
     fcp # better cp
     fd # better find
-    ffmpeg
+    ffmpeg_7
     findutils
     git-crypt
     htop-vim
@@ -124,23 +125,31 @@
     opera
     # libguestfs-with-appliance
     wxmaxima
-    jdk17
     patchelf
     cargo
     rustc
     ngrok
-    # libsForQt5.krfb
+
+
+    # For finding text in MS-Word files
+    python311Packages.docx2txt
+    catdoc
+
+    libreoffice-qt-fresh
+    jdk # LibreOffice Base needs this to import some database
+
     libsForQt5.kate
-    # zathura
     mathematica
     mcomix
-    remmina
+    remmina # RDP client
+
+    android-tools # for adb
+    calibre
+    stderred
+
     brc
     mht2img
     mansuki
-    android-tools
-    calibre
-    stderred
   ];
 in {
   imports = [
@@ -216,8 +225,8 @@ in {
       interactiveShellInit = ''
         fish_add_path ~/.local/bin
       '';
-      functions = with pkgs.lib.strings; {
-        # ffwh = fileContents ./fish/ffwh.fish;
+      functions = {
+        # ffwh = pkgs.lib.strngs.fileContents ./fish/ffwh.fish;
       };
     };
     # direnv.enable = true;
@@ -317,13 +326,9 @@ in {
       "nvim/coc-settings.json".text =
         pkgs.lib.strings.fileContents ./.config/neovim/coc-settings.json;
 
-      # "google-chrome/NativeMessagingHosts/dev.namin.mansuki.json".text = builtins.replaceStrings ["@mansuki@"] ["${pkgs.mansuki}/bin/mansuki"] (fileContents ./.config/chrome/dev.namin.mansuki.json);
-      # "chromium/NativeMessagingHosts/dev.namin.mansuki.json".text = builtins.replaceStrings ["@mansuki@"] ["${pkgs.mansuki}/bin/mansuki"] (fileContents ./.config/chrome/dev.namin.mansuki.json);
-      "thorium/NativeMessagingHosts/dev.namin.mansuki.json".text =
-        builtins.replaceStrings
-          ["@mansuki@"]
-          ["${pkgs.mansuki}"]
-          (pkgs.lib.strings.fileContents ./.config/chrome/dev.namin.mansuki.json);
+      "google-chrome/NativeMessagingHosts/dev.namin.mansuki.json".text = builtins.replaceStrings ["@mansuki@"] ["${pkgs.mansuki}"] (pkgs.lib.strings.fileContents ./.config/chrome/dev.namin.mansuki.json);
+      "chromium/NativeMessagingHosts/dev.namin.mansuki.json".text = builtins.replaceStrings ["@mansuki@"] ["${pkgs.mansuki}"] (pkgs.lib.strings.fileContents ./.config/chrome/dev.namin.mansuki.json);
+      "thorium/NativeMessagingHosts/dev.namin.mansuki.json".text = builtins.replaceStrings ["@mansuki@"] ["${pkgs.mansuki}"] (pkgs.lib.strings.fileContents ./.config/chrome/dev.namin.mansuki.json);
 
       # "google-chrome/NativeMessagingHosts/com.google.chrome.remote_desktop.json".source = "${pkgs.chrome-remote-desktop}/etc/opt/chrome/native-messaging-hosts/com.google.chrome.remote_desktop.json";
       # "chromium/NativeMessagingHosts/com.google.chrome.remote_desktop.json".source = "${pkgs.chrome-remote-desktop}/etc/opt/chrome/native-messaging-hosts/com.google.chrome.remote_desktop.json";
@@ -337,34 +342,29 @@ in {
     mimeApps = {
       enable = true;
       defaultApplications = {
-        # .epub
-        "application/epub+zip" = [ "calibre-ebook-viewer.desktop" ];
-        # .doc
-        "application/msword" = [ "onlyoffice-desktopeditors.desktop" "writer.desktop" ];
-        # .pdf
-        "application/pdf" = [ "org.gnome.Evince.desktop" "mcomix.desktop" ];
-        # .ebz
-        "application/vnd.comicbook+zip" = [ "mcomix.desktop" ];
-        # .xlsx
-        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" = [ "onlyoffice-desktopeditors.desktop" "calc.desktop" ];
-        # .docx
-        "application/vnd.openxmlformats-officedocument.wordprocessingml.document" = [ "onlyoffice-desktopeditors.desktop" "writer.desktop" ];
+        "application/epub+zip" = [ "calibre-ebook-viewer.desktop" ]; # .epub
+        "application/msword" = [ "onlyoffice-desktopeditors.desktop" "writer.desktop" ]; # .doc
+        "application/pdf" = [ "org.gnome.Evince.desktop" "mcomix.desktop" ]; # .pdf
+        "application/vnd.comicbook-rar" = [ "mcomix.desktop" "org.gnome.FileRoller.desktop" ]; # .cbr
+        "application/vnd.comicbook+zip" = [ "mcomix.desktop" "org.gnome.FileRoller.desktop" ]; # .cbz
+        "application/vnd.ms-excel" = [ "onlyoffice-desktopeditors.desktop" "calc.desktop" ]; # .xls
+        "application/vnd.openxmlformats-officedocument.presentationml.presentation" = [ "onlyoffice-desktopeditors.desktop" "impress.desktop" ]; # .pptx
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" = [ "onlyoffice-desktopeditors.desktop" "calc.desktop" ]; # .xlsx
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document" = [ "onlyoffice-desktopeditors.desktop" "writer.desktop" ]; # .docx
+        "application/vnd.ms-powerpoint" = [ "onlyoffice-desktopeditors.desktop" "impress.desktop" ]; # .ppt
         "default-web-browser" = [ "thorium-browser.desktop" "microsoft-edge.desktop" ];
-        # .jpg, .jpeg
-        "image/jpeg" = [ "mcomix.desktop" "org.nomacs.ImageLounge.desktop" "org.kde.krita.desktop" ];
-        # .png
-        "image/png" = [ "mcomix.desktop" "org.nomacs.ImageLounge.desktop" "org.kde.krita.desktop" ];
-        # .webp
-        "image/webp" = [ "mcomix.desktop" "org.nomacs.ImageLounge.desktop" "org.kde.krita.desktop" ];
-        "text/html" = [ "thorium-browser.desktop" "microsoft-edge.desktop" ];
-        "text/plain" = [ "org.kde.kate.desktop" ];
-        "video/mp4" = [ "mpv.desktop" "org.gnome.Totem.desktop" "vlc.desktop" "io.github.mpc_qt.Mpc-Qt.desktop" ];
-        "video/vnd.avi" = [ "mpv.desktop" "org.gnome.Totem.desktop" "vlc.desktop" "io.github.mpc_qt.Mpc-Qt.desktop" ];
-        "video/x-matroska" = [ "mpv.desktop" "org.gnome.Totem.desktop" "vlc.desktop" "io.github.mpc_qt.Mpc-Qt.desktop" ];
-        "x-scheme-handler/about" = [ "thorium-browser.desktop" "microsoft-edge.desktop" ];
-        "x-scheme-handler/http" = [ "thorium-browser.desktop" "microsoft-edge.desktop" ];
-        "x-scheme-handler/https" = [ "thorium-browser.desktop" "microsoft-edge.desktop" ];
-        "x-scheme-handler/unknown" = [ "thorium-browser.desktop" "microsoft-edge.desktop" ];
+        "image/jpeg" = [ "mcomix.desktop" "org.nomacs.ImageLounge.desktop" "org.kde.krita.desktop" ]; # .jpg, .jpeg
+        "image/png" = [ "mcomix.desktop" "org.nomacs.ImageLounge.desktop" "org.kde.krita.desktop" ]; # .png .webp
+        "image/webp" = [ "mcomix.desktop" "org.nomacs.ImageLounge.desktop" "org.kde.krita.desktop" ]; # .webp
+        "text/html" = [ "thorium-browser.desktop" "microsoft-edge.desktop" ]; # .html
+        "text/plain" = [ "org.kde.kate.desktop" ]; # .txt
+        "video/mp4" = [ "mpv.desktop" "org.gnome.Totem.desktop" "vlc.desktop" "io.github.mpc_qt.Mpc-Qt.desktop" ]; # .mp4
+        "video/vnd.avi" = [ "mpv.desktop" "org.gnome.Totem.desktop" "vlc.desktop" "io.github.mpc_qt.Mpc-Qt.desktop" ]; # .avi
+        "video/x-matroska" = [ "mpv.desktop" "org.gnome.Totem.desktop" "vlc.desktop" "io.github.mpc_qt.Mpc-Qt.desktop" ]; # .mkv
+        "x-scheme-handler/about" = [ "thorium-browser.desktop" "google-chrome.desktop" "microsoft-edge.desktop" ];
+        "x-scheme-handler/http" = [ "thorium-browser.desktop" "google-chrome.desktop" "microsoft-edge.desktop" ];
+        "x-scheme-handler/https" = [ "thorium-browser.desktop" "google-chrome.desktop" "microsoft-edge.desktop" ];
+        "x-scheme-handler/unknown" = [ "thorium-browser.desktop" "google-chrome.desktop" "microsoft-edge.desktop" ];
       };
     };
   };
