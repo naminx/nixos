@@ -1,0 +1,22 @@
+diff --git a/mcomix/event.py b/mcomix/event.py
+index dbeb8f6..fb73638 100644
+--- a/mcomix/event.py
++++ b/mcomix/event.py
+@@ -493,6 +493,8 @@ class EventHandler(object):
+         if direction == Gdk.ScrollDirection.UP:
+             if event.get_state() & Gdk.ModifierType.CONTROL_MASK:
+                 self._window.manual_zoom_in()
++            elif prefs['zoom mode'] == constants.ZoomMode.BEST or prefs['zoom mode'] == constants.ZoomMode.HEIGHT:
++                self._window.flip_page(-1)
+             elif prefs['smart scroll']:
+                 self._smart_scroll_up(prefs['number of pixels to scroll per mouse wheel event'])
+             else:
+@@ -501,6 +503,8 @@ class EventHandler(object):
+         elif direction == Gdk.ScrollDirection.DOWN:
+             if event.get_state() & Gdk.ModifierType.CONTROL_MASK:
+                 self._window.manual_zoom_out()
++            elif prefs['zoom mode'] == constants.ZoomMode.BEST or prefs['zoom mode'] == constants.ZoomMode.HEIGHT:
++                self._window.flip_page(+1)
+             elif prefs['smart scroll']:
+                 self._smart_scroll_down(prefs['number of pixels to scroll per mouse wheel event'])
+             else:

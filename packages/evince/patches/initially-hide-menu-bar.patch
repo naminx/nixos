@@ -1,0 +1,25 @@
+From ff94eb9633e4370f37b51d58dc64ea1c33cbe37c Mon Sep 17 00:00:00 2001
+From: Fabian Thomas <fabian@fabianthomas.de>
+Date: Sat, 11 Feb 2023 00:20:43 +0100
+Subject: initially-hide-menu-bar.patch
+
+---
+ shell/evince-toolbar.ui | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/shell/evince-toolbar.ui b/shell/evince-toolbar.ui
+index f3b68066..a9dcaefa 100644
+--- a/shell/evince-toolbar.ui
++++ b/shell/evince-toolbar.ui
+@@ -3,7 +3,7 @@
+   <template class="EvToolbar" parent="GtkBin">
+     <child>
+       <object class="HdyHeaderBar" id="header_bar">
+-        <property name="visible">true</property>
++        <property name="visible">false</property>
+         <child>
+           <object class="GtkButton" id="open_button">
+             <property name="action-name">win.open</property>
+-- 
+2.44.0
+

@@ -1,0 +1,44 @@
+diff --git a/mcomix/tools.py b/mcomix/tools.py
+index 1cf00c2..1f9aff4 100644
+--- a/mcomix/tools.py
++++ b/mcomix/tools.py
+@@ -14,7 +14,7 @@ from typing import (Any, Iterable, List, Mapping, Sequence, Tuple, TypeVar,
+ 
+ Numeric = TypeVar('Numeric', int, float)
+ 
+-NUMERIC_REGEXP = re.compile(r"\d+|\D+")  # Split into numerics and characters
++NUMERIC_REGEXP = re.compile(r"/|\d+|[^/\d]+")  # Split into slash, numerics and everything else
+ PREFIXED_BYTE_UNITS = ("B", "KiB", "MiB", "GiB", "TiB", "PiB", "EiB", "ZiB", "YiB", "RiB", "QiB")
+ 
+ 
+@@ -22,6 +22,13 @@ def cmp(a: str, b: str) -> int:
+     """ Forward port of Python2's cmp function """
+     return (a > b) - (a < b)
+ 
++symbols = "!#$%&(),;@[]^_`{}~+="
++
++def symbol_first(string):
++    return [
++        symbols.index(char) if char in symbols else ord(char) + len(symbols)
++        for char in string
++    ]
+ 
+ class AlphanumericSortKey:
+     """ Compares two strings by their natural order (i.e. 1 before 10) """
+@@ -36,9 +43,14 @@ class AlphanumericSortKey:
+             if not isinstance(left, type(right)):
+                 left_str = str(left)
+                 right_str = str(right)
+-                if left_str < right_str:
++                if symbol_first(left_str) < symbol_first(right_str):
++                    return True
++                elif symbol_first(left_str) > symbol_first(right_str):
++                    return False
++            elif isinstance(left, type("")):
++                if symbol_first(left) < symbol_first(right):
+                     return True
+-                elif left_str > right_str:
++                elif symbol_first(left) > symbol_first(right):
+                     return False
+             else:
+                 if left < right:

@@ -1,0 +1,22 @@
+{
+  "languageserver": {
+    "haskell": {
+      "command": "haskell-language-server-wrapper",
+      "args": ["--lsp"],
+      "rootPatterns": ["*.cabal"],
+      "filetypes": ["haskell", "lhaskell"],
+      "settings": {
+        "haskell": {
+          "formattingProvider": "fourmolu"
+        }
+      }
+    },
+    "nix": {
+      "command": "nixd",
+      "filetypes": ["nix"]
+    }
+  },
+  "prettier.enable": true,
+  "prettier.tabWidth": 2,
+  "coc.preferences.formatOnSave": true
+}

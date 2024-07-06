@@ -1,0 +1,13 @@
+diff --git a/libs/ui/input/kis_pan_action.cpp b/libs/ui/input/kis_pan_action.cpp
+index 4ceb60727b..464c2a1228 100644
+--- a/libs/ui/input/kis_pan_action.cpp
++++ b/libs/ui/input/kis_pan_action.cpp
+@@ -22,7 +22,7 @@
+ class KisPanAction::Private
+ {
+ public:
+-    Private() : panDistance(10) { }
++    Private() : panDistance(120) { }
+ 
+     QPointF averagePoint( QTouchEvent* event, int *outCount = nullptr );
+ 
