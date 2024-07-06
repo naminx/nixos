@@ -3,5 +3,8 @@
   "description": "Man(ga)Suki: Download comics from selected websites.",
   "path": "@mansuki@/bin/mansuki",
   "type": "stdio",
-  "allowed_origins": ["chrome-extension://aehehgedpojgjoiliflhejlfbgibfegn/"]
+  "allowed_origins": [
+    "chrome-extension://aehehgedpojgjoiliflhejlfbgibfegn/",
+    "chrome-extension://jghmmckjljfmiflifjlgalcaoelcmenl/"
+  ]
 }

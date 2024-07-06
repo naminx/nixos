@@ -6,11 +6,21 @@
   username,
   hostname,
   pkgs,
-  # config,
-  # inputs,
-  # lib,
+  config,
+  inputs,
+  lib,
   ...
 }: {
+  # Enable this on WSL
+  wsl.enable = true;
+
+  wsl.wslConf.automount.root = "/mnt";
+  wsl.wslConf.interop.appendWindowsPath = false;
+  wsl.wslConf.network.generateHosts = false;
+  wsl.wslConf.network.generateResolvConf = false;
+  wsl.defaultUser = username;
+  wsl.startMenuLaunchers = true;
+
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -18,20 +28,36 @@
   ];
 
   # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader = lib.mkIf (!config.wsl.enable) {
+    systemd-boot.enable = true;
+    efi.canTouchEfiVariables = true;
+  };
 
   # There are required for VMWare workstation
-  boot.kernel.sysctl."vm.compaction_proactiveness" = 0;
-  boot.kernel.sysctl."vm.extfrag_threshold" = 1000;
+  boot.kernel.sysctl = lib.mkIf (!config.wsl.enable) {
+    "vm.compaction_proactiveness" = 0;
+    "vm.extfrag_threshold" = 1000;
+  };
 
-  boot.kernelParams = [
-    # This is required for VMWare workstation
-    "transparent_hugepage=never"
-    # Custom resolution
-    "video=HDMI-A-2:2160x1440@60"
-    "video=HDMI-A-4:2160x1440@60"
-  ];
+  boot.kernelParams =
+    []
+    ++ (
+      if (!config.wsl.enable)
+      then [
+        # This is required for VMWare workstation
+        "transparent_hugepage=never"
+      ]
+      else []
+    )
+    ++ (
+      if (!config.wsl.enable)
+      then [
+        # Custom resolution
+        "video=HDMI-A-2:2160x1440@60"
+        "video=HDMI-A-4:2160x1440@60"
+      ]
+      else []
+    );
 
   # nix.package = pkgs.nixFlakes;
   nix.package = pkgs.nixVersions.stable;
@@ -84,6 +110,10 @@
   ];
 
   networking.hosts = {
+    "192.168.1.2" =
+      if config.wsl.enable
+      then ["tokyo"]
+      else [];
     "192.168.1.3" = ["osaka"];
     "192.168.1.4" = ["shibuya"];
     "192.168.1.5" = ["mf643cdw"];
@@ -108,7 +138,7 @@
     LC_TIME = "en_GB.UTF-8";
   };
 
-  i18n.inputMethod = {
+  i18n.inputMethod = lib.mkIf (!config.wsl.enable) {
     enabled = "fcitx5";
     fcitx5.addons = with pkgs; [
       fcitx5-configtool
@@ -119,18 +149,18 @@
     ];
   };
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
+  services.xserver = lib.mkIf (!config.wsl.enable) {
+    # Enable the X11 windowing system.
+    enable = true;
 
-  # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.displayManager.gdm.autoSuspend = false;
-  services.xserver.desktopManager.gnome.enable = true;
+    # Enable the GNOME Desktop Environment.
+    displayManager.gdm.enable = true;
+    displayManager.gdm.autoSuspend = false;
+    desktopManager.gnome.enable = true;
 
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
+    # Configure keymap in X11
+    xkb.layout = "us";
+    xkb.variant = "";
   };
 
   # Enable CUPS to print documents.
@@ -173,12 +203,9 @@
     isNormalUser = true;
     description = "Nawamin M.";
     extraGroups = ["networkmanager" "wheel" "storage" "docker"];
+
     shell = pkgs.fish;
-    packages =
-      # with pkgs;
-      [
-        #  thunderbird
-      ];
+    # packages = with pkgs; [ thunderbird ];
     openssh.authorizedKeys.keys = ["${secrets.openssh_authorized_keys."namin@tokyo"}"];
   };
   # These users do not have to enter password on `sudo`
@@ -205,8 +232,10 @@
   programs.nix-index.enable = true;
   programs.nix-index.enableFishIntegration = true;
 
-  programs.onlyoffice.enable = true;
-  programs.onlyoffice.package = pkgs.onlyoffice-bin_latest;
+  programs.onlyoffice = lib.mkIf (!config.wsl.enable) {
+    enable = true;
+    package = pkgs.onlyoffice-bin_latest;
+  };
 
   programs.starship.enable = true;
   programs.starship.settings = {
@@ -239,44 +268,51 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    # Essential packages
-    alejandra # Nix file formatter
-    bc # calculator for bash script
-    cachix
-    git
-    gnomeExtensions.kimpanel
-    gnomeExtensions.gtk4-desktop-icons-ng-ding
-    google-chrome # Convenient browser to get my config files/notes
-    neovim
-    nixd # Nix language server
-    nodejs # For coc
-    python3
-    rar
-    sqlite
-    wget # Needed by some packages
-    wezterm # Easy to edit (mouse selection, cut, paste)
-    wl-clipboard # Wayland clipboard
-    unzip
-    zip
+  environment.systemPackages = with pkgs;
+    [
+      # Essential packages
+      alejandra # Nix file formatter
+      bc # calculator for bash script
+      cachix
+      git
+      neovim
+      nixd # Nix language server
+      nodejs # For coc
+      python3
+      rar
+      sqlite
+      wget # Needed by some packages
+      wl-clipboard # Wayland clipboard
+      unzip
+      zip
 
-    # Convenient packages
-    bat # better cat
-    bottom # better top (btm)
-    broot # better tree (br)
-    eza # better ls
-    fd # better find
-    findutils
-    fzf
-    htop-vim # alternative top (htop)
-    ripgrep # better grep (rg)
-    sd # better sed
-    tree
-    unixODBC
-    unixODBCDrivers.mariadb
-    unixODBCDrivers.sqlite
-    unixODBCDrivers.psql
-  ];
+      # Convenient packages
+      bat # better cat
+      bottom # better top (btm)
+      broot # better tree (br)
+      eza # better ls
+      fd # better find
+      findutils
+      fzf
+      htop-vim # alternative top (htop)
+      ripgrep # better grep (rg)
+      sd # better sed
+      tree
+      unixODBC
+      unixODBCDrivers.mariadb
+      unixODBCDrivers.sqlite
+      unixODBCDrivers.psql
+    ]
+    ++ (
+      if (!config.wsl.enable)
+      then [
+        gnomeExtensions.kimpanel
+        gnomeExtensions.gtk4-desktop-icons-ng-ding
+        google-chrome # Convenient browser to get my config files/notes
+        wezterm # Easy to edit (mouse selection, cut, paste)
+      ]
+      else []
+    );
 
   environment.unixODBCDrivers = with pkgs.unixODBCDrivers; [mariadb sqlite psql];
 
@@ -297,18 +333,19 @@
   # List services that you want to enable:
 
   # Enable Gnome Remote Desktop and Remote Login
-  services.gnome.gnome-remote-desktop.enable = true;
+  services.gnome.gnome-remote-desktop.enable = !config.wsl.enable;
 
   # OneDrive cloud storage
-  services.onedrive.enable = true;
+  services.onedrive.enable = !config.wsl.enable;
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
   services.openssh.settings.PermitRootLogin = "no";
   services.openssh.settings.PasswordAuthentication = true;
 
-  home-manager.users.${username} = {
-    imports = [./home.nix];
+  home-manager.users.${username} = import ./home.nix {
+    inherit secrets config pkgs lib username;
+    nix-index-database = inputs.nix-index-database;
   };
 
   # Open ports in the firewall.
@@ -325,7 +362,7 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "24.05"; # Did you read the comment?
+  system.stateVersion = if config.wsl.enable then "24.05" else "23.11"; # Did you read the comment?
 
   # Enable Dynamic Update Client (DUC) for No-IP
   systemd.services.noip-duc = {
@@ -346,7 +383,7 @@
   };
 
   # Enable Gnome Remote Login on boot.
-  systemd.services."gnome-remote-login" = {
+  systemd.services."gnome-remote-login" = lib.mkIf (!config.wsl.enable) {
     wantedBy = ["multi-user.target"];
     after = ["network.target"];
     script = ''
@@ -355,9 +392,12 @@
   };
 
   # Setup the right display scale for GDM login screen
-  systemd.tmpfiles.rules = [
-    "L+ /run/gdm/.config/monitors.xml - - - - ${./.config/gdm/monitors.xml}"
-  ];
+  systemd.tmpfiles.rules =
+    if (!config.wsl.enable)
+    then [
+      "L+ /run/gdm/.config/monitors.xml - - - - ${./.config/gdm/monitors.xml}"
+    ]
+    else [];
 
   fonts = {
     # enableDefaultPackages = true;
@@ -372,14 +412,17 @@
         monospace = ["FiraCode" "DroidSans"];
       };
     };
-    # fontconfig.localConf = ''
-    #   <fontconfig>
-    #     <dir>/mnt/c/Windows/Fonts</dir>
-    #   </fontconfig>
-    # '';
+    fontconfig.localConf =
+      if config.wsl.enable
+      then ''
+        <fontconfig>
+          <dir>/mnt/c/Windows/Fonts</dir>
+        </fontconfig>
+      ''
+      else "";
   };
 
-  virtualisation = {
+  virtualisation = lib.mkIf (!config.wsl.enable) {
     vmware.host.enable = true;
     vmware.host.package = pkgs.vmware-workstation;
 

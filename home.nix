@@ -1,156 +1,162 @@
 {
   # FIXME: uncomment the next line if you want to reference your GitHub/GitLab access tokens and other secrets
   secrets,
-  # config,
+  config,
   pkgs,
+  lib,
   username,
   nix-index-database,
   ...
 }: let
-  unstable-packages = # with pkgs.unstable;
+  unstable-packages =
+    # with pkgs.unstable;
     [
-    # FIXME: select your core binaries that you always want on the bleeding-edge
-  ];
+      # FIXME: select your core binaries that you always want on the bleeding-edge
+    ];
 
-  stable-packages = with pkgs; [
-    # FIXME: customize these stable packages to your liking for the languages that you use
-    bc
-    coreutils
-    curl
-    du-dust # better du (dust)
-    dos2unix
-    fcp # better cp
-    fd # better find
-    ffmpeg_7
-    findutils
-    git-crypt
-    htop-vim
-    imagemagick
-    jq
-    killall
-    mosh
-    nomacs
-    procs
-    rar
-    rm-improved # better rm (rip)
-    sd # better sed
-    sqlite
-    sqlitebrowser
-    tree
-    unzip
-    # wezterm
-    wget
-    zip
+  stable-packages = with pkgs;
+    [
+      # FIXME: customize these stable packages to your liking for the languages that you use
+      bc
+      coreutils
+      curl
+      du-dust # better du (dust)
+      dos2unix
+      fcp # better cp
+      fd # better find
+      ffmpeg_7
+      findutils
+      git-crypt
+      htop-vim
+      imagemagick
+      jq
+      killall
+      mosh
+      procs
+      rar
+      rm-improved # better rm (rip)
+      sd # better sed
+      sqlite
+      sqlitebrowser
+      tree
+      unzip
+      # wezterm
+      wget
+      zip
 
-    neovim
-    wl-clipboard
-    xclip
+      neovim
+      wl-clipboard
+      xclip
 
-    # key tools
-    gnumake # for lunarvim
-    gcc # for lunarvim
-    gh # for bootstrapping
+      # key tools
+      gnumake # for lunarvim
+      gcc # for lunarvim
+      gh # for bootstrapping
 
-    # core languages
-    # rustup
-    go
-    # lua
-    nodejs
-    # typescript
+      # core languages
+      # rustup
+      go
+      # lua
+      nodejs
+      # typescript
 
-    # haskell
-    ghc
-    cabal-install
-    haskell-language-server
-    haskellPackages.fourmolu
-    # haskellPackages.hls-fourmolu-plugin
+      # haskell
+      ghc
+      cabal-install
+      haskell-language-server
+      haskellPackages.fourmolu
+      # haskellPackages.hls-fourmolu-plugin
 
-    # rust stuff
-    cargo-cache
-    cargo-expand
+      # rust stuff
+      cargo-cache
+      cargo-expand
 
-    # local dev stuf
-    mkcert
-    httpie
+      # local dev stuf
+      mkcert
+      httpie
 
-    # treesitter
-    tree-sitter
+      # treesitter
+      tree-sitter
 
-    # language servers
-    ccls # c / c++
-    # gopls
-    # nodePackages.typescript-language-server
-    nodePackages.vscode-langservers-extracted # html, css, json, eslint
-    nodePackages.yaml-language-server
-    # sumneko-lua-language-server
-    # nil nix
-    nixd # nix
-    nodePackages.pyright
+      # language servers
+      ccls # c / c++
+      # gopls
+      # nodePackages.typescript-language-server
+      nodePackages.vscode-langservers-extracted # html, css, json, eslint
+      nodePackages.yaml-language-server
+      # sumneko-lua-language-server
+      # nil nix
+      nixd # nix
+      nodePackages.pyright
 
-    # formatters and linters
-    alejandra # nix
-    black # python
-    ruff # python
-    deadnix # nix
-    # golangci-lint
-    # lua52Packages.luacheck
-    nodePackages.prettier
-    shellcheck
-    shfmt
-    statix # nix
-    sqlfluff
-    tflint
+      # formatters and linters
+      alejandra # nix
+      black # python
+      ruff # python
+      deadnix # nix
+      # golangci-lint
+      # lua52Packages.luacheck
+      nodePackages.prettier
+      shellcheck
+      shfmt
+      statix # nix
+      sqlfluff
+      tflint
 
-    # namin
-    bootnext
-    chromium
-    thorium
-    (microsoft-edge.override {
-      commandLineArgs = [
-        "--enable-wayland-ime"
-        "--disable-features=WaylandFractionalScaleV1"
-        "--enable-chrome-browser-cloud-management"
-        "--gtk-version=4"
-      ];
-    })
-    meson
-    krita
-    expressvpn
-    ntfs3g
-    qbittorrent
-    telegram-desktop
-    zoom-us
-    vlc
-    mpc-qt
-    opera
-    # libguestfs-with-appliance
-    wxmaxima
-    patchelf
-    cargo
-    rustc
-    ngrok
+      # namin
+      bootnext
+      thorium
+      meson
+      patchelf
+      cargo
+      rustc
+      ngrok
 
+      brc
+      mht2img
+      mansuki
+    ]
+    ++ (
+      if (!config.wsl.enable)
+      then [
+        chromium
+        (microsoft-edge.override {
+          commandLineArgs = [
+            "--enable-wayland-ime"
+            "--disable-features=WaylandFractionalScaleV1"
+            "--enable-chrome-browser-cloud-management"
+            "--gtk-version=4"
+          ];
+        })
+        krita
+        expressvpn
+        ntfs3g
+        qbittorrent
+        telegram-desktop
+        zoom-us
+        vlc
+        mpc-qt
+        opera
+        # libguestfs-with-appliance
+        wxmaxima
 
-    # For finding text in MS-Word files
-    python311Packages.docx2txt
-    catdoc
+        # For finding text in MS-Word files
+        python311Packages.docx2txt
+        catdoc
 
-    libreoffice-qt-fresh
-    jdk # LibreOffice Base needs this to import some database
+        libreoffice-qt-fresh
+        jdk # LibreOffice Base needs this to import some database
 
-    libsForQt5.kate
-    mathematica
-    mcomix
-    remmina # RDP client
+        libsForQt5.kate
+        mathematica
+        mcomix
+        remmina # RDP client
 
-    android-tools # for adb
-    calibre
-    stderred
-
-    brc
-    mht2img
-    mansuki
-  ];
+        android-tools # for adb
+        calibre
+      ]
+      else []
+    );
 in {
   imports = [
     nix-index-database.hmModules.nix-index
@@ -196,176 +202,160 @@ in {
   # home.file.".config/lvim/config.lua".source = ./lvim_config.lua;
 
   programs = {
-    bash = {
-      enable = true;
-      shellAliases = import ./.config/shell/aliases.nix;
-    };
+    bash.enable = true;
+    bash.shellAliases = import ./.config/shell/aliases.nix;
+
     # better cat
-    bat = {
-      enable = true;
-      config = {
-        # map-syntax = [
-        #   "*.jenkinsfile:Groovy"
-        #   "*.props:Java Properties"
-        # ];
-        pager = "less -FRX";
-        theme = "gruvbox-dark";
-      };
-    };
+    bat.enable = true;
+    bat.config.map-syntax = [
+      # "*.jenkinsfile:Groovy"
+      # "*.props:Java Properties"
+    ];
+    bat.config.pager = "less -FRX";
+    bat.config.theme = "gruvbox-dark";
+
     # better top (btm)
     bottom.enable = true;
+
     # better tree (br)
-    broot = {
-      enable = true;
-      enableFishIntegration = true;
+    broot.enable = true;
+    broot.enableFishIntegration = true;
+
+    fish.enable = true;
+    fish.shellAliases = import ./.config/shell/aliases.nix;
+    fish.interactiveShellInit = ''
+      fish_add_path ~/.local/bin
+    '';
+    fish.functions = {
+      # ffwh = pkgs.lib.strngs.fileContents ./fish/ffwh.fish;
     };
-    fish = {
-      enable = true;
-      shellAliases = import ./.config/shell/aliases.nix;
-      interactiveShellInit = ''
-        fish_add_path ~/.local/bin
-      '';
-      functions = {
-        # ffwh = pkgs.lib.strngs.fileContents ./fish/ffwh.fish;
-      };
-    };
+
     # direnv.enable = true;
     # direnv.enableFishIntegration = true;
     # direnv.nix-direnv.enable = true;
-    # finder
-    eza = {
-      enable = true;
-      git = true;
-    };
-    fzf = {
-      enable = true;
-      enableFishIntegration = true;
-    };
+
+    eza.enable = true;
+    eza.git = true;
+
+    fzf.enable = true;
+    fzf.enableFishIntegration = true;
+
     git = {
       enable = true;
       package = pkgs.git;
-      delta = {
-        enable = true;
-        options = {
-          line-numbers = true;
-          side-by-side = true;
-          navigate = true;
-        };
-      };
+      delta.enable = true;
+      delta.options.line-numbers = true;
+      delta.options.side-by-side = true;
+      delta.options.navigate = true;
       userEmail = "naminx@gmail.com"; # FIXME: set your git email
       userName = "Nawamin M."; #FIXME: set your git username
-      extraConfig = {
-        # FIXME: uncomment the next lines if you want to be able to clone private https repos
-        # url = {
-        #   "https://oauth2:${secrets.github_token}@github.com" = {
-        #     insteadOf = "https://github.com";
-        #   };
-        #   "https://oauth2:${secrets.gitlab_token}@gitlab.com" = {
-        #     insteadOf = "https://gitlab.com";
-        #   };
-        # };
-        push = {
-          default = "current";
-          autoSetupRemote = true;
-        };
-        merge.conflictstyle = "diff3";
-        diff.colorMoved = "default";
-      };
+      # FIXME: uncomment the next lines if you want to be able to clone private https repos
+      # extraConfig.url = {
+      #   "https://oauth2:${secrets.github_token}@github.com" = {
+      #     insteadOf = "https://github.com";
+      #   };
+      #   "https://oauth2:${secrets.gitlab_token}@gitlab.com" = {
+      #     insteadOf = "https://gitlab.com";
+      #   };
+      # };
+      extraConfig.credential.helper = "store";
+      extraConfig.push.default = "current";
+      extraConfig.push.autoSetupRemote = true;
+      extraConfig.merge.conflictstyle = "diff3";
+      extraConfig.diff.colorMoved = "default";
     };
+
     home-manager.enable = true;
-    # lsd.enable = true;
-    # lsd.enableAliases = true;
-    mpv = {
-      enable = true;
-      bindings = {
-        WHEEL_UP = "add volume 5";
-        WHEEL_DOWN = "add volume -5";
-        "Ctrl+WHEEL_UP" = "seek 10";
-        "Ctrl+WHEEL_DOWN" = "seek -10";
-      };
-    };
-    nix-index = {
-      enable = true;
-      enableFishIntegration = true;
-    };
+
+    # better ls (lsd)
+    lsd.enable = true;
+
+    mpv.enable = true;
+    mpv.bindings.WHEEL_UP = "add volume 5";
+    mpv.bindings.WHEEL_DOWN = "add volume -5";
+    mpv.bindings."Ctrl+WHEEL_UP" = "seek 10";
+    mpv.bindings."Ctrl+WHEEL_DOWN" = "seek -10";
+
+    nix-index.enable = true;
+    nix-index.enableFishIntegration = true;
+
     nix-index-database.comma.enable = true;
+
     # better grep (rg)
     ripgrep.enable = true;
+
     # FIXME: disable this if you don't want to use the starship prompt
-    starship = {
-      enable = true;
-      settings = {
-        aws.disabled = true; # annoying to always have on
-        gcloud.disabled = true; # annoying to always have on
-        kubernetes.disabled = true; # annoying to always have on
-        git_branch.style = "242";
-        directory = {
-          style = "blue";
-          truncate_to_repo = false;
-          # fish_style_pwd_dir_length = 1; # turn on fish directory truncation
-          truncation_length = 0; # number of directories not to truncate
-        };
-        python.disabled = true;
-        # shlvl.disabled = false;
-        ruby.disabled = true;
-        hostname.ssh_only = false;
-        # hostname.style = "bold green"; # don't like the default
-        memory_usage.disabled = true; # because it includes cached memory it's reported as full a lot
-        # username.style_user = "bold blue"; # don't like the default
+    starship.enable = true;
+    starship.settings = {
+      aws.disabled = true; # annoying to always have on
+      gcloud.disabled = true; # annoying to always have on
+      kubernetes.disabled = true; # annoying to always have on
+      git_branch.style = "242";
+      directory = {
+        style = "blue";
+        truncate_to_repo = false;
+        # fish_style_pwd_dir_length = 1; # turn on fish directory truncation
+        truncation_length = 0; # number of directories not to truncate
       };
+      python.disabled = true;
+      # shlvl.disabled = false;
+      ruby.disabled = true;
+      hostname.ssh_only = false;
+      # hostname.style = "bold green"; # don't like the default
+      memory_usage.disabled = true; # because it includes cached memory it's reported as full a lot
+      # username.style_user = "bold blue"; # don't like the default
     };
+
     wezterm.enable = true;
     wezterm.extraConfig = pkgs.lib.strings.fileContents ./.config/wezterm/wezterm.lua;
+
     # better cd (z)
     zoxide.enable = true;
     zoxide.enableFishIntegration = true;
   };
 
-  xdg = {
-    configFile = {
-      "nvim/coc-settings.json".text =
-        pkgs.lib.strings.fileContents ./.config/neovim/coc-settings.json;
+  xdg.configFile = {
+    "nvim/coc-settings.json".text =
+      pkgs.lib.strings.fileContents ./.config/neovim/coc-settings.json;
 
-      "google-chrome/NativeMessagingHosts/dev.namin.mansuki.json".text = builtins.replaceStrings ["@mansuki@"] ["${pkgs.mansuki}"] (pkgs.lib.strings.fileContents ./.config/chrome/dev.namin.mansuki.json);
-      "chromium/NativeMessagingHosts/dev.namin.mansuki.json".text = builtins.replaceStrings ["@mansuki@"] ["${pkgs.mansuki}"] (pkgs.lib.strings.fileContents ./.config/chrome/dev.namin.mansuki.json);
-      "thorium/NativeMessagingHosts/dev.namin.mansuki.json".text = builtins.replaceStrings ["@mansuki@"] ["${pkgs.mansuki}"] (pkgs.lib.strings.fileContents ./.config/chrome/dev.namin.mansuki.json);
+    "google-chrome/NativeMessagingHosts/dev.namin.mansuki.json".text = builtins.replaceStrings ["@mansuki@"] ["${pkgs.mansuki}"] (pkgs.lib.strings.fileContents ./.config/chrome/dev.namin.mansuki.json);
+    "chromium/NativeMessagingHosts/dev.namin.mansuki.json".text = builtins.replaceStrings ["@mansuki@"] ["${pkgs.mansuki}"] (pkgs.lib.strings.fileContents ./.config/chrome/dev.namin.mansuki.json);
+    "thorium/NativeMessagingHosts/dev.namin.mansuki.json".text = builtins.replaceStrings ["@mansuki@"] ["${pkgs.mansuki}"] (pkgs.lib.strings.fileContents ./.config/chrome/dev.namin.mansuki.json);
 
-      # "google-chrome/NativeMessagingHosts/com.google.chrome.remote_desktop.json".source = "${pkgs.chrome-remote-desktop}/etc/opt/chrome/native-messaging-hosts/com.google.chrome.remote_desktop.json";
-      # "chromium/NativeMessagingHosts/com.google.chrome.remote_desktop.json".source = "${pkgs.chrome-remote-desktop}/etc/opt/chrome/native-messaging-hosts/com.google.chrome.remote_desktop.json";
-      # "thorium/NativeMessagingHosts/com.google.chrome.remote_desktop.json".source = "${pkgs.chrome-remote-desktop}/etc/opt/chrome/native-messaging-hosts/com.google.chrome.remote_desktop.json";
+    # "google-chrome/NativeMessagingHosts/com.google.chrome.remote_desktop.json".source = "${pkgs.chrome-remote-desktop}/etc/opt/chrome/native-messaging-hosts/com.google.chrome.remote_desktop.json";
+    # "chromium/NativeMessagingHosts/com.google.chrome.remote_desktop.json".source = "${pkgs.chrome-remote-desktop}/etc/opt/chrome/native-messaging-hosts/com.google.chrome.remote_desktop.json";
+    # "thorium/NativeMessagingHosts/com.google.chrome.remote_desktop.json".source = "${pkgs.chrome-remote-desktop}/etc/opt/chrome/native-messaging-hosts/com.google.chrome.remote_desktop.json";
 
-      # "thorium/NativeMessagingHosts/org.freedownloadmanager.fdm5.cnh.json".text = builtins.replaceStrings ["@freedownloadmanager@"] ["${pkgs.free-download-manager}"] (fileContents ./.config/chrome/org.freedownloadmanager.fdm5.cnh.json);
+    # "thorium/NativeMessagingHosts/org.freedownloadmanager.fdm5.cnh.json".text = builtins.replaceStrings ["@freedownloadmanager@"] ["${pkgs.free-download-manager}"] (fileContents ./.config/chrome/org.freedownloadmanager.fdm5.cnh.json);
 
-      # "fourmolu.yaml".text = fileContents ./xdg/fourmolu.yaml;
-      "mimeapps.list".force = true;
-    };
-    mimeApps = {
-      enable = true;
-      defaultApplications = {
-        "application/epub+zip" = [ "calibre-ebook-viewer.desktop" ]; # .epub
-        "application/msword" = [ "onlyoffice-desktopeditors.desktop" "writer.desktop" ]; # .doc
-        "application/pdf" = [ "org.gnome.Evince.desktop" "mcomix.desktop" ]; # .pdf
-        "application/vnd.comicbook-rar" = [ "mcomix.desktop" "org.gnome.FileRoller.desktop" ]; # .cbr
-        "application/vnd.comicbook+zip" = [ "mcomix.desktop" "org.gnome.FileRoller.desktop" ]; # .cbz
-        "application/vnd.ms-excel" = [ "onlyoffice-desktopeditors.desktop" "calc.desktop" ]; # .xls
-        "application/vnd.openxmlformats-officedocument.presentationml.presentation" = [ "onlyoffice-desktopeditors.desktop" "impress.desktop" ]; # .pptx
-        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" = [ "onlyoffice-desktopeditors.desktop" "calc.desktop" ]; # .xlsx
-        "application/vnd.openxmlformats-officedocument.wordprocessingml.document" = [ "onlyoffice-desktopeditors.desktop" "writer.desktop" ]; # .docx
-        "application/vnd.ms-powerpoint" = [ "onlyoffice-desktopeditors.desktop" "impress.desktop" ]; # .ppt
-        "default-web-browser" = [ "thorium-browser.desktop" "microsoft-edge.desktop" ];
-        "image/jpeg" = [ "mcomix.desktop" "org.nomacs.ImageLounge.desktop" "org.kde.krita.desktop" ]; # .jpg, .jpeg
-        "image/png" = [ "mcomix.desktop" "org.nomacs.ImageLounge.desktop" "org.kde.krita.desktop" ]; # .png .webp
-        "image/webp" = [ "mcomix.desktop" "org.nomacs.ImageLounge.desktop" "org.kde.krita.desktop" ]; # .webp
-        "text/html" = [ "thorium-browser.desktop" "microsoft-edge.desktop" ]; # .html
-        "text/plain" = [ "org.kde.kate.desktop" ]; # .txt
-        "video/mp4" = [ "mpv.desktop" "org.gnome.Totem.desktop" "vlc.desktop" "io.github.mpc_qt.Mpc-Qt.desktop" ]; # .mp4
-        "video/vnd.avi" = [ "mpv.desktop" "org.gnome.Totem.desktop" "vlc.desktop" "io.github.mpc_qt.Mpc-Qt.desktop" ]; # .avi
-        "video/x-matroska" = [ "mpv.desktop" "org.gnome.Totem.desktop" "vlc.desktop" "io.github.mpc_qt.Mpc-Qt.desktop" ]; # .mkv
-        "x-scheme-handler/about" = [ "thorium-browser.desktop" "google-chrome.desktop" "microsoft-edge.desktop" ];
-        "x-scheme-handler/http" = [ "thorium-browser.desktop" "google-chrome.desktop" "microsoft-edge.desktop" ];
-        "x-scheme-handler/https" = [ "thorium-browser.desktop" "google-chrome.desktop" "microsoft-edge.desktop" ];
-        "x-scheme-handler/unknown" = [ "thorium-browser.desktop" "google-chrome.desktop" "microsoft-edge.desktop" ];
-      };
-    };
+    # "fourmolu.yaml".text = fileContents ./xdg/fourmolu.yaml;
+    "mimeapps.list" = lib.mkIf (!config.wsl.enable) {force = true;};
+  };
+
+  xdg.mimeApps.enable = !config.wsl.enable;
+  xdg.mimeApps.defaultApplications = {
+    "application/epub+zip" = ["calibre-ebook-viewer.desktop"]; # .epub
+    "application/msword" = ["onlyoffice-desktopeditors.desktop" "writer.desktop"]; # .doc
+    "application/pdf" = ["org.gnome.Evince.desktop" "mcomix.desktop"]; # .pdf
+    "application/vnd.comicbook-rar" = ["mcomix.desktop" "org.gnome.FileRoller.desktop"]; # .cbr
+    "application/vnd.comicbook+zip" = ["mcomix.desktop" "org.gnome.FileRoller.desktop"]; # .cbz
+    "application/vnd.ms-excel" = ["onlyoffice-desktopeditors.desktop" "calc.desktop"]; # .xls
+    "application/vnd.openxmlformats-officedocument.presentationml.presentation" = ["onlyoffice-desktopeditors.desktop" "impress.desktop"]; # .pptx
+    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" = ["onlyoffice-desktopeditors.desktop" "calc.desktop"]; # .xlsx
+    "application/vnd.openxmlformats-officedocument.wordprocessingml.document" = ["onlyoffice-desktopeditors.desktop" "writer.desktop"]; # .docx
+    "application/vnd.ms-powerpoint" = ["onlyoffice-desktopeditors.desktop" "impress.desktop"]; # .ppt
+    "default-web-browser" = ["thorium-browser.desktop" "microsoft-edge.desktop"];
+    "image/jpeg" = ["mcomix.desktop" "org.kde.krita.desktop"]; # .jpg, .jpeg
+    "image/png" = ["mcomix.desktop" "org.kde.krita.desktop"]; # .png .webp
+    "image/webp" = ["mcomix.desktop" "org.kde.krita.desktop"]; # .webp
+    "text/html" = ["thorium-browser.desktop" "microsoft-edge.desktop"]; # .html
+    "text/plain" = ["org.kde.kate.desktop"]; # .txt
+    "video/mp4" = ["mpv.desktop" "org.gnome.Totem.desktop" "vlc.desktop" "io.github.mpc_qt.Mpc-Qt.desktop"]; # .mp4
+    "video/vnd.avi" = ["mpv.desktop" "org.gnome.Totem.desktop" "vlc.desktop" "io.github.mpc_qt.Mpc-Qt.desktop"]; # .avi
+    "video/x-matroska" = ["mpv.desktop" "org.gnome.Totem.desktop" "vlc.desktop" "io.github.mpc_qt.Mpc-Qt.desktop"]; # .mkv
+    "x-scheme-handler/about" = ["thorium-browser.desktop" "google-chrome.desktop" "microsoft-edge.desktop"];
+    "x-scheme-handler/http" = ["thorium-browser.desktop" "google-chrome.desktop" "microsoft-edge.desktop"];
+    "x-scheme-handler/https" = ["thorium-browser.desktop" "google-chrome.desktop" "microsoft-edge.desktop"];
+    "x-scheme-handler/unknown" = ["thorium-browser.desktop" "google-chrome.desktop" "microsoft-edge.desktop"];
   };
 }

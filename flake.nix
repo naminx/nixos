@@ -5,22 +5,16 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    home-manager = {
-      url = "github:nix-community/home-manager/release-24.05";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    home-manager.url = "github:nix-community/home-manager/release-24.05";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     nur.url = "github:nix-community/NUR";
 
-    # nixos-wsl = {
-    #   url = "github:nix-community/NixOS-WSL";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
+    nixos-wsl.url = "github:nix-community/NixOS-WSL";
+    nixos-wsl.inputs.nixpkgs.follows = "nixpkgs";
 
-    nix-index-database = {
-      url = "github:Mic92/nix-index-database";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    nix-index-database.url = "github:Mic92/nix-index-database";
+    nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
 
     brc.url = "github:naminx/brc";
     mht2img.url = "github:naminx/mht2img";
@@ -31,12 +25,10 @@
     secrets = builtins.fromJSON (builtins.readFile "${inputs.self}/secrets.json");
 
     nixpkgsWithOverlays = rec {
-      config = {
-        allowUnfree = true;
-        permittedInsecurePackages = [
-          # FIXME:: add any insecure packages you absolutely need here
-        ];
-      };
+      config.allowUnfree = true;
+      config.permittedInsecurePackages = [
+        # FIXME:: add any insecure packages you absolutely need here
+      ];
       overlays = [
         inputs.nur.overlay
         (_final: prev: let
@@ -121,11 +113,11 @@
     formatter.x86_64-linux = inputs.nixpkgs.legacyPackages.x86_64-linux.alejandra;
 
     nixosConfigurations.nixos = mkNixosConfiguration {
-      hostname = "tokyo";
+      hostname = "chiyoda";
       username = "namin"; # FIXME: replace with your own username!
       modules = [
-        # nixos-wsl.nixosModules.wsl
         ./configuration.nix
+        inputs.nixos-wsl.nixosModules.wsl
       ];
     };
   };
