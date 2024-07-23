@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+
+shopt -s extglob
+
+main() (
+local IFS=$'\n'
+Yellow='\033[1;33m'
+
+for cbz in $(shopt -s nullglob; ls *.cbz **/*.cbz 2> /dev/null); do
+    echo -e "$Yellow$cbz"
+    base=${cbz##*/}
+    base=${base%.cbz}
+    chap=${base#* }
+    unzip -d "$chap" "$cbz" > /dev/null 2> /dev/null
+    cd "$chap"
+    fixcbz
+    if [ -d two/ ]; then
+        # (shopt -s failglob; : *) 2>/dev/null && echo exists
+        if [ $(shopt -s nullglob; M=(two/*.@(jpg|png|webp)); echo ${#M[*]}) -eq 0 ]; then
+            rmdir two
+            renum > /dev/null
+            cd ..
+        else
+            if [ ! $(shopt -s nullglob; M=(*.@(jpg|png|webp)); echo ${#M[*]}) -eq $(shopt -s nullglob; M=(*.@(jpg|png|webp)); echo ${M[-1]%.*}) ]; then
+                renum > /dev/null
+                cd ..
+                mv "$chap" "!!${chap}"
+            else
+                cd ..
+                mv "$chap" "!${chap}"
+            fi
+        fi
+    else
+        # nothing changes
+        cd ..
+        mv "$chap" "_${chap}"
+    fi
+done
+)
+
+main

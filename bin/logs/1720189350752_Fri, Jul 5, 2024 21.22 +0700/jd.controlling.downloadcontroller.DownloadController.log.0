@@ -1,0 +1,6 @@
+------------------------Thread: 74:jd.controlling.downloadcontroller.DownloadController.log-----------------------
+--ID:74TS:1720189353413-7/5/24, 9:22:33 PM -  [jd.controlling.downloadcontroller.DownloadController$7(run)] -> Init DownloadList
+--ID:74TS:1720189353413-7/5/24, 9:22:33 PM -  [jd.controlling.downloadcontroller.DownloadController(findAvailableDownloadLists)] -> Collect Lists
+--ID:74TS:1720189353416-7/5/24, 9:22:33 PM -  [jd.controlling.downloadcontroller.DownloadController(findAvailableDownloadLists)] -> Lists: [/home/namin/.local/bin/cfg/downloadList103.zip, /home/namin/.local/bin/cfg/downloadList102.zip, /home/namin/.local/bin/cfg/downloadList101.zip, /home/namin/.local/bin/cfg/downloadList100.zip, /home/namin/.local/bin/cfg/downloadList99.zip, /home/namin/.local/bin/cfg/downloadList98.zip]
+--ID:74TS:1720189353417-7/5/24, 9:22:33 PM -  [jd.controlling.downloadcontroller.DownloadController(loadFile)] -> Load List: /home/namin/.local/bin/cfg/downloadList103.zip
+--ID:74TS:1720189353421-7/5/24, 9:22:33 PM -  [jd.controlling.downloadcontroller.DownloadController$7(run)] -> LinkList found: 0/0

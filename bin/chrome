@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+chromium \
+    --enable-wayland-ime \
+    --disable-features=WaylandFractionalScaleV1 \
+    --enable-chrome-browser-cloud-management \
+    "$@"
+#   > /dev/null \
+#   2> /dev/null &
+#   --enable-features=UseOzonePlatform \
+#   --ozone-platform=wayland \
+#   --gtk-version=4 \
+#   --high-dpi-support=1 \
+#   --force-device-scale-factor=2 \

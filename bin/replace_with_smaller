@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+if [ ! -z "$1" ]; then
+    dst=$1
+    shift
+    src=$1
+    while [ ! -z "$src" ]; do
+        if [ $(stat -c%s "$src") -lt $(stat -c%s "$dst") ]; then
+            dst=$(replace "$dst" "$src")
+        else
+            rm -f "$src"
+        fi
+        shift
+        src=$1
+    done
+    echo "$dst"
+fi
+

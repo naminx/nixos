@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+IFS=$'\n'; globs=( $(shopt -p nullglob extglob) ); unset IFS
+shopt -s nullglob extglob
+
+if [ -f .params.trymontage ]; then
+  echo reading parameters from two/.params.trymontage
+  params=$(cat .params.trymontage)
+  cropl=${params%,*}
+  cropr=${params#*,}
+  for bar in _[0-9][0-9][0-9]b.jpg; do
+    rm $bar
+    right=${bar:1:3}
+    doone $cropl $cropr $((10#$right))
+  done
+  rm .params.trymontage
+fi
+
+for glob in "${globs[@]}"; do
+  $glob
+done

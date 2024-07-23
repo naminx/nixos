@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+shopt -s extglob
+
+for i in */*.@(jpg|png|webp); do
+    cp -v $i ${i/\//-}
+done

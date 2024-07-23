@@ -2,7 +2,7 @@
 let
   librsvg-with-webp = pkgs.librsvg.overrideAttrs (oldAttrs: {
     pname = oldAttrs.pname + "-with-webp";
-    nativeBuildInputs = oldAttrs.nativeBuildInputs ++ [pkgs.webp-pixbuf-loader];
+    propagatedBuildInputs = oldAttrs.propagatedBuildInputs ++ [pkgs.webp-pixbuf-loader];
     postInstall =
       builtins.replaceStrings
       ["cat "]
@@ -11,7 +11,7 @@ let
   });
 in
   (pkgs.evince.overrideAttrs (oldAttrs: {
-    buildInputs = oldAttrs.buildInputs ++ [pkgs.webp-pixbuf-loader];
+    buildInputs = oldAttrs.buildInputs ++ [librsvg-with-webp];
     patches =
       (oldAttrs.patches or [])
       ++ [

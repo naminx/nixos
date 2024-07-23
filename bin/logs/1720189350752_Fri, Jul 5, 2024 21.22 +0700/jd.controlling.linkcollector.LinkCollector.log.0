@@ -1,0 +1,6 @@
+------------------------Thread: 34:jd.controlling.linkcollector.LinkCollector.log-----------------------
+--ID:34TS:1720189352097-7/5/24, 9:22:32 PM -  [jd.controlling.linkcollector.LinkCollector(<init>)] -> LinkChecker Enabled:true
+------------------------Thread: 75:jd.controlling.linkcollector.LinkCollector.log-----------------------
+--ID:75TS:1720189353413-7/5/24, 9:22:33 PM -  [jd.controlling.linkcollector.LinkCollector(findAvailableCollectorLists)] -> Collect Lists
+--ID:75TS:1720189353416-7/5/24, 9:22:33 PM -  [jd.controlling.linkcollector.LinkCollector(findAvailableCollectorLists)] -> Lists: [/home/namin/.local/bin/cfg/linkcollector82.zip, /home/namin/.local/bin/cfg/linkcollector81.zip, /home/namin/.local/bin/cfg/linkcollector80.zip, /home/namin/.local/bin/cfg/linkcollector79.zip, /home/namin/.local/bin/cfg/linkcollector78.zip, /home/namin/.local/bin/cfg/linkcollector77.zip]
+--ID:75TS:1720189353421-7/5/24, 9:22:33 PM -  [jd.controlling.linkcollector.LinkCollector$17(run)] -> CollectorList found: 0/0

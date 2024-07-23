@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+if [ -d "$1" -o -f "$1" ]; then
+    if [ -f "$(which wslpath 2> /dev/null)" ]; then
+        win_path=$(winpath "$1")
+        cd /mnt/c
+        /mnt/c/Windows/System32/cmd.exe /c start "" "$win_path"
+    elif [ -f "$(which nautilus 2> /dev/null)" ]; then
+        nautilus "$1" > /dev/null 2> /dev/null &
+    elif [ -f "$(which dolphin 2> /dev/null)" ]; then
+        dolphin "$1" > /dev/null 2> /dev/null &
+    fi
+else
+    echo path not found: "$1"
+fi

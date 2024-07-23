@@ -1,0 +1,76 @@
+Fri Feb 09 19:56:16 ICT 2024
+Package: package_1707478929345.awf
+Install
+Write Revision: 17118
+----------------Plugins----------------
+   jd/plugins/decrypter/CtDiskComFolder.class
+   jd/plugins/decrypter/DiskYandexNetFolder.class
+   jd/plugins/decrypter/GetComicsInfo.class
+   jd/plugins/decrypter/IcedriveNetFolder.class
+   jd/plugins/decrypter/JpgChurchCrawler.class
+   jd/plugins/decrypter/KemonoPartyCrawler.class
+   jd/plugins/decrypter/KrakenfilesComFolder.class
+   jd/plugins/decrypter/LiteapksComCrawler.class
+   jd/plugins/decrypter/ManyvidsComCrawler.class
+   jd/plugins/decrypter/OrfAt$1.class
+   jd/plugins/decrypter/OrfAt.class
+   jd/plugins/decrypter/PinterestComDecrypter.class
+   jd/plugins/decrypter/PluralsightComDecrypter.class
+   jd/plugins/decrypter/RedditComCrawler.class
+   jd/plugins/decrypter/SafegoCc.class
+   jd/plugins/decrypter/ScnlogEu.class
+   jd/plugins/decrypter/SexCom.class.removed
+   jd/plugins/decrypter/SexComCrawler.class
+   jd/plugins/decrypter/SexComShortsCrawler.class
+   jd/plugins/decrypter/TwitterComCrawler$1.class
+   jd/plugins/decrypter/TwitterComCrawler.class
+   jd/plugins/decrypter/VKontakteRu$1.class
+   jd/plugins/decrypter/VKontakteRu.class
+   jd/plugins/decrypter/VimeoComDecrypter$1.class
+   jd/plugins/decrypter/VimeoComDecrypter.class
+   jd/plugins/decrypter/WeTransferComFolder.class
+   jd/plugins/hoster/CamwhoreshdCom.class
+   jd/plugins/hoster/ExtMatrixCom.class
+   jd/plugins/hoster/GrabItShareCom.class
+   jd/plugins/hoster/ImgurComHoster$4.class
+   jd/plugins/hoster/ImgurComHoster$5.class
+   jd/plugins/hoster/ImgurComHoster.class
+   jd/plugins/hoster/KernelVideoSharingComHomoXxx.class
+   jd/plugins/hoster/KernelVideoSharingComV2$1.class
+   jd/plugins/hoster/KernelVideoSharingComV2.class
+   jd/plugins/hoster/KernelVideoSharingComV2HostsDefault.class
+   jd/plugins/hoster/KernelVideoSharingMypornhereCom.class
+   jd/plugins/hoster/KernelVideoSharingPornadoXxx.class
+   jd/plugins/hoster/KernelVideoSharingSexwebvideoCom.class
+   jd/plugins/hoster/KrakenfilesCom.class
+   jd/plugins/hoster/LinkboxTo.class
+   jd/plugins/hoster/LulustreamCom.class
+   jd/plugins/hoster/MediafilesCc.class
+   jd/plugins/hoster/MvpdjCom.class
+   jd/plugins/hoster/NitroFlareCom.class
+   jd/plugins/hoster/OneFichierCom$1.class
+   jd/plugins/hoster/OneFichierCom$OnefichierAccountFactory$1.class
+   jd/plugins/hoster/OneFichierCom$OnefichierAccountFactory.class
+   jd/plugins/hoster/OneFichierCom.class
+   jd/plugins/hoster/PhotobucketCom.class
+   jd/plugins/hoster/PhotobucketComDirectImages.class
+   jd/plugins/hoster/PinterestCom$1.class
+   jd/plugins/hoster/PinterestCom.class
+   jd/plugins/hoster/PluralsightCom$QUALITY.class
+   jd/plugins/hoster/PluralsightCom.class
+   jd/plugins/hoster/RapidGatorNet.class
+   jd/plugins/hoster/StreamdavCom.class.removed
+   jd/plugins/hoster/Tb7AndXt7PlCORE$1.class
+   jd/plugins/hoster/Tb7AndXt7PlCORE$2.class
+   jd/plugins/hoster/Tb7AndXt7PlCORE.class
+   jd/plugins/hoster/Tb7Pl.class
+   jd/plugins/hoster/WayshareCc.class
+   jd/plugins/hoster/Xt7Pl$1.class.removed
+   jd/plugins/hoster/Xt7Pl$2.class.removed
+   jd/plugins/hoster/Xt7Pl.class
+----------------Extensions----------------
+----------------Direct Files----------------
+   build.json
+----------------Core Files----------------
+   JD: libs/cons.jar/org/jdownloader/container/Config$1.class
+   libs/cons.jar

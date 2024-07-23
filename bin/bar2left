@@ -1,0 +1,3 @@
+#!/usr/bin/env fish
+
+string pad -w 3 -c 0 (math (bar2right $argv[1]) + 1)

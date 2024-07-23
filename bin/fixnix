@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+nullglob=$(shopt -p nullglob); shopt -s nullglob extglob
+
+if [ -z "$1" ]; then
+    args=(".")
+else
+    args=("$@")
+fi
+
+# sudo chown -v -R namin "${args[@]}"
+for arg in "${args[@]}"; do
+    find -L "$arg" -user root -exec sudo chown -v -R namin {} +
+    find -L "$arg" -type d ! -perm 755 -exec chmod -v 755 {} +
+    find -L "$arg" -type f -executable ! -perm 755 -regex ".*\.\(exe\|com\|cmd\|bat\|ps1\)\$" -exec chmod -v 755 {} +
+    find -L "$arg" -type f -executable ! -regex ".*\.\(exe\|com\|cmd\|bat\|ps1\)\$" -exec chmod -v 644 {} +
+done
+
+$nullglob; unset nullglob

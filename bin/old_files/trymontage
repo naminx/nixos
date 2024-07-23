@@ -1,0 +1,159 @@
+#!/usr/bin/env bash
+
+IFS=$'\n'; globs=( $(shopt -p nullglob extglob) ); unset IFS
+shopt -s nullglob extglob
+
+is_uint() { case "$1" in '' | *[!0-9]* ) return 1;; esac; }
+
+last_digit=$1
+shift
+
+cropl=
+cropr=
+while [ "${1:0:1}" = "-" ]; do
+    if [ "$1" = "-crop" ]; then
+        geometry=($(echo $2 | sed 's/\([0-9]\+\)x\([0-9]\+\)+\([0-9]\+\)+\([0-9]\+\)/\1 \2 \3 \4/'))
+        if [ "${#geometry[@]}" -eq 4 ] &&
+            is_uint "${geometry[0]}" &&
+            is_uint "${geometry[1]}" &&
+            is_uint "${geometry[2]}" &&
+            is_uint "${geometry[3]}"; then
+            cropl="-crop $2"
+            cropr="-crop $2"
+            paraml="-cropl $2"
+            paramr="-cropr $2"
+            shift 2
+        else
+            echo "error: -crop expects WIDTHxHEIGHT+LEFT+TOP"
+            exit 1
+        fi
+    elif [ "$1" = "-cropl" ]; then
+        geometry=($(echo $2 | sed 's/\([0-9]\+\)x\([0-9]\+\)+\([0-9]\+\)+\([0-9]\+\)/\1 \2 \3 \4/'))
+        if [ "${#geometry[@]}" -eq 4 ] &&
+            is_uint "${geometry[0]}" &&
+            is_uint "${geometry[1]}" &&
+            is_uint "${geometry[2]}" &&
+            is_uint "${geometry[3]}"; then
+            cropl="-crop $2"
+            paraml="$1 $2"
+            shift 2
+        else
+            echo "error: -cropl expects WIDTHxHEIGHT+LEFT+TOP"
+            exit 1
+        fi
+    elif [ "$1" = "-cropr" ]; then
+        geometry=($(echo $2 | sed 's/\([0-9]\+\)x\([0-9]\+\)+\([0-9]\+\)+\([0-9]\+\)/\1 \2 \3 \4/'))
+        if [ "${#geometry[@]}" -eq 4 ] &&
+            is_uint "${geometry[0]}" &&
+            is_uint "${geometry[1]}" &&
+            is_uint "${geometry[2]}" &&
+            is_uint "${geometry[3]}"; then
+            cropr="-crop $2"
+            paramr="$1 $2"
+            shift 2
+        else
+            echo "error: -cropr expects WIDTHxHEIGHT+LEFT+TOP"
+            exit 1
+        fi
+    elif [ "$1" = "-trim" ]; then
+        if is_uint "$2"; then
+            cropl="-gravity west -chop ${2}x0"
+            cropr="-gravity east -chop ${2}x0"
+            paraml="-triml $2"
+            paramr="-trimr $2"
+            shift 2
+        else
+            if [ "${2:0:1}" = "-" ] && is_uint "${2:1}"; then
+                cropl="-gravity east -chop ${2:1}x0"
+                cropr="-gravity west -chop ${2:1}x0"
+                paraml="-triml $2"
+                paramr="-trimr $2"
+                shift 2
+            else
+                echo "error: -trim expects NUM or -NUM"
+                exit 1
+            fi
+        fi
+    elif [ "$1" = "-triml" ]; then
+        if is_uint "$2"; then
+            cropl="-gravity west -chop ${2}x0"
+            paraml="$1 $2"
+            shift 2
+        else
+            if [ "${2:0:1}" = "-" ] && is_uint "${2:1}"; then
+                cropl="-gravity east -chop ${2:1}x0"
+                paraml="$1 $2"
+                shift 2
+            else
+                echo "error: -triml expects NUM or -NUM"
+                exit 1
+            fi
+        fi
+    elif [ "$1" = "-trimr" ]; then
+        if is_uint "$2"; then
+            cropr="-gravity east -chop ${2}x0"
+            paramr="$1 $2"
+            shift 2
+        else
+            if [ "${2:0:1}" = "-" ] && is_uint "${2:1}"; then
+                cropr="-gravity west -chop ${2:1}x0"
+                paramr="$1 $2"
+                shift 2
+            else
+                echo "error: -trimr expects NUM or -NUM"
+                exit 1
+            fi
+        fi
+    else
+        break
+    fi
+done
+
+for right in [0-9][0-9][$last_digit].@(jpg|png|webp); do
+  echo "$paraml,$paramr" > .params.trymontage
+  if [ -f "$(which wslpath 2> /dev/null)" ]; then
+      /mnt/c/WINDOWS/system32/attrib.exe +h .params.trymontage > /dev/null 2> /dev/null
+  fi
+  break
+done
+
+lower=${1:-1}
+upper=${2:-999}
+if ! is_uint "$lower" || ! is_uint "$upper"; then
+    echo usage: ${0##*/} LAST_DIGIT_WILDCARD [-crop WIDTHxHEIGHT+LEFT+TOP] [FROM_NNN] [TO_NNN}
+    exit 1
+fi
+
+tmp_dir=$(mktemp -d --tmpdir)
+for right in [0-9][0-9][$last_digit].@(jpg|png|webp); do
+    # strip extension
+    right_num=${right%.*}
+
+    if [ $((10#$right_num)) -ge $lower ] && [ $((10#$right_num)) -le $upper ]; then
+        left_num=$((10#$right_num+1))
+
+        # append padding leading zeros
+        left_num=00${left_num}
+        left_num=${left_num:(-3)}
+
+        left_files=($left_num.@(jpg|png|webp))
+        num_left_files=${#left_files[@]}
+        out_file=_${right_num}b.jpg
+        for left in ${left_files[@]}; do
+            # take extension
+            ext=${left##*.}
+            if [ $num_left_files -gt 1 ]; then
+                out_file=_$left+$right.jpg
+            fi
+            echo "$left + $right => $out_file"
+            magick \( "$left" $cropl \) \( "$right" $cropr \) +append "$tmp_dir/$out_file"
+            mv "$tmp_dir/$out_file" "$out_file"
+        done
+    fi
+done
+
+rmdir "$tmp_dir"
+
+for glob in "${globs[@]}"; do
+    $glob
+done

@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+git -C ~/nixos add -f ~/nixos/secrets.json
+sudo nixos-rebuild switch --flake ~/nixos#nixos
+git -C ~/nixos rm --cached ~/nixos/secrets.json

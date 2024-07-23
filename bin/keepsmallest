@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+if [ ! -z "$1" ]; then
+    smallest=$1
+    shift
+    while [ ! -z "$1" ]; do
+        if [ $(stat -c%s "$1") -le $(stat -c%s "$smallest") ]; then
+            rm "$smallest"
+            smallest=$1
+        else
+            rm "$1"
+        fi
+        shift
+    done
+    echo "$smallest"
+fi

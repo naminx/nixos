@@ -1,0 +1,62 @@
+------------------------Thread: 34:org.appwork.shutdown.ShutdownController.log-----------------------
+--ID:34TS:1720189351738-7/5/24, 9:22:31 PM -  [org.appwork.shutdown.ShutdownController(log)] -> Add ShutdownVetoListener:jd.controlling.downloadcontroller.DownloadWatchDog@3fdb1754:true
+--ID:34TS:1720189352096-7/5/24, 9:22:32 PM -  [org.appwork.shutdown.ShutdownController(log)] -> Add ShutdownVetoListener:jd.controlling.linkcollector.LinkCollector@436be388:true
+------------------------Thread: 78:org.appwork.shutdown.ShutdownController.log-----------------------
+--ID:78TS:1720189353601-7/5/24, 9:22:33 PM -  [org.appwork.shutdown.ShutdownController(log)] -> Add ShutdownVetoListener:org.jdownloader.extensions.extraction.ExtractionExtension$3@721ba9fe:true
+------------------------Thread: 106:org.appwork.shutdown.ShutdownController.log-----------------------
+--ID:106TS:1720189396935-7/5/24, 9:23:16 PM -  [org.appwork.shutdown.ShutdownController(log)] -> Request Shutdown: org.jdownloader.updatev2.SmartRlyExitRequest@63b03747
+--ID:106TS:1720189396935-7/5/24, 9:23:16 PM -  [org.appwork.shutdown.ShutdownController(log)] -> Wait for ShutdownThread:Thread[#114,ShutdownThread:1720189396935|org.jdownloader.updatev2.SmartRlyExitRequest@63b03747,6,main]|waitDuration:0
+------------------------Thread: 114:org.appwork.shutdown.ShutdownController.log-----------------------
+--ID:114TS:1720189396935-7/5/24, 9:23:16 PM -  [org.appwork.shutdown.ShutdownController(log)] -> Exit Now(Controller): Code: 0
+--ID:114TS:1720189396935-7/5/24, 9:23:16 PM -  [org.appwork.shutdown.ShutdownController(log)] -> [1/23|Priority: 2147483548]ShutdownController: start item->ShutdownEvent: Save ArchiveController
+--ID:114TS:1720189396936-7/5/24, 9:23:16 PM -  [org.appwork.shutdown.ShutdownController(log)] -> [1/23|Priority: 2147483548]ShutdownController: item ended after->1
+--ID:114TS:1720189396936-7/5/24, 9:23:16 PM -  [org.appwork.shutdown.ShutdownController(log)] -> [Done:1/23]
+--ID:114TS:1720189396936-7/5/24, 9:23:16 PM -  [org.appwork.shutdown.ShutdownController(log)] -> [2/23|Priority: 10000]ShutdownController: start item->org.appwork.utils.swing.locationstore.LocationStorageManager Priority: 10000
+--ID:114TS:1720189396943-7/5/24, 9:23:16 PM -  [org.appwork.shutdown.ShutdownController(log)] -> [2/23|Priority: 10000]ShutdownController: item ended after->7
+--ID:114TS:1720189396943-7/5/24, 9:23:16 PM -  [org.appwork.shutdown.ShutdownController(log)] -> [Done:2/23]
+--ID:114TS:1720189396943-7/5/24, 9:23:16 PM -  [org.appwork.shutdown.ShutdownController(log)] -> [3/23|Priority: 10000]ShutdownController: start item->ShutdownEvent: Save AuthController
+--ID:114TS:1720189396943-7/5/24, 9:23:16 PM -  [org.appwork.shutdown.ShutdownController(log)] -> [3/23|Priority: 10000]ShutdownController: item ended after->0
+--ID:114TS:1720189396943-7/5/24, 9:23:16 PM -  [org.appwork.shutdown.ShutdownController(log)] -> [Done:3/23]
+--ID:114TS:1720189396943-7/5/24, 9:23:16 PM -  [org.appwork.shutdown.ShutdownController(log)] -> [4/23|Priority: 10000]ShutdownController: start item->org.jdownloader.controlling.hosterrule.HosterRuleController$3 Priority: 10000
+--ID:114TS:1720189396946-7/5/24, 9:23:16 PM -  [org.appwork.shutdown.ShutdownController(log)] -> [4/23|Priority: 10000]ShutdownController: item ended after->3
+--ID:114TS:1720189396946-7/5/24, 9:23:16 PM -  [org.appwork.shutdown.ShutdownController(log)] -> [Done:4/23]
+--ID:114TS:1720189396946-7/5/24, 9:23:16 PM -  [org.appwork.shutdown.ShutdownController(log)] -> [5/23|Priority: 10000]ShutdownController: start item->ShutdownEvent: Save Favicons
+--ID:114TS:1720189396946-7/5/24, 9:23:16 PM -  [org.appwork.shutdown.ShutdownController(log)] -> [5/23|Priority: 10000]ShutdownController: item ended after->0
+--ID:114TS:1720189396946-7/5/24, 9:23:16 PM -  [org.appwork.shutdown.ShutdownController(log)] -> [Done:5/23]
+--ID:114TS:1720189396946-7/5/24, 9:23:16 PM -  [org.appwork.shutdown.ShutdownController(log)] -> [6/23|Priority: 10000]ShutdownController: start item->org.jdownloader.captcha.v2.solver.jac.JACSolver$1 Priority: 10000
+--ID:114TS:1720189396946-7/5/24, 9:23:16 PM -  [org.appwork.shutdown.ShutdownController(log)] -> [6/23|Priority: 10000]ShutdownController: item ended after->0
+--ID:114TS:1720189396946-7/5/24, 9:23:16 PM -  [org.appwork.shutdown.ShutdownController(log)] -> [Done:6/23]
+--ID:114TS:1720189396946-7/5/24, 9:23:16 PM -  [org.appwork.shutdown.ShutdownController(log)] -> [7/23|Priority: 10000]ShutdownController: start item->save iconID cache to disk
+--ID:114TS:1720189396946-7/5/24, 9:23:16 PM -  [org.appwork.shutdown.ShutdownController(log)] -> [7/23|Priority: 10000]ShutdownController: item ended after->0
+--ID:114TS:1720189396946-7/5/24, 9:23:16 PM -  [org.appwork.shutdown.ShutdownController(log)] -> [Done:7/23]
+--ID:114TS:1720189396946-7/5/24, 9:23:16 PM -  [org.appwork.shutdown.ShutdownController(log)] -> [8/23|Priority: 10000]ShutdownController: start item->save packagizer...
+--ID:114TS:1720189396948-7/5/24, 9:23:16 PM -  [org.appwork.shutdown.ShutdownController(log)] -> [8/23|Priority: 10000]ShutdownController: item ended after->2
+--ID:114TS:1720189396948-7/5/24, 9:23:16 PM -  [org.appwork.shutdown.ShutdownController(log)] -> [Done:8/23]
+--ID:114TS:1720189396948-7/5/24, 9:23:16 PM -  [org.appwork.shutdown.ShutdownController(log)] -> [9/23|Priority: 10000]ShutdownController: start item->save filters...
+--ID:114TS:1720189396948-7/5/24, 9:23:16 PM -  [org.appwork.shutdown.ShutdownController(log)] -> [9/23|Priority: 10000]ShutdownController: item ended after->0
+--ID:114TS:1720189396949-7/5/24, 9:23:16 PM -  [org.appwork.shutdown.ShutdownController(log)] -> [Done:9/23]
+--ID:114TS:1720189396949-7/5/24, 9:23:16 PM -  [org.appwork.shutdown.ShutdownController(log)] -> [10/23|Priority: 10000]ShutdownController: start item->ShutdownEvent: Save AccountController
+--ID:114TS:1720189396951-7/5/24, 9:23:16 PM -  [org.appwork.shutdown.ShutdownController(log)] -> [10/23|Priority: 10000]ShutdownController: item ended after->2
+--ID:114TS:1720189396951-7/5/24, 9:23:16 PM -  [org.appwork.shutdown.ShutdownController(log)] -> [Done:10/23]
+--ID:114TS:1720189396951-7/5/24, 9:23:16 PM -  [org.appwork.shutdown.ShutdownController(log)] -> [11/23|Priority: 10000]ShutdownController: start item->jd.gui.swing.jdgui.JDGui$25 Priority: 10000
+--ID:114TS:1720189396953-7/5/24, 9:23:16 PM -  [org.appwork.shutdown.ShutdownController(log)] -> [11/23|Priority: 10000]ShutdownController: item ended after->2
+--ID:114TS:1720189396953-7/5/24, 9:23:16 PM -  [org.appwork.shutdown.ShutdownController(log)] -> [Done:11/23]
+--ID:114TS:1720189396953-7/5/24, 9:23:16 PM -  [org.appwork.shutdown.ShutdownController(log)] -> [12/23|Priority: 10000]ShutdownController: start item->save linkcollector...
+--ID:114TS:1720189396957-7/5/24, 9:23:16 PM -  [org.appwork.shutdown.ShutdownController(log)] -> [12/23|Priority: 10000]ShutdownController: item ended after->4
+--ID:114TS:1720189396958-7/5/24, 9:23:16 PM -  [org.appwork.shutdown.ShutdownController(log)] -> [Done:12/23]
+--ID:114TS:1720189396958-7/5/24, 9:23:16 PM -  [org.appwork.shutdown.ShutdownController(log)] -> [13/23|Priority: 10000]ShutdownController: start item->ShutdownEvent: Save Downloadlist
+--ID:114TS:1720189396961-7/5/24, 9:23:16 PM -  [org.appwork.shutdown.ShutdownController(log)] -> [13/23|Priority: 10000]ShutdownController: item ended after->3
+--ID:114TS:1720189396961-7/5/24, 9:23:16 PM -  [org.appwork.shutdown.ShutdownController(log)] -> [Done:13/23]
+--ID:114TS:1720189396961-7/5/24, 9:23:16 PM -  [org.appwork.shutdown.ShutdownController(log)] -> [14/23|Priority: 10000]ShutdownController: start item->org.jdownloader.plugins.controller.host.HostPluginController$1 Priority: 10000
+--ID:114TS:1720189396975-7/5/24, 9:23:16 PM -  [org.appwork.shutdown.ShutdownController(log)] -> [14/23|Priority: 10000]ShutdownController: item ended after->14
+--ID:114TS:1720189396975-7/5/24, 9:23:16 PM -  [org.appwork.shutdown.ShutdownController(log)] -> [Done:14/23]
+--ID:114TS:1720189396975-7/5/24, 9:23:16 PM -  [org.appwork.shutdown.ShutdownController(log)] -> [15/23|Priority: 10000]ShutdownController: start item->ShutdownEvent: SaveAllSubconfigurations
+--ID:114TS:1720189396976-7/5/24, 9:23:16 PM -  [org.appwork.shutdown.ShutdownController(log)] -> [15/23|Priority: 10000]ShutdownController: item ended after->1
+--ID:114TS:1720189396976-7/5/24, 9:23:16 PM -  [org.appwork.shutdown.ShutdownController(log)] -> [Done:15/23]
+--ID:114TS:1720189396976-7/5/24, 9:23:16 PM -  [org.appwork.shutdown.ShutdownController(log)] -> [16/23|Priority: 10000]ShutdownController: start item->ProxyController: save config
+--ID:114TS:1720189396977-7/5/24, 9:23:16 PM -  [org.appwork.shutdown.ShutdownController(log)] -> [16/23|Priority: 10000]ShutdownController: item ended after->1
+--ID:114TS:1720189396977-7/5/24, 9:23:16 PM -  [org.appwork.shutdown.ShutdownController(log)] -> [Done:16/23]
+--ID:114TS:1720189396977-7/5/24, 9:23:16 PM -  [org.appwork.shutdown.ShutdownController(log)] -> [17/23|Priority: 10000]ShutdownController: start item->org.appwork.shutdown.ShutdownRunableEvent Priority: 10000
+--ID:114TS:1720189396977-7/5/24, 9:23:16 PM -  [org.appwork.shutdown.ShutdownController(log)] -> [17/23|Priority: 10000]ShutdownController: item ended after->0
+--ID:114TS:1720189396977-7/5/24, 9:23:16 PM -  [org.appwork.shutdown.ShutdownController(log)] -> [Done:17/23]
+--ID:114TS:1720189396977-7/5/24, 9:23:16 PM -  [org.appwork.shutdown.ShutdownController(log)] -> [18/23|Priority: 10000]ShutdownController: start item->flushing logs to disk

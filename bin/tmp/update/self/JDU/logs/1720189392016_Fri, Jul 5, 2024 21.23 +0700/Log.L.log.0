@@ -1,0 +1,33 @@
+------------------------Thread: 1:Log.L.log-----------------------
+--ID:1TS:1720189392101-7/5/24, 9:23:12 PM -  [org.appwork.loggingv3.LogV3(info)] -> Application Root: /home/namin/.local/bin/tmp/update/self/JDU
+--ID:1TS:1720189392107-7/5/24, 9:23:12 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> Prefer (merged) JSon Storage from File: /home/namin/.local/bin/tmp/update/self/JDU/cfg/org.jdownloader.update.lastchance.LastChanceConfig.json
+--ID:1TS:1720189392155-7/5/24, 9:23:12 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> Prefer (merged) JSon Storage from File: /home/namin/.local/bin/tmp/update/self/JDU/cfg/org.jdownloader.updatev2.UpdateSettings.json
+--ID:1TS:1720189392170-7/5/24, 9:23:12 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> Load JSon Storage from Classpath url: jar:file:/home/namin/.local/bin/tmp/update/self/JDU/JDownloader.jar!/cfg/updateclient/Setup.json
+--ID:1TS:1720189392170-7/5/24, 9:23:12 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> Prefer (merged) JSon Storage from File: /home/namin/.local/bin/tmp/update/self/JDU/cfg/updateclient/Setup.json
+--ID:1TS:1720189392171-7/5/24, 9:23:12 PM -  [org.appwork.loggingv3.LogV3(finer)] -> Init StorageHandler for Interface:org.appwork.updatesys.client.Setup|Path:/home/namin/.local/bin/tmp/update/self/JDU/cfg/updateclient/Setup
+------------------------Thread: 28:Log.L.log-----------------------
+--ID:28TS:1720189392178-7/5/24, 9:23:12 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> Prefer (merged) JSon Storage from File: /home/namin/.local/bin/tmp/update/self/JDU/cfg/org.jdownloader.settings.InternetConnectionSettings.json
+--ID:28TS:1720189392179-7/5/24, 9:23:12 PM -  [org.appwork.loggingv3.LogV3(finer)] -> Init StorageHandler for Interface:org.jdownloader.updatev2.InternetConnectionSettings|Path:/home/namin/.local/bin/tmp/update/self/JDU/cfg/org.jdownloader.settings.InternetConnectionSettings
+--ID:28TS:1720189392189-7/5/24, 9:23:12 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> Load JSon Storage from Classpath url: jar:file:/home/namin/.local/bin/tmp/update/self/JDU/JDownloader.jar!/cfg/updateclient/HttpSettings.json
+--ID:28TS:1720189392190-7/5/24, 9:23:12 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> CFG File does not exist: /home/namin/.local/bin/tmp/update/self/JDU/cfg/updateclient/HttpSettings.json
+--ID:28TS:1720189392190-7/5/24, 9:23:12 PM -  [org.appwork.loggingv3.LogV3(finer)] -> Init StorageHandler for Interface:org.appwork.updatesys.client.defaultimpl.http.UpdateHttpClientOptions|Path:/home/namin/.local/bin/tmp/update/self/JDU/cfg/updateclient/HttpSettings
+--ID:28TS:1720189392194-7/5/24, 9:23:12 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> CFG File does not exist: /home/namin/.local/bin/tmp/update/self/JDU/cfg/ProxySelector.json
+--ID:28TS:1720189392194-7/5/24, 9:23:12 PM -  [org.appwork.loggingv3.LogV3(finer)] -> Init StorageHandler for Interface:org.appwork.updatesys.client.defaultimpl.http.ProxySelectorSettings|Path:/home/namin/.local/bin/tmp/update/self/JDU/cfg/ProxySelector
+--ID:28TS:1720189392195-7/5/24, 9:23:12 PM -  [org.appwork.loggingv3.LogV3(finer)] -> Read Config(File): /home/namin/.local/bin/tmp/update/self/JDU/cfg/ProxySelector.proxies.json
+--ID:28TS:1720189392214-7/5/24, 9:23:12 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> CFG File does not exist: /home/namin/.local/bin/tmp/update/self/JDU/update/versioninfo/JD/extensions.json
+--ID:28TS:1720189392215-7/5/24, 9:23:12 PM -  [org.appwork.loggingv3.LogV3(finer)] -> Init StorageHandler for Interface:org.appwork.updatesys.client.extensions.ExtensionsStorage|Path:/home/namin/.local/bin/tmp/update/self/JDU/update/versioninfo/JD/extensions
+--ID:28TS:1720189392218-7/5/24, 9:23:12 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> CFG File does not exist: /home/namin/.local/bin/tmp/update/self/JDU/cfg/org.appwork.updatesys.client.tracker.TrackConfig.json
+--ID:28TS:1720189392221-7/5/24, 9:23:12 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> CFG File does not exist: /home/namin/.local/bin/tmp/update/self/JDU/update/versioninfo/JDU/extensions.json
+--ID:28TS:1720189392221-7/5/24, 9:23:12 PM -  [org.appwork.loggingv3.LogV3(finer)] -> Init StorageHandler for Interface:org.appwork.updatesys.client.extensions.ExtensionsStorage|Path:/home/namin/.local/bin/tmp/update/self/JDU/update/versioninfo/JDU/extensions
+------------------------Thread: 29:Log.L.log-----------------------
+--ID:29TS:1720189392227-7/5/24, 9:23:12 PM -  [org.appwork.loggingv3.LogV3(finer)] -> Read Config(URL): jar:file:/home/namin/.local/bin/tmp/update/self/JDU/JDownloader.jar!/cfg/updateclient/Setup.updateservers.json
+--ID:29TS:1720189392242-7/5/24, 9:23:12 PM -  [org.appwork.loggingv3.LogV3(finer)] -> Read Config(File): /home/namin/.local/bin/tmp/update/self/JDU/cfg/org.jdownloader.settings.InternetConnectionSettings.customproxylist.json
+--ID:29TS:1720189392255-7/5/24, 9:23:12 PM -  [org.appwork.loggingv3.LogV3(info)] -> Translation file missing:org/appwork/utils/locale/AWUTranslation.en.lngUse Annotation Dev fallback
+------------------------Thread: 1:Log.L.log-----------------------
+--ID:1TS:1720189397083-7/5/24, 9:23:17 PM -  [org.appwork.loggingv3.LogV3(info)] -> Translation file missing:org/jdownloader/updatev2/UpdaterTranslation.en.lngUse Annotation Dev fallback
+------------------------Thread: 42:Log.L.log-----------------------
+--ID:42TS:1720189397091-7/5/24, 9:23:17 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> CFG File does not exist: /home/namin/.local/bin/tmp/update/self/JDU/cfg/laf/JDDefaultLookAndFeel.json
+------------------------Thread: 1:Log.L.log-----------------------
+--ID:1TS:1720189397121-7/5/24, 9:23:17 PM -  [org.appwork.loggingv3.LogV3(info)] -> No Vetos
+--ID:1TS:1720189397121-7/5/24, 9:23:17 PM -  [org.appwork.loggingv3.LogV3(info)] -> Fire onShutDownEvents:0
+--ID:1TS:1720189397121-7/5/24, 9:23:17 PM -  [org.appwork.loggingv3.LogV3(info)] -> Create ExitThread

@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+sudo rm -f /opt/google/chrome-remote-desktop
+sudo ln -s /$(echo $(readlink $(readlink ~/.config/thorium/NativeMessagingHosts/com.google.chrome.remote_desktop.json)) | cut -d/ -f 2,3,4)/opt/google/chrome-remote-desktop /opt/google/chrome-remote-desktop

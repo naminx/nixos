@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+IFS=$'\n'; globs=( $(shopt -p nullglob extglob) ); unset IFS
+shopt -s nullglob extglob
+
+for file in two/[0-9][0-9][0-9]b.jpg; do
+    if [ -f two/.params.mkabc ]; then
+        dotwo
+    fi
+    if [ -f two/.params.mkabc2 ]; then
+        dotwo2
+    fi
+    break
+done
+
+for file in two/[0-9][0-9][0-9]b.@(jpg|webp); do
+    base=${file##*/}
+    num=${base%b.*}
+    rm -v -f "${num}"a.@(jpg|webp) "${num}"c.@(jpg|webp)
+    mv -v "$file" .
+    touch "./$(basename "$file")"
+done
+rm -f two/.params.mkabc two/.params.mkabc2
+rmdir two
+
+for glob in "${globs[@]}"; do
+  $glob
+done

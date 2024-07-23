@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+shopt -s extglob
+
+if [ -z "$1" ] || [ ! -z "$2" ]; then
+    echo usage: ${0##*/} CHAP_NO
+    exit 1
+fi
+
+chap=00$((10#$1))
+chap=${chap: -3}
+mkdir $chap
+
+for i in $chap.*; do
+    subchap=00$((10#${i#$chap.}))
+    subchap=${subchap:(-3)}
+    for j in $i/*.@(jpg|png|webp); do
+        echo "$j => $chap/$subchap-${j##*/}"
+        cp $j $chap/$subchap-${j##*/}
+    done
+done

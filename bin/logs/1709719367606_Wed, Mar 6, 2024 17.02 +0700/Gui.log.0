@@ -1,0 +1,21 @@
+------------------------Thread: 30:Gui.log-----------------------
+--ID:30TS:1709719395084-3/6/24, 5:03:15 PM -  [jd.gui.swing.jdgui.JDGui(internalInitLocationAndDimension)] -> Check if Screen Location are ok java.awt.Point[x=949,y=103] - java.awt.Dimension[width=1012,height=854]
+------------------------Thread: 52:Gui.log-----------------------
+--ID:52TS:1709719395163-3/6/24, 5:03:15 PM -  [jd.gui.swing.jdgui.JDGui$27(run)] -> Update bug Finder
+--ID:52TS:1709719395163-3/6/24, 5:03:15 PM -  [jd.gui.swing.jdgui.JDGui$27(run)] -> Find Counter
+--ID:52TS:1709719395164-3/6/24, 5:03:15 PM -  [jd.gui.swing.jdgui.JDGui$27(run)] -> /home/namin/.local/bin/JDownloader.jar
+--ID:52TS:1709719395164-3/6/24, 5:03:15 PM -  [jd.gui.swing.jdgui.JDGui$27(run)] -> Done: 1
+------------------------Thread: 30:Gui.log-----------------------
+--ID:30TS:1709719395183-3/6/24, 5:03:15 PM -  [jd.gui.swing.jdgui.JDGui$31(runInEDT)] -> No To Top. We already have focus
+--ID:30TS:1709719395398-3/6/24, 5:03:15 PM -  [jd.gui.swing.jdgui.JDGui$34(edtRun)] -> Reset frame to 
+null
+------------------------Thread: 52:Gui.log-----------------------
+--ID:52TS:1709719396165-3/6/24, 5:03:16 PM -  [jd.gui.swing.jdgui.JDGui$27(run)] -> Gogogo 1
+------------------------Thread: 30:Gui.log-----------------------
+--ID:30TS:1709719520531-3/6/24, 5:05:20 PM -  [jd.gui.swing.jdgui.JDGui$24(edtRun)] -> SilentMode: auto false
+--ID:30TS:1709719541135-3/6/24, 5:05:41 PM -  [jd.gui.swing.jdgui.JDGui$24(edtRun)] -> SilentMode: auto false
+--ID:30TS:1709719542174-3/6/24, 5:05:42 PM -  [jd.gui.swing.jdgui.JDGui$24(edtRun)] -> SilentMode: auto false
+--ID:30TS:1709719547573-3/6/24, 5:05:47 PM -  [jd.gui.swing.jdgui.JDGui$24(edtRun)] -> SilentMode: auto false
+--ID:30TS:1709719548649-3/6/24, 5:05:48 PM -  [jd.gui.swing.jdgui.JDGui$24(edtRun)] -> SilentMode: auto false
+--ID:30TS:1709719627732-3/6/24, 5:07:07 PM -  [jd.gui.swing.jdgui.JDGui$34(edtRun)] -> Reset frame to 
+null

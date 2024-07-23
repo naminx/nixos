@@ -1,0 +1,14 @@
+------------------------Thread: 30:org.jdownloader.plugins.controller.host.HostPluginController$2.log-----------------------
+--ID:30TS:1720189444545-7/5/24, 9:24:04 PM -  [org.jdownloader.plugins.controller.host.HostPluginController$2(run)] -> HostPluginController: init
+--ID:30TS:1720189444570-7/5/24, 9:24:04 PM -  [org.jdownloader.plugins.controller.host.HostPluginController$2(run)] -> @HostPluginController: loadFromCache took 25ms for 3409|LastModified:1720189420296
+--ID:30TS:1720189444580-7/5/24, 9:24:04 PM -  [org.jdownloader.plugins.controller.PluginScannerNIO(scan)] -> @PluginController(NIO): lastModified timestamp change test: successful
+--ID:30TS:1720189444583-7/5/24, 9:24:04 PM -  [org.jdownloader.plugins.controller.PluginScannerNIO(scan)] -> @PluginController(NIO): plugin cache valid|Size:3409|LastModified:1720189444579
+--ID:30TS:1720189444583-7/5/24, 9:24:04 PM -  [org.jdownloader.plugins.controller.PluginScannerNIO(scan)] -> @PluginController(NIO): scan took 12ms for 3409
+--ID:30TS:1720189444584-7/5/24, 9:24:04 PM -  [org.jdownloader.plugins.controller.host.HostPluginController$2(run)] -> @HostPluginController: update took 14ms for 3409|LastModified:1720189444579
+--ID:30TS:1720189444589-7/5/24, 9:24:04 PM -  [org.jdownloader.plugins.controller.host.HostPluginController$2(run)] -> @HostPluginController: sort took 5ms for 3409
+--ID:30TS:1720189444589-7/5/24, 9:24:04 PM -  [org.jdownloader.plugins.controller.host.HostPluginController$2(run)] -> @HostPlugin replaced:DailyMotionCom@49243|2:49243 with DailyMotionComV2@47865|3:47865
+--ID:30TS:1720189444590-7/5/24, 9:24:04 PM -  [org.jdownloader.plugins.controller.host.HostPluginController$2(run)] -> @HostPlugin replaced:FileFactory@49212|2:49212 with PowerFileCom@46119|3:46119
+--ID:30TS:1720189444590-7/5/24, 9:24:04 PM -  [org.jdownloader.plugins.controller.host.HostPluginController$2(run)] -> @HostPlugin replaced:Offline@49264|3:49264 with Offline@49264|3:49264
+--ID:30TS:1720189444591-7/5/24, 9:24:04 PM -  [org.jdownloader.plugins.controller.host.HostPluginController$2(run)] -> @HostPlugin replaced:Offline@49264|3:49264 with Offline@49264|3:49264
+--ID:30TS:1720189444591-7/5/24, 9:24:04 PM -  [org.jdownloader.plugins.controller.host.HostPluginController$2(run)] -> @HostPluginController: mapping took 2ms for 3409
+--ID:30TS:1720189444591-7/5/24, 9:24:04 PM -  [org.jdownloader.plugins.controller.host.HostPluginController$2(run)] -> @HostPluginController: init took 46ms for 3404

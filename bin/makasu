@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+IFS=$'\n'; globs=( $(shopt -p nullglob extglob nocaseglob) ); unset IFS
+shopt -s nullglob extglob nocaseglob
+
+num=$(basename "$(pwd)")
+renum > /dev/null
+files=(*.jpg)
+if [ "${#files[@]}" -gt 0 ]; then
+    jpg2webp "${files[@]}" > /dev/null
+fi
+files=(*.png)
+if [ "${#files[@]}" -gt 0 ]; then
+    png2webp "${files[@]}" > /dev/null
+fi
+cd ..
+files=(Volume/*.cbz)
+if [ "${#files[@]}" -gt 0 ]; then
+    prefix=$(basename "${files[0]}" .cbz)
+else
+    files=(*.cbz)
+    prefix=$(basename "${files[0]}" .cbz)
+fi
+cbz "${prefix%% *}" "$num" > /dev/null
+if [ -f "${prefix%% *} $num.cbz" ]; then
+    rm -r "$num"
+fi
+
+for glob in "${globs[@]}"; do
+    $glob
+done

@@ -1,0 +1,16 @@
+#!/usr/bin/env fish
+
+if [ -z $argv[1] ]
+    echo usage: (basename (status -f)) FILE_NAME
+else
+    begin
+        cat - | tee /dev/stderr 2>| magick - $argv[1].webp
+    end | magick - $argv[1].jpg
+    if [ (stat -c%s $argv[1].webp) -le (stat -c%s $argv[1].jpg) ]
+        echo $argv[1].webp
+        rm $argv[1].jpg
+    else
+        echo $argv[1].jpg
+        rm $argv[1].webp
+    end
+end

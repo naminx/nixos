@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+
+nullglob=$(shopt -p nullglob); shopt -s nullglob extglob
+
+positional_args=()
+verbose="false"
+
+while [[ $# -gt 0 ]]; do
+  case $1 in
+    -v|--verbose)
+      verbose="true"
+      shift # past argument
+      ;;
+    --)
+      positional_args+=("${@:1}") # save everything after "--"
+      shift $# # drop all arguments
+      break
+      ;;
+    -*|--*)
+      echo "Unknown option $1"
+      exit 1
+      ;;
+    *)
+      positional_args+=("$1") # save positional arg
+      shift # past argument
+      ;;
+  esac
+done
+
+set -- "${positional_args[@]}"
+
+for i in "$@"; do
+  if [ -L "$i" ] && [ -d "$i" ] && [ "$(stat -c %Y "$i")" != "$(stat -c %Y "$(readlink -e "$i")")" ]; then
+    if [ "$verbose" = "true" ]; then
+      echo "$(basename "$i")"
+    fi
+    touch -r "$(readlink -e "$i")" -h "$i"
+  fi
+done
+
+$nullglob; unset nullglob

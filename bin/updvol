@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+db_file=/mnt/m/Documents/Comics/scanweb.sqlite3
+select_comics="SELECT comic,folder FROM comics ORDER BY comic;"
+
+IFS=$'\n' comics=($(sqlite3 $db_file $select_comics))
+
+for comic_info in "${comics[@]}"; do
+    comic=${comic_info%|*}
+    folder=${comic_info#*|}
+    if [ -d /mnt/m/Documents/Comics/$folder/Volume ]; then
+        num_files=$((10#$(ls /mnt/m/Documents/Comics/$folder/Volume | wc -l)))
+    else
+        num_files=0
+    fi
+    if [ $num_files != 0 ]; then
+        last_cbz=$(ls /mnt/m/Documents/Comics/$folder/Volume | tail -1)
+        last_cbz=${last_cbz%.cbz}
+        last_cbz=${last_cbz%s}
+        last_cbz=$((10#${last_cbz##* }))
+    else
+        last_cbz=0
+    fi
+    if [ $num_files = $last_cbz ]; then
+        sqlite3 $db_file "UPDATE comics SET volume=$num_files WHERE comic=$comic;"
+    fi
+done

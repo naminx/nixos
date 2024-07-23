@@ -1,0 +1,61 @@
+#!/usr/bin/env fish
+
+# Define option specifications
+set -l options (fish_opt --short h --long help)
+set options {$options} (fish_opt --short t --long tmpdir --required-val)
+
+if not argparse {$options} -- {$argv}
+  exit 1
+end
+
+# Handle the help flag
+if set --query _flag_help
+  echo usage: (basename (status filename)) [OPTIONS] JPG_FILE ...
+  echo options:
+  echo   -h,--help           Show this help message.
+  echo   -t,--tmpdir DIR     Use the supplied temporary directory
+  return
+end
+
+if set --query _flag_tmpdir && test -d {$_flag_tmpdir}
+  set tmp_dir {$_flag_tmpdir}
+else
+  set tmp_dir $(mktemp --directory)
+end
+mkdir {$tmp_dir}/miff
+
+if test (count {$argv}) -eq 0
+  string join0 -- *.jpg \
+    | parallel --null (realpath (status current-filename)) --tmpdir {$tmp_dir}
+else if test (count {$argv}) -eq 1
+  set file {$argv}
+  if test -e {$file}
+    set file_base (basename {$file})
+    set name (string split --fields 1 --max 1 --right -- . {$file_base})
+    set ext (string split --fields 2 --max 1 --right -- . {$file_base})
+    if test -z {$name} && test -n {$ext}
+      set name .{$ext}
+      set --erase ext
+    end
+    if test "$ext" = "jpg"
+      magick {$file} {$tmp_dir}/{$name}.webp
+      magick {$file} miff:- | magick - {$tmp_dir}/miff/{$name}.webp
+      set output (replace_with_smaller {$file} {$tmp_dir}/{$name}.webp {$tmp_dir}/miff/{$name}.webp)
+      if test (dirname {$output}) = "."
+        echo (basename {$output})
+      else
+        echo {$output}
+      end
+    end
+  else
+    echo \"{$file}\" not found >&2
+  end
+else
+  string join0 -- {$argv} \
+    | parallel --null (realpath (status current-filename)) --tmpdir {$tmp_dir}
+end
+
+if not set --query _flag_tmpdir || not test -d {$_flag_tmpdir}
+  rmdir {$tmp_dir}/miff
+  rmdir {$tmp_dir}
+end

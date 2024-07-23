@@ -1,0 +1,11 @@
+#!/usr/bin/env fish
+
+set threshold 0.0516
+
+for file in $argv
+  set RGB (string split -n " " (string replace -a -r [^0-9.] " " (magick {$file} -colorspace rgb -scale "1x1!" -format "%[pixel:s.p{0,0}]" info:)))
+  set diff (math abs\({$RGB[1]}-{$RGB[2]}\)+abs\({$RGB[2]}-{$RGB[3]}\)+abs\({$RGB[3]}-{$RGB[1]}\))
+  if [ $diff -gt $threshold ]
+      echo {$file}: (math abs\({$RGB[1]}-{$RGB[2]}\)+abs\({$RGB[2]}-{$RGB[3]}\)+abs\({$RGB[3]}-{$RGB[1]}\))
+  end
+end

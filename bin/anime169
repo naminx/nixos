@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+
+nullglob=$(shopt -p nullglob); shopt -s nullglob extglob
+
+FFMPEG="ffmpeg -nostdin"
+HEVC="-c:v libx265 -preset medium -x265-params crf=23"
+HEVC10="-c:v libx265 -preset medium -x265-params crf=23 -pix_fmt yuv420p10le"
+AVC="-c:v libx264 -preset medium -x264-params crf=23"
+XVID="-c:v mpeg4 -vtag xvid -qscale:v 2"
+CONCAT2="-filter_complex [0:v][0:a][1:v][1:a]concat=n=2:v=1:a=1[v][a] -map [v] -map [a]"
+CONCAT4="-filter_complex [0:v][0:a][1:v][1:a][2:v][2:a][3:v][3:a]concat=n=4:v=1:a=1[v][a] -map [v] -map [a]"
+OPUS="-c:a libopus -b:a 96k"
+AAC="-c:a aac -b:a 128k"
+PCM="-c:a pcm_s16le"
+COPY="-c:a copy"
+WAV16="-sample_fmt s16"
+SPLINE="-sws_flags spline"
+SETSAR="-vf setsar=1"
+DOWNMIX="-ac 2 -clev 3dB"
+CHAPTER="-map_chapters 0"
+BIT10="-pix_fmt yuv420p10le"
+
+if [ -z "$1" ]; then
+    files=(*.avi)
+else
+    files=( )
+    for arg in "$@"; do
+        if [ -f "$arg" ]; then
+            files+=("$arg")
+        elif [ -d "$arg" ]; then
+            files+=("$arg"/*.avi)
+        fi
+    done
+fi
+
+for file in "${files[@]}"; do
+    if [ -f "${file%.*}.srt" ]; then
+        $FFMPEG -i "$file" -i "${file%.*}.srt" -map 0:v -map 0:a -map 1:s \
+            $HEVC -aspect 16/9 $OPUS -c:s copy "${file%.*}.mkv"
+    else
+        $FFMPEG -i "$file" -map 0:v -map 0:a \
+            $HEVC -aspect 16/9 $OPUS "${file%.*}.mkv"
+    fi
+done
+
+$nullglob; unset nullglob

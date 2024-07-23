@@ -1,0 +1,128 @@
+#!/usr/bin/env bash
+
+nullglob=$(shopt -p nullglob); shopt -s nullglob extglob
+
+is_uint() { case $1 in '' | *[!0-9]* ) return 1;; esac ;}
+
+print_usage() {
+    echo "usage: ${0##*/} left_edge [right_edge] [top_edge] [bottom_edge]"
+}
+
+left_edge=${1:-0}
+right_edge=${2:-0}
+top_edge=${3:-0}
+bottom_edge=${4:-0}
+
+if (! (is_uint "$left_edge" || ([ "${left_edge:0:1}" = "-" ] && is_uint "${left_edge:1}"))) \
+    || (! (is_uint "$right_edge" || ([ "${right_edge:0:1}" = "-" ] && is_uint "${right_edge:1}"))) \
+    || (! (is_uint "$top_edge" || ([ "${top_edge:0:1}" = "-" ] && is_uint "${top_edge:1}"))) \
+    || (! (is_uint "$bottom_edge" || ([ "${bottom_edge:0:1}" = "-" ] && is_uint "${bottom_edge:1}"))); then
+    print_usage
+    exit 1
+fi
+
+lefts=([0-9][0-9][13579].@(jpg|png|webp))
+if [ "$lefts" = "" ]; then
+    echo error: files not found
+    exit 1
+fi
+
+files=([0-9][0-9][24680].@(jpg|png|webp))
+if [ "$files" = "" ]; then
+    echo error: files not found
+    exit 1
+fi
+
+geometry=$(magick identify -ping -format "%[w]x%[h]\n" "${files[0]}")
+
+full_width=$((2*${geometry%%x*}-(left_edge)-(right_edge)))
+echo full_width: $full_width
+if [ $((full_width % 2)) -eq 0 ]; then
+  page_width=$((full_width/2))
+  right_page=$((left_edge+page_width))
+else
+  page_width=$((full_width/2))
+  right_page=$((left_edge+page_width+1))
+fi
+echo page_width: $page_width
+echo right_page: $right_page
+center_page=$((left_edge+page_width/2))
+
+full_height=${geometry##*x}
+echo full_height: $full_height
+height=$((full_height-top_edge-bottom_edge))
+echo height: $height
+
+mkdir stock two
+echo $left_edge $right_edge $top_edge $bottom_edge > two/.params.mkabc2
+if [ -f "$(which wslpath 2> /dev/null)" ]; then
+  cwd=$(pwd)
+  wdd=$(wslpath -a -w "$cwd")
+  if [ "${wdd::2}" != "\\\\" ]; then
+    pushd /mnt/c > /dev/null
+    /mnt/c/windows/system32/attrib.exe +h "$(wslpath -a -w "$cwd/two/.params.mkabc")"
+    popd > /dev/null
+  fi
+fi
+
+tmp_dir=$(mktemp -d --tmpdir)
+
+for left in "${lefts[0]}"; do
+    cp "$left" stock
+    ext=${left##*.}
+    base=${left%.$ext}
+    mv "$base.$ext" "${base}b.$ext"
+done
+
+for right in "${files[@]}"; do
+  if [ -f "$right" ]; then
+    # strip extension
+    right_num=${right%.*}
+
+    left_num=$((10#$right_num+1))
+
+    # append padding leading zeros
+    left_num=00${left_num}
+    left_num=${left_num:(-3)}
+    left=${left_num}.jpg
+
+    crop=${full_width}x$height+$left_edge+$top_edge
+   magick "$left" "$right" +append -verbose \
+        -crop $crop +repage "two/${right_num}b.jpg"
+  fi
+done
+
+for right in "${files[@]}"; do
+  if [ -f "$right" ]; then
+    # strip extension
+    right_num=${right%.*}
+
+    left_num=$((10#$right_num+1))
+
+    # append padding leading zeros
+    left_num=00${left_num}
+    left_num=${left_num:(-3)}
+    left=${left_num}.jpg
+
+    crop=${page_width}x$height+$right_page+$top_edge
+    magick "$left" "$right" +append -crop $crop +repage "$tmp_dir/${right_num}a.jpg"
+    magick "$left" "$right" +append -crop $crop +repage "$tmp_dir/${right_num}a.webp"
+    output=$(demiff "$(keepsmallest "$tmp_dir/${right_num}a.jpg" "$tmp_dir/${right_num}a.webp" \
+                    "$(magick "$left" "$right" +append -crop $crop +repage miff:- \
+                           | minify "$tmp_dir/${right_num}a-miff")")")
+    echo ${output##*/}
+    mv "$output" .
+    crop=${page_width}x$height+$left_edge+$top_edge
+    magick "$left" "$right" +append -crop $crop +repage "$tmp_dir/${right_num}c.jpg"
+    magick "$left" "$right" +append -crop $crop +repage "$tmp_dir/${right_num}c.webp"
+    output=$(demiff "$(keepsmallest "$tmp_dir/${right_num}c.jpg" "$tmp_dir/${right_num}c.webp" \
+                    "$(magick "$left" "$right" +append -crop $crop +repage miff:- \
+                           | minify "$tmp_dir/${right_num}c-miff")")")
+    echo ${output##*/}
+    mv "$output" .
+    mv "$right" "$left" stock
+  fi
+done
+rmdir "$tmp_dir"
+
+$nullglob; unset nullglob

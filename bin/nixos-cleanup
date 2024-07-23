@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+if [ "$1" = "-u" ]; then
+  sudo nix-channel --update
+fi
+
+sudo nix-env -u --always
+sudo rm -v /nix/var/nix/gcroots/auto/*
+sudo nix-collect-garbage -d

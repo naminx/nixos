@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+mv "$1" x
+mkdir "$1"
+mv x/* "$1"
+rmdir x

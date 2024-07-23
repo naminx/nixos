@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+microsoft-edge \
+    --enable-features=UseOzonePlatform \
+    --ozone-platform=wayland \
+    --enable-wayland-ime \
+    --gtk-version=4 \
+    --high-dpi-support=1 \
+    --force-device-scale-factor=2 \
+    --enable-chrome-browser-cloud-management \
+    "$@" \
+    > /dev/null \
+    2> /dev/null &

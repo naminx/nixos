@@ -1,0 +1,80 @@
+#!/usr/bin/env bash
+
+nullglob=$(shopt -p nullglob); shopt -s nullglob extglob
+
+is_uint() { case $1 in '' | *[!0-9]* ) return 1;; esac ;}
+
+print_usage() {
+    echo "usage: ${0##*/} left_edge [right_edge] [top_edge] [bottom_edge]"
+}
+
+if [ -z "$1" ]; then
+    if [ ! -f two/.params.mkabc2 ]; then
+        print_usage
+        exit 1
+    fi
+    echo reading parameters from two/.params.mkabc2
+    params=($(cat two/.params.mkabc2))
+    left_edge=${params[0]}
+    right_edge=${params[1]}
+    top_edge=${params[2]}
+    bottom_edge=${params[3]}
+else
+    left_edge=$1
+    right_edge=${2:-0}
+    top_edge=${3:-0}
+    bottom_edge=${4:-0}
+fi
+
+if (! (is_uint "$left_edge" || ([ "${left_edge:0:1}" = "-" ] && is_uint "${left_edge:1}"))) \
+    || (! (is_uint "$right_edge" || ([ "${right_edge:0:1}" = "-" ] && is_uint "${right_edge:1}"))) \
+    || (! (is_uint "$top_edge" || ([ "${top_edge:0:1}" = "-" ] && is_uint "${top_edge:1}"))) \
+    || (! (is_uint "$bottom_edge" || ([ "${bottom_edge:0:1}" = "-" ] && is_uint "${bottom_edge:1}"))); then
+    print_usage
+    exit 1
+fi
+
+files=(stock/[0-9][0-9][0-9].@(jpg|png|webp))
+geometry=$(magick identify -ping -format "%[w]x%[h]\n" "${files[1]}")
+
+full_width=$((2*${geometry%%x*}-(left_edge)-(right_edge)))
+if [ $((full_width % 2)) -eq 0 ]; then
+  page_width=$((full_width/2))
+  right_page=$((left_edge+page_width))
+else
+  page_width=$((full_width/2))
+  right_page=$((left_edge+page_width+1))
+fi
+center_page=$((left_edge+page_width/2))
+
+full_height=${geometry##*x}
+height=$(($full_height-($top_edge)-($bottom_edge)))
+
+tmp_dir=$(mktemp -d --tmpdir)
+for file in two/[0-9][0-9][0-9]b.jpg; do
+  base=${file##*/}
+  right=${base%b.*}
+  left=$((10#$right+1))
+  left=00${left}
+  left=${left:(-3)}
+  crop=${full_width}x$height+$left_edge+$top_edge
+  magick \
+    "stock/$left".@(jpg|png|webp) \
+    "stock/$right".@(jpg|png|webp) \
+    +append -crop $crop "$tmp_dir/${right}b.webp"
+  output=$(demiff "$(keepsmallest \
+    "$file" \
+    "$tmp_dir/${right}b.webp" \
+    "$(magick \
+      "stock/$left".@(jpg|png|webp) \
+      "stock/$right".@(jpg|png|webp) \
+      +append -crop $crop miff:- \
+      | minify "$tmp_dir/${right}b-miff")")")
+  echo ${output##*/}
+  if [ "$output" != "$file" ]; then
+    mv "$output" two
+  fi
+done
+rmdir "$tmp_dir"
+
+$nullglob; unset nullglob

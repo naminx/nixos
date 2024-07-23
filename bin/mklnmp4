@@ -1,0 +1,25 @@
+#!/usr/bin/env fish
+
+set default_script_name lnmp4
+
+if [ -z "$argv[2]" -o -z "$argv[1]" ]
+    echo usage: (status basename) FILE_MP4 NAME [SCRIPT_NAME]
+    exit 1
+end
+
+if [ -z "$argv[3]" ]
+    set output $default_script_name
+else
+    set output $argv[3]
+end
+
+echo \#!/usr/bin/env fish\n\
+\n\
+for i in (string replace -r "^(.* - )(\d\d.*)( \(.*)" \"\$1\"\*\"\ \(\"\*\".mp4\" $argv[1])\n\
+\ \ \ \ echo \(string replace -r \""^(.* - )(\d\d.*)( \(.*)"\" $argv[2]\\ \\\$2.mp4 \{\$i\}\)\n\
+\ \ \ \ ln -s \{\$i\} \(string replace -r \""^(.* - )(\d\d.*)( \(.*)"\" $argv[2]\\ \\\$2.mp4 \{\$i\}\)\n\
+end\n> $output
+
+chmod 755 $output
+
+./$output

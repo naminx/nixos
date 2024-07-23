@@ -1,0 +1,17 @@
+#!/usr/bin/env python3
+
+import os
+from gi.repository import Gio
+
+if __name__ == "__main__":
+    import sys
+
+    if len(sys.argv) < 2:
+        print("Usage:  " + sys.argv[0] + " FILENAME")
+        sys.exit(0)
+
+    filename = sys.argv[1]
+    if os.path.isfile(filename):
+        info = Gio.File.new_for_path(filename).query_info("thumbnail::path", Gio.FileQueryInfoFlags.NONE, None)
+        if info is not None:
+            print(info.get_attribute_byte_string("thumbnail::path"))

@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+nullglob=$(shopt -p nullglob); shopt -s nullglob extglob
+
+# Your codes here
+
+$nullglob; unset nullglob

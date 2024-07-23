@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+
+if [ -z "$1" -o -z "$2" ]; then
+  echo usage: $(basename "$0") LOCATION on\|off
+  echo Valid locations are: shibuya, tokyo, tokyo2, yokohama, estonia
+  exit 1
+fi
+
+case ${1,,} in
+  shibuya)
+    ;;
+  tokyo)
+    ;;
+  tokyo2)
+    ;;
+  yokohama)
+    ;;
+  estonia)
+    ;;
+  *)
+    echo error: Unknown location
+    echo Valid locations are: shibuya, tokyo, tokyo2, yokohama, estonia
+    exit 1
+    ;;
+esac
+
+case ${2,,} in
+  on)
+    # sudo sysctl -w net.ipv6.conf.enp5s0.disable_ipv6=1
+    sudo systemctl start openvpn-$1.service
+    ;;
+  off)
+    sudo systemctl stop openvpn-$1.service
+    ;;
+  *)
+    echo error: Unknown operation
+    echo Valid operations are: on, off
+    exit 1
+esac

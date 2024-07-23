@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+IFS=$'\n'; globs=( $(shopt -p nullglob extglob nocaseglob) ); unset IFS
+shopt -s nullglob extglob nocaseglob
+
+brc --execute \
+    --regex '/^([0-9])\./0\1./' \
+    --regex '/^/0/' \
+    --replace '/.rawkuma.com//'
+    *.@(jpg|jpeg|png|webp)
+
+for glob in "${globs[@]}"; do
+  $glob
+done

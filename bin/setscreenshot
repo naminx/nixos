@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+if [ -z "$1" ]; then
+    echo usage: ${0##*/} START_NUM
+    exit 1
+fi
+
+reg.exe add 'HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer' /v ScreenshotIndex /t REG_DWORD /f /d $1

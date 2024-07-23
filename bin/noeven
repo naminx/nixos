@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+rm -f _*[02468]b.jpg

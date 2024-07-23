@@ -1,0 +1,4 @@
+------------------------Thread: 61:org.jdownloader.osevents.multios.SignalEventSource.log-----------------------
+--ID:61TS:1720189444869-7/5/24, 9:24:04 PM -  [org.jdownloader.osevents.multios.SignalEventSource(reg)] -> register signal: INT->SIGINT
+--ID:61TS:1720189444869-7/5/24, 9:24:04 PM -  [org.jdownloader.osevents.multios.SignalEventSource(reg)] -> register signal: TERM->SIGTERM
+--ID:61TS:1720189444869-7/5/24, 9:24:04 PM -  [org.jdownloader.osevents.multios.SignalEventSource(reg)] -> register signal: HUP->SIGHUP

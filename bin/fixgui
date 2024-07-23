@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+/mnt/c/WINDOWS/system32/taskkill.exe /f /im explorer.exe
+/mnt/c/WINDOWS/system32/cmd.exe /c start "" "$(wslpath -w "/mnt/c/WINDOWS/explorer.exe")" &

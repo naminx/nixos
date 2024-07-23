@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+nullglob=$(shopt -p nullglob); shopt -s nullglob extglob
+
+for i in "$@"; do
+    if [ -L "$i" ] && [ -f "$i" ]; then
+        rm "$(readlink "$i")"
+    fi
+done
+
+$nullglob; unset nullglob

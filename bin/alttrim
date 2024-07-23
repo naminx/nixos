@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+nullglob=$(shopt -p nullglob); shopt -s nullglob extglob
+
+is_uint() { case $1 in '' | *[!0-9]* ) return 1;; esac; }
+
+if is_uint "$1"; then
+    pixtrim -$1 *[13579].@(jpg|png|webp) &
+    pixtrim $1- *[02468].@(jpg|png|webp) &
+elif [ "${1:0:1}" = "-" ] || is_uint "${1:1}"; then
+    pixtrim ${1:1}- *[13579].@(jpg|png|webp) &
+    pixtrim -${1:1} *[02468].@(jpg|png|webp) &
+else
+    echo usage: "${0##*/} [-]pixels"
+    exit 1
+fi
+wait $(jobs -p)
+
+$nullglob; unset nullglob

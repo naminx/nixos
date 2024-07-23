@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+if [ ! -z "$1" -a ! -z "$2" ]; then
+  if [ "$1" != "$2" ]; then
+    dst=$1
+    dst_dir=$(dirname "$dst")
+    dst_base=$(basename "$dst")
+    src=$2
+    src_dir=$(dirname "$src")
+    src_base=$(basename "$src")
+    if [ "$src_dir" = "$dst_dir" -a "$src_base" != "$dst_base" ]; then
+      rm -f "$dst"
+      mv "$src" "$dst"
+      touch "$dst"
+    else
+      if [ "$src_base" != "$dst_base" ]; then
+        rm -f "$dst_dir/$src_base"
+        mv "$dst" "$dst_dir/$src_base"
+        touch "$dst_dir/$src_base"
+        dst=$dst_dir/$src_base
+      fi
+      rm -f "$dst"
+      mv "$src" "$dst"
+      touch "$dst"
+    fi
+    echo $dst
+  else
+    echo $1
+  fi
+fi

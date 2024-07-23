@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+if [ -d "$1" -o -f "$1" ]; then
+    win_path=$(wslpath -w "$1")
+    if [ "${win_path::27}" == "\\\\wsl.localhost\\NixOS\\mnt\\r" ]; then
+      win_path="R:${win_path:27}"
+    fi
+    echo "$win_path"
+fi

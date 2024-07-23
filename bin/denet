@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+IFS=$'\n'; globs=( $(shopt -p nullglob extglob nocaseglob) ); unset IFS
+shopt -s nullglob extglob nocaseglob
+
+rm -f *.url .*.url cover.jpg
+
+if [ -f 0.jpeg -a -f 00002.jpeg -a ! -f 00001.jpeg ]; then
+    mv 0.jpeg 00001.jpeg
+fi
+
+if [ -f 1.jpeg -a -f 00002.jpeg -a ! -f 00001.jpeg ]; then
+    mv 1.jpeg 00001.jpeg
+fi
+
+brc --execute \
+    --lowercase-ext \
+    --regex-ext /p\?jpeg/jpg/ \
+    --regex '/^(.*[^0-9])?([0-9]+[a-z]?)$/00\\2/' \
+    --regex '/^.*([0-9]{3}[a-z]?)$/\\1/' \
+    *.@(jpg|jpeg|pjpeg|png|webp)
+
+for glob in "${globs[@]}"; do
+  $glob
+done

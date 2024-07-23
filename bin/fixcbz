@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+
+shopt -s extglob
+Red='\033[1;31m'
+Green='\033[1;32m'
+
+magick identify *.@(jpg|png|webp) | \
+while read -r info; do
+    filename=${info%% @(JPEG|PNG|WEBP) *}
+    if [ "$filename" != "$info" ]; then
+        base=${filename%.*}
+        ext=${filename##*.}
+        column3upward=${info#$filename @(JPEG|PNG|WEBP) }
+        dimension=${column3upward%% *}
+        width=${dimension%%x*}
+        height=${dimension##*x}
+        if [ $width -gt $height ]; then
+            prev=$((10#$base-1))
+            prev=00$prev
+            prev=${prev:(-3)}
+            next=$((10#$base+1))
+            next=00$next
+            next=${next:(-3)}
+            if [ -f $prev.$ext ] && [ -f $next.$ext ]; then
+                if [ ! -d two ]; then
+                    mkdir two
+                fi
+                cp $base.$ext two/$base.$ext
+                magick montage $next.$ext $prev.$ext \
+                    -geometry +0+0 \
+                    -font aileron \
+                    two/$next-$prev.$ext
+                simi=$(similar -m g two/$base.$ext two/$next-$prev.$ext)
+                if [ $(echo "scale=4; $simi > 0.99" | bc) = 1 ]; then
+                    rm $prev.$ext $next.$ext two/$base.$ext two/$next-$prev.$ext
+                    echo -e "$Green$base.$ext ($simi) => × $prev.$ext, × $next.$ext"
+                else
+                    echo -e "$Red$base.$ext ($simi) => ✓ $prev.$ext, ✓ $next.$ext"
+                fi
+            fi
+        fi
+    fi
+done

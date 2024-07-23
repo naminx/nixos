@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+/nix/store/bqscm309qy6d5kpj23aigsrfi9s7xf8k-cloudflared-2023.10.0/bin/cloudflared tunnel --config=/nix/store/ack67r86yn89x7p7lgmkdgifcpbp8pcz-cloudflared.yml --no-autoupdate run

@@ -1,0 +1,49 @@
+------------------------Thread: 1:org.jdownloader.update.launcher.SelfTest.log-----------------------
+--ID:1TS:1720189392226-7/5/24, 9:23:12 PM -  [org.jdownloader.update.launcher.SelfTest(copyOptionalLAf)] -> Copy /home/namin/.local/bin/libs/laf/synthetica.jar to /home/namin/.local/bin/tmp/update/self/JDU/libs/laf/synthetica.jar
+--ID:1TS:1720189392227-7/5/24, 9:23:12 PM -  [org.jdownloader.update.launcher.SelfTest(copyOptionalLAf)] -> Copy /home/namin/.local/bin/libs/laf/syntheticaJDCustom.jar to /home/namin/.local/bin/tmp/update/self/JDU/libs/laf/syntheticaJDCustom.jar
+--ID:1TS:1720189392228-7/5/24, 9:23:12 PM -  [org.jdownloader.update.launcher.SelfTest(copyOptionalLAf)] -> Copy /home/namin/.local/bin/libs/laf/syntheticaSimple2D.jar to /home/namin/.local/bin/tmp/update/self/JDU/libs/laf/syntheticaSimple2D.jar
+--ID:1TS:1720189394228-7/5/24, 9:23:14 PM -  [org.jdownloader.update.launcher.SelfTest(onSelfTestOK)] -> Write PollFile: /home/namin/.local/bin/tmp/selftest_1720189391910
+--ID:1TS:1720189397044-7/5/24, 9:23:17 PM -  [org.jdownloader.update.launcher.SelfTest(onSelfTestOK)] -> PollFile Deletion detected: /home/namin/.local/bin/tmp/selftest_1720189391910
+--ID:1TS:1720189397086-7/5/24, 9:23:17 PM -  [org.jdownloader.update.launcher.SelfTest(createBackup)] -> Create backup: /home/namin/.local/bin/JDownloader.jar
+--ID:1TS:1720189397086-7/5/24, 9:23:17 PM -  [org.jdownloader.update.launcher.SelfTest(createBackup)] -> Create backup at: /home/namin/.local/bin/JDownloader.jar.backup.1
+--ID:1TS:1720189397086-7/5/24, 9:23:17 PM -  [org.jdownloader.update.launcher.SelfTest(renameTo)] -> Rename /home/namin/.local/bin/JDownloader.jar to /home/namin/.local/bin/JDownloader.jar.backup.1
+--ID:1TS:1720189397086-7/5/24, 9:23:17 PM -  [org.jdownloader.update.launcher.SelfTest(renameTo)] -> Rename Success: true
+--ID:1TS:1720189397086-7/5/24, 9:23:17 PM -  [org.jdownloader.update.launcher.SelfTest(renameTo)] -> From Exists false (/home/namin/.local/bin/JDownloader.jar)
+--ID:1TS:1720189397086-7/5/24, 9:23:17 PM -  [org.jdownloader.update.launcher.SelfTest(renameTo)] -> To Exists true (/home/namin/.local/bin/JDownloader.jar.backup.1)
+--ID:1TS:1720189397086-7/5/24, 9:23:17 PM -  [org.jdownloader.update.launcher.SelfTest(createBackup)] -> Create backup: /home/namin/.local/bin/update/versioninfo/JDU/rev
+--ID:1TS:1720189397086-7/5/24, 9:23:17 PM -  [org.jdownloader.update.launcher.SelfTest(createBackup)] -> Create backup at: /home/namin/.local/bin/update/versioninfo/JDU/rev.backup.1
+--ID:1TS:1720189397086-7/5/24, 9:23:17 PM -  [org.jdownloader.update.launcher.SelfTest(renameTo)] -> Rename /home/namin/.local/bin/update/versioninfo/JDU/rev to /home/namin/.local/bin/update/versioninfo/JDU/rev.backup.1
+--ID:1TS:1720189397086-7/5/24, 9:23:17 PM -  [org.jdownloader.update.launcher.SelfTest(renameTo)] -> Rename Success: true
+--ID:1TS:1720189397086-7/5/24, 9:23:17 PM -  [org.jdownloader.update.launcher.SelfTest(renameTo)] -> From Exists false (/home/namin/.local/bin/update/versioninfo/JDU/rev)
+--ID:1TS:1720189397086-7/5/24, 9:23:17 PM -  [org.jdownloader.update.launcher.SelfTest(renameTo)] -> To Exists true (/home/namin/.local/bin/update/versioninfo/JDU/rev.backup.1)
+--ID:1TS:1720189397086-7/5/24, 9:23:17 PM -  [org.jdownloader.update.launcher.SelfTest(onSelfTestOK)] -> Rev Backup: /home/namin/.local/bin/update/versioninfo/JDU/rev.backup.1 exists: true( org-> /home/namin/.local/bin/update/versioninfo/JDU/rev
+--ID:1TS:1720189397086-7/5/24, 9:23:17 PM -  [org.jdownloader.update.launcher.SelfTest(onSelfTestOK)] -> Jar Backup: /home/namin/.local/bin/JDownloader.jar.backup.1 exists: true( org-> /home/namin/.local/bin/JDownloader.jar
+--ID:1TS:1720189397086-7/5/24, 9:23:17 PM -  [org.jdownloader.update.launcher.SelfTest(onSelfTestOK)] -> Jar: /home/namin/.local/bin/JDownloader.jar exists: false
+--ID:1TS:1720189397086-7/5/24, 9:23:17 PM -  [org.jdownloader.update.launcher.SelfTest(onSelfTestOK)] -> /home/namin/.local/bin/tmp/update/self/JDU/rev > /home/namin/.local/bin/update/versioninfo/JDU/rev
+--ID:1TS:1720189397087-7/5/24, 9:23:17 PM -  [org.jdownloader.update.launcher.SelfTest(onSelfTestOK)] -> Copy Logs
+--ID:1TS:1720189397087-7/5/24, 9:23:17 PM -  [org.jdownloader.update.launcher.SelfTest(onSelfTestOK)] -> Copy LogFile /home/namin/.local/bin/tmp/update/self/JDU/self_17140_to_17143.log
+--ID:1TS:1720189397087-7/5/24, 9:23:17 PM -  [org.jdownloader.update.launcher.SelfTest(delete)] -> Delete /home/namin/.local/bin/logs/updatehistory/self_17140_to_17143.log
+--ID:1TS:1720189397087-7/5/24, 9:23:17 PM -  [org.jdownloader.update.launcher.SelfTest(delete)] -> Delete OK /home/namin/.local/bin/logs/updatehistory/self_17140_to_17143.log
+--ID:1TS:1720189397087-7/5/24, 9:23:17 PM -  [org.jdownloader.update.launcher.SelfTest(onSelfTestOK)] -> Copy LogFile /home/namin/.local/bin/tmp/update/self/JDU/self_17143_to_17153.log
+--ID:1TS:1720189397087-7/5/24, 9:23:17 PM -  [org.jdownloader.update.launcher.SelfTest(delete)] -> Delete /home/namin/.local/bin/logs/updatehistory/self_17143_to_17153.log
+--ID:1TS:1720189397087-7/5/24, 9:23:17 PM -  [org.jdownloader.update.launcher.SelfTest(delete)] -> Delete OK /home/namin/.local/bin/logs/updatehistory/self_17143_to_17153.log
+--ID:1TS:1720189397088-7/5/24, 9:23:17 PM -  [org.jdownloader.update.launcher.SelfTest(onSelfTestOK)] -> Copy LogFile /home/namin/.local/bin/tmp/update/self/JDU/self_17217_to_17454.log
+--ID:1TS:1720189397088-7/5/24, 9:23:17 PM -  [org.jdownloader.update.launcher.SelfTest(delete)] -> Delete /home/namin/.local/bin/logs/updatehistory/self_17217_to_17454.log
+--ID:1TS:1720189397088-7/5/24, 9:23:17 PM -  [org.jdownloader.update.launcher.SelfTest(delete)] -> Delete OK /home/namin/.local/bin/logs/updatehistory/self_17217_to_17454.log
+--ID:1TS:1720189397088-7/5/24, 9:23:17 PM -  [org.jdownloader.update.launcher.SelfTest(onSelfTestOK)] -> Copy LogFile /home/namin/.local/bin/tmp/update/self/JDU/self_-1_to_17140.log
+--ID:1TS:1720189397088-7/5/24, 9:23:17 PM -  [org.jdownloader.update.launcher.SelfTest(delete)] -> Delete /home/namin/.local/bin/logs/updatehistory/self_-1_to_17140.log
+--ID:1TS:1720189397088-7/5/24, 9:23:17 PM -  [org.jdownloader.update.launcher.SelfTest(delete)] -> Delete OK /home/namin/.local/bin/logs/updatehistory/self_-1_to_17140.log
+--ID:1TS:1720189397088-7/5/24, 9:23:17 PM -  [org.jdownloader.update.launcher.SelfTest(onSelfTestOK)] -> Copy LogFile /home/namin/.local/bin/tmp/update/self/JDU/self_17153_to_17158.log
+--ID:1TS:1720189397088-7/5/24, 9:23:17 PM -  [org.jdownloader.update.launcher.SelfTest(delete)] -> Delete /home/namin/.local/bin/logs/updatehistory/self_17153_to_17158.log
+--ID:1TS:1720189397089-7/5/24, 9:23:17 PM -  [org.jdownloader.update.launcher.SelfTest(delete)] -> Delete OK /home/namin/.local/bin/logs/updatehistory/self_17153_to_17158.log
+--ID:1TS:1720189397089-7/5/24, 9:23:17 PM -  [org.jdownloader.update.launcher.SelfTest(onSelfTestOK)] -> Copy LogFile /home/namin/.local/bin/tmp/update/self/JDU/self_17158_to_17217.log
+--ID:1TS:1720189397089-7/5/24, 9:23:17 PM -  [org.jdownloader.update.launcher.SelfTest(delete)] -> Delete /home/namin/.local/bin/logs/updatehistory/self_17158_to_17217.log
+--ID:1TS:1720189397089-7/5/24, 9:23:17 PM -  [org.jdownloader.update.launcher.SelfTest(delete)] -> Delete OK /home/namin/.local/bin/logs/updatehistory/self_17158_to_17217.log
+--ID:1TS:1720189397089-7/5/24, 9:23:17 PM -  [org.jdownloader.update.launcher.SelfTest(onSelfTestOK)] -> Delete /home/namin/.local/bin/JDownloader.jar
+--ID:1TS:1720189397089-7/5/24, 9:23:17 PM -  [org.jdownloader.update.launcher.SelfTest(delete)] -> Delete /home/namin/.local/bin/JDownloader.jar
+--ID:1TS:1720189397089-7/5/24, 9:23:17 PM -  [org.jdownloader.update.launcher.SelfTest(delete)] -> Delete OK /home/namin/.local/bin/JDownloader.jar
+--ID:1TS:1720189397089-7/5/24, 9:23:17 PM -  [org.jdownloader.update.launcher.SelfTest(onSelfTestOK)] -> Copy /home/namin/.local/bin/tmp/update/self/JDU/JDownloader.jar to /home/namin/.local/bin/JDownloader.jar
+--ID:1TS:1720189397105-7/5/24, 9:23:17 PM -  [org.jdownloader.update.launcher.SelfTest(onSelfTestOK)] -> Finally
+--ID:1TS:1720189397119-7/5/24, 9:23:17 PM -  [org.jdownloader.update.launcher.SelfTest(onSelfTestOK)] -> Jar Hash OK
+--ID:1TS:1720189397120-7/5/24, 9:23:17 PM -  [org.jdownloader.update.launcher.SelfTest(onSelfTestOK)] -> REV Hash OK
+--ID:1TS:1720189397120-7/5/24, 9:23:17 PM -  [org.jdownloader.update.launcher.SelfTest(onSelfTestOK)] -> Restart /home/namin/.local/bin - /home/namin/.local/bin/JDownloader.jar

@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+
+nullglob=$(shopt -p nullglob); shopt -s nullglob
+
+is_uint() { case $1 in '' | *[!0-9]* ) return 1;; esac ;}
+
+geom=(${1//[x+]/ })
+
+if ! is_uint "${geom[0]}" || ! is_uint "${geom[1]}" || ! is_uint "${geom[2]}" || ! is_uint "${geom[3]}"; then
+    echo usage: "${0##*/} WIDTHxHEIGHT+LEFT+TOP files ..."
+    exit 1
+fi
+
+args=-crop\ $1
+shift
+
+tmp_dir=$(mktemp -d --tmpdir)
+tmp_dir2=$(mktemp -d --tmpdir)
+for file in "$@"; do
+    if [ -f "$file" ]; then
+        file_base=$(basename "$file")
+        name="${file_base%.[^.]*}"
+        ext="${file_base:${#name} + 1}"
+        if [[ -z "$name" && -n "$ext" ]]; then
+            base=".$ext"
+            ext=""
+        fi
+        magick "$file" $args +repage "$tmp_dir/$name.jpg"
+        magick "$file" $args +repage "$tmp_dir/$name.webp"
+        output=$(keepsmallest \
+            "$tmp_dir/$name.jpg" \
+            "$tmp_dir/$name.webp" \
+            "$( magick "$file" $args +repage miff:- \
+              | minify "$tmp_dir2/$name")")
+        output=$(replace $file $output)
+        if [ "$(dirname "$output")" = "." ]; then
+            echo $(basename "$output")
+        else
+            echo $output
+        fi
+    fi
+done
+rmdir "$tmp_dir" "$tmp_dir2"
+
+$nullglob; unset nullglob

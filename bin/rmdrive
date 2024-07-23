@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+cd /mnt/c/
+if [ "$(/mnt/c/Windows/System32/cmd.exe /c subst | grep "^Q:" | wc -l)" == "1" ]; then
+  /mnt/c/Windows/System32/cmd.exe /c subst Q: /d
+fi
+
+if [ "$(/mnt/c/Windows/System32/cmd.exe /c subst | grep "^R:" | wc -l)" == "1" ]; then
+  /mnt/c/Windows/System32/cmd.exe /c subst R: /d
+fi
+
+if [ "$(/mnt/c/Windows/System32/cmd.exe /c subst | grep "^U:" | wc -l)" == "1" ]; then
+  /mnt/c/Windows/System32/cmd.exe /c subst U: /d
+fi
+
+/mnt/c/Program\ Files/Hidden\ Start/hstart64.exe /noconsole /nouac /wait "C:\\Windows\\System32\\wsl.exe --unmount \\\\.\\PHYSICALDRIVE2"
+/mnt/c/Program\ Files/Hidden\ Start/hstart64.exe /noconsole /nouac /wait "C:\\Windows\\System32\\wsl.exe --unmount \\\\.\\PHYSICALDRIVE4"
+/mnt/c/Program\ Files/Hidden\ Start/hstart64.exe /noconsole /nouac /wait "C:\\Windows\\System32\\wsl.exe --unmount \\\\.\\PHYSICALDRIVE6"

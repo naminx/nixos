@@ -1,0 +1,48 @@
+#!/usr/bin/env fish
+
+for file in $argv
+  set width (math (magick identify -ping -format %[w] {$file}))
+  set west \
+    ( math {$width} - \
+      ( magick convert {$file} -gravity north -chop 0x100 -gravity south \
+               -chop 0x100 -define trim:edges=west -fuzz 30% -trim miff:- \
+      | magick identify -ping -format %[w] - ) )
+  if [ "$west" != "0" ]
+    set west -{$west}
+  else
+    set west ""
+  end
+  set east \
+    ( math {$width} - \
+      ( magick convert {$file} -gravity north -chop 0x100 -gravity south \
+               -chop 0x100 -define trim:edges=east -fuzz 30% -trim miff:- \
+      | magick identify -ping -format %[w] - ) )
+  if [ "$east" != "0" ]
+    set east {$east}-
+  else
+    set east ""
+  end
+  set height (math (magick identify -ping -format %[h] {$file}))
+  set north \
+    ( math {$height} - \
+      ( magick convert {$file} -define trim:edges=east,west -fuzz 30% \
+               -trim -define trim:edges=north -fuzz 30% -trim miff:- \
+      | magick identify -ping -format %[h] - ) )
+  if [ "$north" != "0" ]
+    set north --{$north}
+  else
+    set north ""
+  end
+  set south \
+    ( math {$height} - \
+      ( magick convert {$file} -define trim:edges=east,west -fuzz 30% \
+               -trim -define trim:edges=south -fuzz 30% -trim miff:- \
+      | magick identify -ping -format %[h] - ) )
+  if [ "$south" != "0" ]
+    set south {$south}--
+  else
+    set south ""
+  end
+
+  echo {$file}: {$west} {$east} {$north} {$south}
+end

@@ -1,0 +1,5 @@
+#!/usr/bin/env fish
+
+if string match -qr '^_[0-9][0-9][0-9]b.(jpg|png|webp)$' $argv[1]
+    string sub -s 2 -l 3 $argv[1]
+end

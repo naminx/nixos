@@ -1,0 +1,2 @@
+------------------------Thread: 20:org.appwork.shutdown.ShutdownController.log-----------------------
+--ID:20TS:1720189434854-7/5/24, 9:23:54 PM -  [org.appwork.shutdown.ShutdownController(log)] -> [1/5|Priority: 10000]ShutdownController: start item->flushing logs to disk

@@ -1,0 +1,132 @@
+#!/usr/bin/env bash
+
+nullglob=$(shopt -p nullglob); shopt -s nullglob extglob
+
+is_uint() { case $1 in '' | *[!0-9]* ) return 1;; esac ;}
+
+print_usage() {
+    echo "usage: ${0##*/} left_edge [right_edge] [top_edge] [bottom_edge]"
+}
+
+left_edge=${1:-0}
+right_edge=${2:-0}
+top_edge=${3:-0}
+bottom_edge=${4:-0}
+
+if (! (is_uint "$left_edge" || ([ "${left_edge:0:1}" = "-" ] && is_uint "${left_edge:1}"))) \
+    || (! (is_uint "$right_edge" || ([ "${right_edge:0:1}" = "-" ] && is_uint "${right_edge:1}"))) \
+    || (! (is_uint "$top_edge" || ([ "${top_edge:0:1}" = "-" ] && is_uint "${top_edge:1}"))) \
+    || (! (is_uint "$bottom_edge" || ([ "${bottom_edge:0:1}" = "-" ] && is_uint "${bottom_edge:1}"))); then
+    print_usage
+    exit 1
+fi
+
+files=([0-9][0-9][0-9].@(jpg|png|webp))
+if [ "$files" = "" ]; then
+    echo error: files not found
+    exit 1
+fi
+
+geometry=$(magick identify -ping -format "%[w]x%[h]\n" "${files[0]}")
+
+full_width=$((${geometry%%x*}-(left_edge)-(right_edge)))
+if [ $((full_width % 2)) -eq 0 ]; then
+  page_width=$((full_width/2))
+  right_page=$((left_edge+page_width))
+else
+  page_width=$((full_width/2))
+  right_page=$((left_edge+page_width+1))
+fi
+center_page=$((left_edge+page_width/2))
+
+full_height=${geometry##*x}
+height=$((full_height-top_edge-bottom_edge))
+
+mkdir stock two
+echo $left_edge $right_edge $top_edge $bottom_edge > two/.params.mkabc
+if [ -f "$(which wslpath 2> /dev/null)" ]; then
+  cwd=$(pwd)
+  wdd=$(wslpath -a -w "$cwd")
+  if [ "${wdd::2}" != "\\\\" ]; then
+    pushd /mnt/c > /dev/null
+    /mnt/c/windows/system32/attrib.exe +h "$(wslpath -a -w "$cwd/two/.params.mkabc")"
+    popd > /dev/null
+  fi
+fi
+
+tmp_dir=$(mktemp -d --tmpdir)
+
+for file in "${files[0]}"; do
+    base=${file%.*}
+    ext=${file##*.}
+    crop=${page_width}x$height+$right_page+$top_edge
+    magick "$file" -crop $crop +repage "$tmp_dir/${base}a.jpg"
+    magick "$file" -crop $crop +repage "$tmp_dir/${base}a.webp"
+    output=$(demiff "$( keepsmallest "$tmp_dir/${base}a.jpg" "$tmp_dir/${base}a.webp" \
+                    "$( magick "$file" -crop $crop +repage miff:- \
+                      | minify "$tmp_dir/${base}a-miff")")")
+    echo ${output##*/}
+    mv "$output" .
+    crop=${page_width}x$height+$center_page+$top_edge
+    magick "$file" -crop $crop +repage "$tmp_dir/${base}b.jpg"
+    magick "$file" -crop $crop +repage "$tmp_dir/${base}b.webp"
+    output=$(demiff "$( keepsmallest "$tmp_dir/${base}b.jpg" "$tmp_dir/${base}b.webp" \
+                    "$( magick "$file" -crop $crop +repage miff:- \
+                      | minify "$tmp_dir/${base}b-miff")")")
+    echo ${output##*/}
+    mv "$output" .
+    if [ ! $((page_width % 2)) -eq 0 ]; then
+      crop=${page_width}x$height+$((center_page+1))+$top_edge
+      magick "$file" -crop $crop +repage "$tmp_dir/${base}b2.jpg"
+      magick "$file" -crop $crop +repage "$tmp_dir/${base}b2.webp"
+      output=$(demiff "$( keepsmallest "$tmp_dir/${base}b2.jpg" "$tmp_dir/${base}b2.webp" \
+                      "$( magick "$file" -crop $crop +repage miff:- \
+                        | minify "$tmp_dir/${base}b2-miff")")")
+      echo ${output##*/}
+      mv "$output" .
+    fi
+    crop=${page_width}x$height+$left_edge+$top_edge
+    magick "$file" -crop $crop +repage "$tmp_dir/${base}c.jpg"
+    magick "$file" -crop $crop +repage "$tmp_dir/${base}c.webp"
+    output=$(demiff "$( keepsmallest "$tmp_dir/${base}c.jpg" "$tmp_dir/${base}c.webp" \
+                    "$( magick "$file" -crop $crop +repage miff:- \
+                      | minify "$tmp_dir/${base}c-miff")")")
+    echo ${output##*/}
+    mv "$output" .
+    mv $file stock
+done
+
+for file in "${files[@]:1}"; do
+  if [ -f "$file" ]; then
+    base=${file%.*}
+    ext=${file##*.}
+    crop=${full_width}x$height+$left_edge+$top_edge
+    magick "$file" -verbose -crop $crop +repage "two/${base}b.jpg"
+  fi
+done
+for file in "${files[@]:1}"; do
+  if [ -f "$file" ]; then
+    base=${file%.*}
+    ext=${file##*.}
+    crop=${page_width}x$height+$right_page+$top_edge
+    magick "$file" -crop $crop +repage "$tmp_dir/${base}a.jpg"
+    magick "$file" -crop $crop +repage "$tmp_dir/${base}a.webp"
+    output=$(demiff "$( keepsmallest "$tmp_dir/${base}a.jpg" "$tmp_dir/${base}a.webp" \
+                    "$( magick "$file" -crop $crop +repage miff:- \
+                      | minify "$tmp_dir/${base}a-miff")")")
+    echo ${output##*/}
+    mv "$output" .
+    crop=${page_width}x$height+$left_edge+$top_edge
+    magick "$file" -crop $crop +repage "$tmp_dir/${base}c.jpg"
+    magick "$file" -crop $crop +repage "$tmp_dir/${base}c.webp"
+    output=$(demiff "$( keepsmallest "$tmp_dir/${base}c.jpg" "$tmp_dir/${base}c.webp" \
+                    "$( magick "$file" -crop $crop +repage miff:- \
+                     | minify "$tmp_dir/${base}c-miff")")")
+    echo ${output##*/}
+    mv "$output" .
+    mv $file stock
+  fi
+done
+rmdir "$tmp_dir"
+
+$nullglob; unset nullglob

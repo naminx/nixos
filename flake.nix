@@ -58,11 +58,13 @@
           custom-fonts = mypkg ./packages/custom-fonts;
           evince = mypkg ./packages/evince;
           gnome = mypkg ./packages/gnome;
+          google-chrome = mypkg ./packages/google-chrome;
           krita = mypkg ./packages/krita;
           libreoffice-qt-fresh = mypkg ./packages/libreoffice-qt-fresh;
           mcomix = mypkg ./packages/mcomix;
-          noip-duc = mypkg ./packages/noip-duc;
+          microsoft-edge = mypkg ./packages/microsoft-edge;
           neovim = mypkg ./packages/neovim;
+          noip-duc = mypkg ./packages/noip-duc;
           thorium = mypkg ./packages/thorium;
 
           # my own apps
@@ -113,7 +115,7 @@
     formatter.x86_64-linux = inputs.nixpkgs.legacyPackages.x86_64-linux.alejandra;
 
     nixosConfigurations.nixos = mkNixosConfiguration {
-      hostname = "chiyoda";
+      hostname = "tokyo";
       username = "namin"; # FIXME: replace with your own username!
       modules = [
         ./configuration.nix

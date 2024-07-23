@@ -1,0 +1,92 @@
+#!/usr/bin/env bash
+
+IFS=$'\n'; globs=( $(shopt -p nullglob extglob) ); unset IFS
+shopt -s nullglob extglob
+
+is_uint() { case "$1" in '' | *[!0-9]* ) return 1;; esac; }
+
+cropl=
+cropr=
+rotate=
+while [ "${1:0:1}" = "-" ]; do
+    if [ "$1" = "-crop" ]; then
+        geometry=($(echo $2 | sed 's/\([0-9]\+\)x\([0-9]\+\)+\([0-9]\+\)+\([0-9]\+\)/\1 \2 \3 \4/'))
+        if [ "${#geometry[@]}" -eq 4 ] &&
+            is_uint "${geometry[0]}" &&
+            is_uint "${geometry[1]}" &&
+            is_uint "${geometry[2]}" &&
+            is_uint "${geometry[3]}"; then
+            cropl="-cropl $2"
+            cropr="-cropr $2"
+            shift 2
+        fi
+    elif [ "$1" = "-cropl" ]; then
+        geometry=($(echo $2 | sed 's/\([0-9]\+\)x\([0-9]\+\)+\([0-9]\+\)+\([0-9]\+\)/\1 \2 \3 \4/'))
+        if [ "${#geometry[@]}" -eq 4 ] &&
+            is_uint "${geometry[0]}" &&
+            is_uint "${geometry[1]}" &&
+            is_uint "${geometry[2]}" &&
+            is_uint "${geometry[3]}"; then
+            cropl="-cropl $2"
+            shift 2
+        fi
+    elif [ "$1" = "-cropr" ]; then
+        geometry=($(echo $2 | sed 's/\([0-9]\+\)x\([0-9]\+\)+\([0-9]\+\)+\([0-9]\+\)/\1 \2 \3 \4/'))
+        if [ "${#geometry[@]}" -eq 4 ] &&
+            is_uint "${geometry[0]}" &&
+            is_uint "${geometry[1]}" &&
+            is_uint "${geometry[2]}" &&
+            is_uint "${geometry[3]}"; then
+            cropr="-cropr $2"
+            shift 2
+        fi
+    elif [ "$1" = "-trim" ]; then
+        if is_uint "$2"; then
+            cropl="-triml $2"
+            cropr="-trimr $2"
+            shift 2
+        else
+            if [ "${2:0:1}" = "-" ] && is_uint "${2:1}"; then
+                cropl="-triml $2"
+                cropr="-trimr $2"
+                shift 2
+            fi
+        fi
+    elif [ "$1" = "-triml" ]; then
+        if is_uint "$2"; then
+            cropl="-triml $2"
+            shift 2
+        else
+            if [ "${2:0:1}" = "-" ] && is_uint "${2:1}"; then
+                cropl="-triml $2"
+                shift 2
+            fi
+        fi
+    elif [ "$1" = "-trimr" ]; then
+        if is_uint "$2"; then
+            cropr="-trimr $2"
+            shift 2
+        else
+            if [ "${2:0:1}" = "-" ] && is_uint "${2:1}"; then
+                cropr="-trimr $2"
+                shift 2
+            fi
+        fi
+    elif [ "$1" = "-rotater" ]; then
+        rotate="-rotater"
+        shift
+    elif [ "$1" = "-rotatel" ]; then
+        rotate="-rotatel"
+        shift
+    else
+        break
+    fi
+done
+
+for arg in "$@"; do
+    domontage 0-9 $cropl $cropr $rotate "$arg" "$arg"
+done
+
+for glob in "${globs[@]}"; do
+  $glob
+done

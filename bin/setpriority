@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+wmic=/mnt/c/Windows/System32/Wbem/WMIC.exe
+
+if [ -z "$1" ] || [ ! -z "$2" ]; then
+    echo "usage: ${0##*/} PRIORITY_LEVEL"
+    echo "    where PRIORITY_LEVEL can be one of the followings:"
+    echo "          [ Realtime | High | \"Above normal\""
+    echo "          | Normal | \"Below normal\" | Low | Idle ]"
+    exit 0
+fi
+
+parent_pid=$($wmic Process WHERE "CommandLine LIKE '%MyProgWMICflag%'" Get ParentProcessID -format:list | dos2unix | dos2unix)
+$wmic Process where "ProcessId='${parent_pid#*=}'" CALL setpriority "$1" > /dev/null

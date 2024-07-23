@@ -1,0 +1,3 @@
+------------------------Thread: 1:Log.L.log-----------------------
+--ID:1TS:1720189406180-7/5/24, 9:23:26 PM -  [org.appwork.loggingv3.LogV3(info)] -> Application Root: /home/namin/.local/bin
+--ID:1TS:1720189406186-7/5/24, 9:23:26 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> Prefer (merged) JSon Storage from File: /home/namin/.local/bin/cfg/org.jdownloader.update.lastchance.LastChanceConfig.json

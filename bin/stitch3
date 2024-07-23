@@ -1,0 +1,47 @@
+#!/usr/bin/env fish
+
+if [ -z "$argv[1]" -o -z "$argv[2]" -o -z "$argv[3]" -o -z "$argv[4]" -o -z "$argv[5]" -o -z "$argv[6]" ]
+    echo usage: (status basename) TRIM_EAST OVERLAP_AB OVERLAP_BC TRIM_SOUTH NUM_BEGIN NUM_END [DOONE_1] ..
+    exit 1
+end
+
+if [ ! -d stock ]
+    mkstock_yanmaga3
+end
+
+set trim_east -gravity east -chop {$argv[1]}x0
+set trim_south_a -gravity south -chop 0x{$argv[2]}
+set trim_north_b -gravity north -chop 0x{$argv[2]}
+set trim_south_b -gravity south -chop 0x{$argv[3]}
+set trim_north_c -gravity north -chop 0x{$argv[3]}
+set trim_south_c -gravity south -chop 0x{$argv[4]}
+
+if [ "$argv[5]" -gt "0" ]
+    for num in (seq -f %03g $argv[5] $argv[6])
+        cp stock/{$num}a.jpg {$num}.jpg
+        magix {$trim_east} {$trim_south_a} \
+            \( stock/{$num}b.jpg {$trim_east} {$trim_north_b} {$trim_south_b} \) \
+            \( stock/{$num}c.jpg {$trim_east} {$trim_north_c} {$trim_south_c} \) \
+            -append \
+            {$num}.jpg
+    end
+end
+
+if [ ! -z "$argv[7]" ]
+    for right in $argv[7..-1]
+        set left (string pad -c 0 -w 3 (math 1+{$right}))
+        set right (string pad -c 0 -w 3 {$right})
+        cp stock/{$left}a.jpg _{$right}b.jpg
+        magix {$trim_east} {$trim_south_a} \
+            \( stock/{$left}b.jpg {$trim_east} {$trim_north_b} {$trim_south_b} \) \
+            \( stock/{$left}c.jpg {$trim_east} {$trim_north_c} {$trim_south_c} \) \
+            -append \
+            \( \( stock/{$right}a.jpg {$trim_east} {$trim_south_a} \) \
+               \( stock/{$right}b.jpg {$trim_east} {$trim_north_b} {$trim_south_b} \) \
+               \( stock/{$right}c.jpg {$trim_east} {$trim_north_c} {$trim_south_c} \) \
+               -append  \
+            \) \
+            +append \
+            _{$right}b.jpg
+    end
+end

@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+find -H ~/comics -mindepth 1 -maxdepth 1 -type l -xtype d -print0 \
+  | sort -z \
+  | xargs -r0 touchlink -v

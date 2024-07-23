@@ -1,0 +1,269 @@
+------------------------Thread: 120:FavIcons-----------------------
+--ID:120TS:1709719520668-3/6/24, 5:05:20 PM -  [jd.controlling.faviconcontroller.FavIcons(downloadFavIcon)] -> Download FavIcon for www.megaupload.com
+--ID:120TS:1709719522963-3/6/24, 5:05:22 PM -  [] -> Exception thrown at jd.http.Browser.openRequestConnection(Browser.java:2064):
+java.net.UnknownHostException: Could not resolve: -www.megaupload.com<->www.megaupload.com-
+	at org.appwork.utils.net.httpconnection.HTTPConnectionUtils.resolvHostIP(HTTPConnectionUtils.java:868)
+	at org.appwork.utils.net.httpconnection.HTTPConnectionUtils.resolvHostIP(HTTPConnectionUtils.java:475)
+	at org.appwork.utils.net.httpconnection.HTTPConnectionImpl.resolvHostIP(HTTPConnectionImpl.java:779)
+	at org.appwork.utils.net.httpconnection.HTTPConnectionImpl.getRemoteIPs(HTTPConnectionImpl.java:784)
+	at org.appwork.utils.net.httpconnection.HTTPConnectionImpl.connect(HTTPConnectionImpl.java:916)
+	at org.appwork.utils.net.httpconnection.HTTPConnectionImpl.finalizeConnect(HTTPConnectionImpl.java:1329)
+	at jd.http.Request.connect(Request.java:374)
+	at jd.http.Request.connect(Request.java:361)
+	at jd.http.Browser.openRequestConnection(Browser.java:2027)
+	at jd.http.Browser.openRequestConnection(Browser.java:1883)
+	at jd.http.Browser.getPage(Browser.java:1542)
+	at jd.http.Browser.getPage(Browser.java:1538)
+	at jd.controlling.faviconcontroller.FavIcons.download_FavIconTag(FavIcons.java:552)
+	at jd.controlling.faviconcontroller.FavIcons.downloadFavIcon(FavIcons.java:762)
+	at jd.controlling.faviconcontroller.FavIcons.downloadFavIcon(FavIcons.java:740)
+	at jd.controlling.faviconcontroller.FavIcons$4.run(FavIcons.java:309)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+
+--ID:120TS:1709719522964-3/6/24, 5:05:22 PM -  [] -> Exception thrown at jd.controlling.faviconcontroller.FavIcons.download_FavIconTag(FavIcons.java:566):
+jd.http.Browser$BrowserException: Caller: jd.controlling.faviconcontroller.FavIcons.download_FavIconTag(FavIcons.java:552)
+jd.controlling.faviconcontroller.FavIcons.downloadFavIcon(FavIcons.java:762)
+jd.controlling.faviconcontroller.FavIcons.downloadFavIcon(FavIcons.java:740)
+jd.controlling.faviconcontroller.FavIcons$4.run(FavIcons.java:309)
+java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+java.base/java.lang.Thread.run(Thread.java:833)
+BrowserID:5|BrowserParentID:-1|RequestID:1|URL:https://www.megaupload.com/
+----------------Request Information-------------
+URL: https://www.megaupload.com/
+Host: www.megaupload.com
+Connection-Timeout: 10000ms
+Read-Timeout: 10000ms
+----------------Request-------------------------
+-------------Not Connected Yet!-----------------
+
+----------------Response Information------------
+-------------Not Connected Yet!------------------
+
+
+	at jd.http.Browser.openRequestConnection(Browser.java:2075)
+	at jd.http.Browser.openRequestConnection(Browser.java:1883)
+	at jd.http.Browser.getPage(Browser.java:1542)
+	at jd.http.Browser.getPage(Browser.java:1538)
+	at jd.controlling.faviconcontroller.FavIcons.download_FavIconTag(FavIcons.java:552)
+	at jd.controlling.faviconcontroller.FavIcons.downloadFavIcon(FavIcons.java:762)
+	at jd.controlling.faviconcontroller.FavIcons.downloadFavIcon(FavIcons.java:740)
+	at jd.controlling.faviconcontroller.FavIcons$4.run(FavIcons.java:309)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+Caused by: java.net.UnknownHostException: Could not resolve: -www.megaupload.com<->www.megaupload.com-
+	at org.appwork.utils.net.httpconnection.HTTPConnectionUtils.resolvHostIP(HTTPConnectionUtils.java:868)
+	at org.appwork.utils.net.httpconnection.HTTPConnectionUtils.resolvHostIP(HTTPConnectionUtils.java:475)
+	at org.appwork.utils.net.httpconnection.HTTPConnectionImpl.resolvHostIP(HTTPConnectionImpl.java:779)
+	at org.appwork.utils.net.httpconnection.HTTPConnectionImpl.getRemoteIPs(HTTPConnectionImpl.java:784)
+	at org.appwork.utils.net.httpconnection.HTTPConnectionImpl.connect(HTTPConnectionImpl.java:916)
+	at org.appwork.utils.net.httpconnection.HTTPConnectionImpl.finalizeConnect(HTTPConnectionImpl.java:1329)
+	at jd.http.Request.connect(Request.java:374)
+	at jd.http.Request.connect(Request.java:361)
+	at jd.http.Browser.openRequestConnection(Browser.java:2027)
+	... 10 more
+
+--ID:120TS:1709719524152-3/6/24, 5:05:24 PM -  [] -> Exception thrown at jd.http.Browser.openRequestConnection(Browser.java:2064):
+java.net.UnknownHostException: Could not resolve: -www.megaupload.com<->www.megaupload.com-
+	at org.appwork.utils.net.httpconnection.HTTPConnectionUtils.resolvHostIP(HTTPConnectionUtils.java:868)
+	at org.appwork.utils.net.httpconnection.HTTPConnectionUtils.resolvHostIP(HTTPConnectionUtils.java:475)
+	at org.appwork.utils.net.httpconnection.HTTPConnectionImpl.resolvHostIP(HTTPConnectionImpl.java:779)
+	at org.appwork.utils.net.httpconnection.HTTPConnectionImpl.getRemoteIPs(HTTPConnectionImpl.java:784)
+	at org.appwork.utils.net.httpconnection.HTTPConnectionImpl.connect(HTTPConnectionImpl.java:916)
+	at org.appwork.utils.net.httpconnection.HTTPConnectionImpl.finalizeConnect(HTTPConnectionImpl.java:1329)
+	at jd.http.Request.connect(Request.java:374)
+	at jd.http.Request.connect(Request.java:361)
+	at jd.http.Browser.openRequestConnection(Browser.java:2027)
+	at jd.http.Browser.openRequestConnection(Browser.java:1883)
+	at jd.http.Browser.getPage(Browser.java:1542)
+	at jd.http.Browser.getPage(Browser.java:1538)
+	at jd.controlling.faviconcontroller.FavIcons.download_FavIconTag(FavIcons.java:552)
+	at jd.controlling.faviconcontroller.FavIcons.downloadFavIcon(FavIcons.java:762)
+	at jd.controlling.faviconcontroller.FavIcons.downloadFavIcon(FavIcons.java:740)
+	at jd.controlling.faviconcontroller.FavIcons$4.run(FavIcons.java:309)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+
+--ID:120TS:1709719524152-3/6/24, 5:05:24 PM -  [] -> Exception thrown at jd.controlling.faviconcontroller.FavIcons.download_FavIconTag(FavIcons.java:566):
+jd.http.Browser$BrowserException: Caller: jd.controlling.faviconcontroller.FavIcons.download_FavIconTag(FavIcons.java:552)
+jd.controlling.faviconcontroller.FavIcons.downloadFavIcon(FavIcons.java:762)
+jd.controlling.faviconcontroller.FavIcons.downloadFavIcon(FavIcons.java:740)
+jd.controlling.faviconcontroller.FavIcons$4.run(FavIcons.java:309)
+java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+java.base/java.lang.Thread.run(Thread.java:833)
+BrowserID:5|BrowserParentID:-1|RequestID:2|URL:http://www.megaupload.com/
+----------------Request Information-------------
+URL: http://www.megaupload.com/
+Host: www.megaupload.com
+Connection-Timeout: 10000ms
+Read-Timeout: 10000ms
+----------------Request-------------------------
+-------------Not Connected Yet!-----------------
+
+----------------Response Information------------
+-------------Not Connected Yet!------------------
+
+
+	at jd.http.Browser.openRequestConnection(Browser.java:2075)
+	at jd.http.Browser.openRequestConnection(Browser.java:1883)
+	at jd.http.Browser.getPage(Browser.java:1542)
+	at jd.http.Browser.getPage(Browser.java:1538)
+	at jd.controlling.faviconcontroller.FavIcons.download_FavIconTag(FavIcons.java:552)
+	at jd.controlling.faviconcontroller.FavIcons.downloadFavIcon(FavIcons.java:762)
+	at jd.controlling.faviconcontroller.FavIcons.downloadFavIcon(FavIcons.java:740)
+	at jd.controlling.faviconcontroller.FavIcons$4.run(FavIcons.java:309)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+Caused by: java.net.UnknownHostException: Could not resolve: -www.megaupload.com<->www.megaupload.com-
+	at org.appwork.utils.net.httpconnection.HTTPConnectionUtils.resolvHostIP(HTTPConnectionUtils.java:868)
+	at org.appwork.utils.net.httpconnection.HTTPConnectionUtils.resolvHostIP(HTTPConnectionUtils.java:475)
+	at org.appwork.utils.net.httpconnection.HTTPConnectionImpl.resolvHostIP(HTTPConnectionImpl.java:779)
+	at org.appwork.utils.net.httpconnection.HTTPConnectionImpl.getRemoteIPs(HTTPConnectionImpl.java:784)
+	at org.appwork.utils.net.httpconnection.HTTPConnectionImpl.connect(HTTPConnectionImpl.java:916)
+	at org.appwork.utils.net.httpconnection.HTTPConnectionImpl.finalizeConnect(HTTPConnectionImpl.java:1329)
+	at jd.http.Request.connect(Request.java:374)
+	at jd.http.Request.connect(Request.java:361)
+	at jd.http.Browser.openRequestConnection(Browser.java:2027)
+	... 10 more
+
+--ID:120TS:1709719524152-3/6/24, 5:05:24 PM -  [jd.controlling.faviconcontroller.FavIcons(downloadFavIcon)] -> Could not download FavIcon for www.megaupload.com
+--ID:120TS:1709719524153-3/6/24, 5:05:24 PM -  [jd.controlling.faviconcontroller.FavIcons(downloadFavIcon)] -> Download FavIcon for megaupload.com
+--ID:120TS:1709719526562-3/6/24, 5:05:26 PM -  [] -> Exception thrown at jd.http.Browser.openRequestConnection(Browser.java:2064):
+java.net.UnknownHostException: Could not resolve: -megaupload.com<->megaupload.com-
+	at org.appwork.utils.net.httpconnection.HTTPConnectionUtils.resolvHostIP(HTTPConnectionUtils.java:868)
+	at org.appwork.utils.net.httpconnection.HTTPConnectionUtils.resolvHostIP(HTTPConnectionUtils.java:475)
+	at org.appwork.utils.net.httpconnection.HTTPConnectionImpl.resolvHostIP(HTTPConnectionImpl.java:779)
+	at org.appwork.utils.net.httpconnection.HTTPConnectionImpl.getRemoteIPs(HTTPConnectionImpl.java:784)
+	at org.appwork.utils.net.httpconnection.HTTPConnectionImpl.connect(HTTPConnectionImpl.java:916)
+	at org.appwork.utils.net.httpconnection.HTTPConnectionImpl.finalizeConnect(HTTPConnectionImpl.java:1329)
+	at jd.http.Request.connect(Request.java:374)
+	at jd.http.Request.connect(Request.java:361)
+	at jd.http.Browser.openRequestConnection(Browser.java:2027)
+	at jd.http.Browser.openRequestConnection(Browser.java:1883)
+	at jd.http.Browser.getPage(Browser.java:1542)
+	at jd.http.Browser.getPage(Browser.java:1538)
+	at jd.controlling.faviconcontroller.FavIcons.download_FavIconTag(FavIcons.java:552)
+	at jd.controlling.faviconcontroller.FavIcons.downloadFavIcon(FavIcons.java:762)
+	at jd.controlling.faviconcontroller.FavIcons.downloadFavIcon(FavIcons.java:740)
+	at jd.controlling.faviconcontroller.FavIcons$4.run(FavIcons.java:309)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+
+--ID:120TS:1709719526562-3/6/24, 5:05:26 PM -  [] -> Exception thrown at jd.controlling.faviconcontroller.FavIcons.download_FavIconTag(FavIcons.java:566):
+jd.http.Browser$BrowserException: Caller: jd.controlling.faviconcontroller.FavIcons.download_FavIconTag(FavIcons.java:552)
+jd.controlling.faviconcontroller.FavIcons.downloadFavIcon(FavIcons.java:762)
+jd.controlling.faviconcontroller.FavIcons.downloadFavIcon(FavIcons.java:740)
+jd.controlling.faviconcontroller.FavIcons$4.run(FavIcons.java:309)
+java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+java.base/java.lang.Thread.run(Thread.java:833)
+BrowserID:6|BrowserParentID:-1|RequestID:1|URL:https://megaupload.com/
+----------------Request Information-------------
+URL: https://megaupload.com/
+Host: megaupload.com
+Connection-Timeout: 10000ms
+Read-Timeout: 10000ms
+----------------Request-------------------------
+-------------Not Connected Yet!-----------------
+
+----------------Response Information------------
+-------------Not Connected Yet!------------------
+
+
+	at jd.http.Browser.openRequestConnection(Browser.java:2075)
+	at jd.http.Browser.openRequestConnection(Browser.java:1883)
+	at jd.http.Browser.getPage(Browser.java:1542)
+	at jd.http.Browser.getPage(Browser.java:1538)
+	at jd.controlling.faviconcontroller.FavIcons.download_FavIconTag(FavIcons.java:552)
+	at jd.controlling.faviconcontroller.FavIcons.downloadFavIcon(FavIcons.java:762)
+	at jd.controlling.faviconcontroller.FavIcons.downloadFavIcon(FavIcons.java:740)
+	at jd.controlling.faviconcontroller.FavIcons$4.run(FavIcons.java:309)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+Caused by: java.net.UnknownHostException: Could not resolve: -megaupload.com<->megaupload.com-
+	at org.appwork.utils.net.httpconnection.HTTPConnectionUtils.resolvHostIP(HTTPConnectionUtils.java:868)
+	at org.appwork.utils.net.httpconnection.HTTPConnectionUtils.resolvHostIP(HTTPConnectionUtils.java:475)
+	at org.appwork.utils.net.httpconnection.HTTPConnectionImpl.resolvHostIP(HTTPConnectionImpl.java:779)
+	at org.appwork.utils.net.httpconnection.HTTPConnectionImpl.getRemoteIPs(HTTPConnectionImpl.java:784)
+	at org.appwork.utils.net.httpconnection.HTTPConnectionImpl.connect(HTTPConnectionImpl.java:916)
+	at org.appwork.utils.net.httpconnection.HTTPConnectionImpl.finalizeConnect(HTTPConnectionImpl.java:1329)
+	at jd.http.Request.connect(Request.java:374)
+	at jd.http.Request.connect(Request.java:361)
+	at jd.http.Browser.openRequestConnection(Browser.java:2027)
+	... 10 more
+
+--ID:120TS:1709719527756-3/6/24, 5:05:27 PM -  [] -> Exception thrown at jd.http.Browser.openRequestConnection(Browser.java:2064):
+java.net.UnknownHostException: Could not resolve: -megaupload.com<->megaupload.com-
+	at org.appwork.utils.net.httpconnection.HTTPConnectionUtils.resolvHostIP(HTTPConnectionUtils.java:868)
+	at org.appwork.utils.net.httpconnection.HTTPConnectionUtils.resolvHostIP(HTTPConnectionUtils.java:475)
+	at org.appwork.utils.net.httpconnection.HTTPConnectionImpl.resolvHostIP(HTTPConnectionImpl.java:779)
+	at org.appwork.utils.net.httpconnection.HTTPConnectionImpl.getRemoteIPs(HTTPConnectionImpl.java:784)
+	at org.appwork.utils.net.httpconnection.HTTPConnectionImpl.connect(HTTPConnectionImpl.java:916)
+	at org.appwork.utils.net.httpconnection.HTTPConnectionImpl.finalizeConnect(HTTPConnectionImpl.java:1329)
+	at jd.http.Request.connect(Request.java:374)
+	at jd.http.Request.connect(Request.java:361)
+	at jd.http.Browser.openRequestConnection(Browser.java:2027)
+	at jd.http.Browser.openRequestConnection(Browser.java:1883)
+	at jd.http.Browser.getPage(Browser.java:1542)
+	at jd.http.Browser.getPage(Browser.java:1538)
+	at jd.controlling.faviconcontroller.FavIcons.download_FavIconTag(FavIcons.java:552)
+	at jd.controlling.faviconcontroller.FavIcons.downloadFavIcon(FavIcons.java:762)
+	at jd.controlling.faviconcontroller.FavIcons.downloadFavIcon(FavIcons.java:740)
+	at jd.controlling.faviconcontroller.FavIcons$4.run(FavIcons.java:309)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+
+--ID:120TS:1709719527756-3/6/24, 5:05:27 PM -  [] -> Exception thrown at jd.controlling.faviconcontroller.FavIcons.download_FavIconTag(FavIcons.java:566):
+jd.http.Browser$BrowserException: Caller: jd.controlling.faviconcontroller.FavIcons.download_FavIconTag(FavIcons.java:552)
+jd.controlling.faviconcontroller.FavIcons.downloadFavIcon(FavIcons.java:762)
+jd.controlling.faviconcontroller.FavIcons.downloadFavIcon(FavIcons.java:740)
+jd.controlling.faviconcontroller.FavIcons$4.run(FavIcons.java:309)
+java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+java.base/java.lang.Thread.run(Thread.java:833)
+BrowserID:6|BrowserParentID:-1|RequestID:2|URL:http://megaupload.com/
+----------------Request Information-------------
+URL: http://megaupload.com/
+Host: megaupload.com
+Connection-Timeout: 10000ms
+Read-Timeout: 10000ms
+----------------Request-------------------------
+-------------Not Connected Yet!-----------------
+
+----------------Response Information------------
+-------------Not Connected Yet!------------------
+
+
+	at jd.http.Browser.openRequestConnection(Browser.java:2075)
+	at jd.http.Browser.openRequestConnection(Browser.java:1883)
+	at jd.http.Browser.getPage(Browser.java:1542)
+	at jd.http.Browser.getPage(Browser.java:1538)
+	at jd.controlling.faviconcontroller.FavIcons.download_FavIconTag(FavIcons.java:552)
+	at jd.controlling.faviconcontroller.FavIcons.downloadFavIcon(FavIcons.java:762)
+	at jd.controlling.faviconcontroller.FavIcons.downloadFavIcon(FavIcons.java:740)
+	at jd.controlling.faviconcontroller.FavIcons$4.run(FavIcons.java:309)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+Caused by: java.net.UnknownHostException: Could not resolve: -megaupload.com<->megaupload.com-
+	at org.appwork.utils.net.httpconnection.HTTPConnectionUtils.resolvHostIP(HTTPConnectionUtils.java:868)
+	at org.appwork.utils.net.httpconnection.HTTPConnectionUtils.resolvHostIP(HTTPConnectionUtils.java:475)
+	at org.appwork.utils.net.httpconnection.HTTPConnectionImpl.resolvHostIP(HTTPConnectionImpl.java:779)
+	at org.appwork.utils.net.httpconnection.HTTPConnectionImpl.getRemoteIPs(HTTPConnectionImpl.java:784)
+	at org.appwork.utils.net.httpconnection.HTTPConnectionImpl.connect(HTTPConnectionImpl.java:916)
+	at org.appwork.utils.net.httpconnection.HTTPConnectionImpl.finalizeConnect(HTTPConnectionImpl.java:1329)
+	at jd.http.Request.connect(Request.java:374)
+	at jd.http.Request.connect(Request.java:361)
+	at jd.http.Browser.openRequestConnection(Browser.java:2027)
+	... 10 more
+
+--ID:120TS:1709719527756-3/6/24, 5:05:27 PM -  [jd.controlling.faviconcontroller.FavIcons(downloadFavIcon)] -> Could not download FavIcon for megaupload.com

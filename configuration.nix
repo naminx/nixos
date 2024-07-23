@@ -12,7 +12,7 @@
   ...
 }: {
   # Enable this on WSL
-  wsl.enable = true;
+  wsl.enable = false;
 
   wsl.wslConf.automount.root = "/mnt";
   wsl.wslConf.interop.appendWindowsPath = false;
@@ -110,13 +110,16 @@
   ];
 
   networking.hosts = {
-    "192.168.1.2" =
-      if config.wsl.enable
-      then ["tokyo"]
-      else [];
+    "192.168.1.1" = ["router"];
+    "192.168.1.2" = ["tokyo"];
     "192.168.1.3" = ["osaka"];
     "192.168.1.4" = ["shibuya"];
     "192.168.1.5" = ["mf643cdw"];
+    "192.168.1.6" = ["repeater"];
+    "192.168.1.7" = ["furano"];
+    "192.168.1.9" = ["akita"]; # Chuwi Hi13
+    "192.168.1.10" = ["chiyoda"]; # NixOS on WSL on Tokyo
+    "192.168.1.11" = ["nagano"]; # Surface Pro 1
   };
 
   # Set your time zone.
@@ -278,6 +281,7 @@
       neovim
       nixd # Nix language server
       nodejs # For coc
+      parallel
       python3
       rar
       sqlite
@@ -306,9 +310,9 @@
     ++ (
       if (!config.wsl.enable)
       then [
-        gnomeExtensions.kimpanel
+        chromium # Convenient browser to get my config files/notes
         gnomeExtensions.gtk4-desktop-icons-ng-ding
-        google-chrome # Convenient browser to get my config files/notes
+        gnomeExtensions.kimpanel
         wezterm # Easy to edit (mouse selection, cut, paste)
       ]
       else []
@@ -390,6 +394,11 @@
       ${pkgs.systemd}/bin/systemctl start gnome-remote-desktop.service
     '';
   };
+
+  systemd.targets.sleep.enable = false;
+  systemd.targets.suspend.enable = false;
+  systemd.targets.hibernate.enable = false;
+  systemd.targets.hybrid-sleep.enable = false;
 
   # Setup the right display scale for GDM login screen
   systemd.tmpfiles.rules =

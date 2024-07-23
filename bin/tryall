@@ -1,0 +1,116 @@
+#!/usr/bin/env fish
+
+# Define option specifications
+set -l options (fish_opt --short h --long help)
+set options $options (fish_opt --short c --long crop --required-val)
+set options $options (fish_opt --short x --long crop-left --required-val)
+set options $options (fish_opt --short v --long crop-right --required-val)
+set options $options (fish_opt --short t --long trim --required-val)
+set options $options (fish_opt --short r --long trim-left --required-val)
+set options $options (fish_opt --short y --long trim-right --required-val)
+
+if not argparse --max-args 2 $options -- $argv
+  exit 1
+end
+
+# Handle the help flag
+if set --query _flag_help
+  echo usage: (basename (status filename)) [OPTIONS] FROM_FILE TO_FILE
+  echo options:
+  echo   -h,--help           Show this help message.
+  echo   -c,--crop GEOMETRY  Crop both image by GEOMETRY.
+  echo                       GEOMETRY format is WIDTHxHEIGHT+LEFT+TOP.
+  echo                       Use -x,--crop-left and -v,--crop-right to
+  echo                       specify different GEOMETRY for left/right.
+  echo   -t,--trim=NUM_PIXELS
+  echo                       Trim both outer edges by NUM_PIXELS.
+  echo                       Minus number of NUM_PIXELS trims inner edges.
+  echo                       Use -r,--trim-left and -u,--trim-right to
+  echo                       specify different NUM_PIXELS for left/right.
+  return
+end
+
+set --erase propagated_args
+
+if set --query _flag_crop
+  if string match --quiet --regex '^(?<geometry>[[:digit:]]+x[[:digit:]]+\+[[:digit:]]+\+[[:digit:]]+)$' -- "$_flag_crop"
+    set propagated_args {$propagated_args} --crop {$geometry}
+  else
+    echo crop: expected WIDTHxHEIGHT+LEFT+TOP\; got \"{$_flag_crop}\" >&2
+    exit 1
+  end
+end
+
+if set --query _flag_crop_left
+  if string match --quiet --regex '^(?<geometry>[[:digit:]]+x[[:digit:]]+\+[[:digit:]]+\+[[:digit:]]+)$' -- "$_flag_crop_left"
+    set propagated_args {$propagated_args} --crop-left {$geometry}
+  else
+    echo crop-left: expected WIDTHxHEIGHT+LEFT+TOP\; got \"{$_flag_crop}\" >&2
+    exit 1
+  end
+end
+
+if set --query _flag_crop_right
+  if string match --quiet --regex '^(?<geometry>[[:digit:]]+x[[:digit:]]+\+[[:digit:]]+\+[[:digit:]]+)$' -- "$_flag_crop_right"
+    set propagated_args {$propagated_args} --crop-right {$geometry}
+  else
+    echo crop-right: expected WIDTHxHEIGHT+LEFT+TOP\; got \"{$_flag_crop}\" >&2
+    exit 1
+  end
+end
+
+if set --query _flag_trim
+  if string match --quiet --regex -- '^(?<pixel>-?[[:digit:]]+)$' {$_flag_trim}
+    set propagated_args {$propagated_args} --trim {$pixel}
+  else
+    echo trim: expected a positive/negative number\; got \"{$_flag_trim}\" >&2
+    exit 1
+  end
+end
+
+if set --query _flag_trim_left
+  if string match --quiet --regex -- '^(?<pixel>-?[[:digit:]]+)$' {$_flag_trim_left}
+    set propagated_args {$propagated_args} --trim-left {$pixel}
+  else
+    echo trim-left: expected a positive/negative number\; got \"{$_flag_trim_left}\" >&2
+    exit 1
+  end
+end
+
+if set --query _flag_trim_right
+  if string match --quiet --regex -- '^(?<pixel>-?[[:digit:]]+)$' {$_flag_trim_right}
+    set propagated_args {$propagated_args} --trim-right {$pixel}
+  else
+    echo trim-right: expected a positive/negative number\; got \"{$_flag_trim_right}\" >&2
+    exit 1
+  end
+end
+
+set begin 1
+set end 998
+
+if test (count {$argv}) -ge 1
+  if string match --quiet --regex -- '^0*(?<begin>[[:digit:]]{1,3})$' {$argv[1]}
+    if test (math {$begin} % 2) -eq 1
+      set begin (math {$begin}+1)
+    end
+  else
+    echo (basename (status filename)): expected a number from 0 to 999\; got \"{$argv[1]}\" >&2
+    exit 1
+  end
+end
+
+if test (count {$argv}) -eq 2
+  if string match --quiet --regex -- '^0*(?<end>[[:digit:]]{1,3})$' {$argv[2]}
+    if test (math {$end} % 2) -eq 1
+      set end (math {$end}-1)
+    end
+  else
+    echo (basename (status filename)): expected a number from 0 to 999\; got \"{$argv[2]}\" >&2
+    exit 1
+  end
+end
+
+fd --exact-depth 1 --print0 --strip-cwd-prefix=always ^\((seq -f %03g -s \| {$begin} {$end})\)\\.\(png\|jpg\|webp\)\$ \
+  | sed --null-data --regexp-extended s/\\.\(jpg\|webp\|png\)\$// \
+  | parallel --null tryone {$propagated_args}

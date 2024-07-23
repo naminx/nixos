@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+if [ -z "$1" -o -z "$2" ]; then
+    echo usage: ${0##*/} ebook dir
+else
+    base=$1
+    shift
+    for arg in "$@"; do
+        if [ ! -d "$arg" ]; then
+            echo error: $arg/ not found
+        else
+            zip -0 -j "$base $arg.cbz" "$arg"/*
+        fi
+    done
+    touch "$(dirname "$base $arg.cbz")"
+    # sync
+fi

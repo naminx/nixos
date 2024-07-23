@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+rm -f ~/.cache/thumbnails/fail/gnome-thumbnail-factory/* ~/.cache/thumbnails/*/*.png

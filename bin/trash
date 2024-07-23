@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+if [ "$#" != "0" ]; then
+    if [ -x "$(which gio)" ]; then
+        gio trash "$@"
+    elif [ -x "$(which kioclient)" ]; then
+        kioclient move "$@" trash:/
+    else
+        echo "Error: gio/kioclient Not found"
+    fi
+fi

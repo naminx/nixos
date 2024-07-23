@@ -1,0 +1,347 @@
+------------------------Thread: 1:Log.L.log-----------------------
+--ID:1TS:1720189443037-7/5/24, 9:24:03 PM -  [org.appwork.loggingv3.LogV3(info)] -> Application Root: /home/namin/.local/bin
+--ID:1TS:1720189443045-7/5/24, 9:24:03 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> Prefer (merged) JSon Storage from File: /home/namin/.local/bin/cfg/org.jdownloader.update.lastchance.LastChanceConfig.json
+--ID:1TS:1720189443139-7/5/24, 9:24:03 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> Prefer (merged) JSon Storage from File: /home/namin/.local/bin/cfg/org.jdownloader.updatev2.UpdateSettings.json
+--ID:1TS:1720189443154-7/5/24, 9:24:03 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> Load JSon Storage from Classpath url: jar:file:/home/namin/.local/bin/JDownloader.jar!/cfg/updateclient/Setup.json
+--ID:1TS:1720189443154-7/5/24, 9:24:03 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> Prefer (merged) JSon Storage from File: /home/namin/.local/bin/cfg/updateclient/Setup.json
+--ID:1TS:1720189443155-7/5/24, 9:24:03 PM -  [org.appwork.loggingv3.LogV3(finer)] -> Init StorageHandler for Interface:org.appwork.updatesys.client.Setup|Path:/home/namin/.local/bin/cfg/updateclient/Setup
+------------------------Thread: 30:Log.L.log-----------------------
+--ID:30TS:1720189443162-7/5/24, 9:24:03 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> Prefer (merged) JSon Storage from File: /home/namin/.local/bin/cfg/org.jdownloader.settings.InternetConnectionSettings.json
+--ID:30TS:1720189443163-7/5/24, 9:24:03 PM -  [org.appwork.loggingv3.LogV3(finer)] -> Init StorageHandler for Interface:org.jdownloader.updatev2.InternetConnectionSettings|Path:/home/namin/.local/bin/cfg/org.jdownloader.settings.InternetConnectionSettings
+--ID:30TS:1720189443170-7/5/24, 9:24:03 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> Load JSon Storage from Classpath url: jar:file:/home/namin/.local/bin/JDownloader.jar!/cfg/updateclient/HttpSettings.json
+--ID:30TS:1720189443171-7/5/24, 9:24:03 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> CFG File does not exist: /home/namin/.local/bin/cfg/updateclient/HttpSettings.json
+--ID:30TS:1720189443171-7/5/24, 9:24:03 PM -  [org.appwork.loggingv3.LogV3(finer)] -> Init StorageHandler for Interface:org.appwork.updatesys.client.defaultimpl.http.UpdateHttpClientOptions|Path:/home/namin/.local/bin/cfg/updateclient/HttpSettings
+--ID:30TS:1720189443174-7/5/24, 9:24:03 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> CFG File does not exist: /home/namin/.local/bin/cfg/ProxySelector.json
+--ID:30TS:1720189443174-7/5/24, 9:24:03 PM -  [org.appwork.loggingv3.LogV3(finer)] -> Init StorageHandler for Interface:org.appwork.updatesys.client.defaultimpl.http.ProxySelectorSettings|Path:/home/namin/.local/bin/cfg/ProxySelector
+--ID:30TS:1720189443175-7/5/24, 9:24:03 PM -  [org.appwork.loggingv3.LogV3(finer)] -> Read Config(File): /home/namin/.local/bin/cfg/ProxySelector.proxies.json
+--ID:30TS:1720189443194-7/5/24, 9:24:03 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> CFG File does not exist: /home/namin/.local/bin/update/versioninfo/JD/extensions.json
+--ID:30TS:1720189443194-7/5/24, 9:24:03 PM -  [org.appwork.loggingv3.LogV3(finer)] -> Init StorageHandler for Interface:org.appwork.updatesys.client.extensions.ExtensionsStorage|Path:/home/namin/.local/bin/update/versioninfo/JD/extensions
+--ID:30TS:1720189443199-7/5/24, 9:24:03 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> CFG File does not exist: /home/namin/.local/bin/cfg/org.appwork.updatesys.client.tracker.TrackConfig.json
+--ID:30TS:1720189443201-7/5/24, 9:24:03 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> CFG File does not exist: /home/namin/.local/bin/update/versioninfo/JDU/extensions.json
+--ID:30TS:1720189443201-7/5/24, 9:24:03 PM -  [org.appwork.loggingv3.LogV3(finer)] -> Init StorageHandler for Interface:org.appwork.updatesys.client.extensions.ExtensionsStorage|Path:/home/namin/.local/bin/update/versioninfo/JDU/extensions
+------------------------Thread: 1:Log.L.log-----------------------
+--ID:1TS:1720189443245-7/5/24, 9:24:03 PM -  [org.appwork.loggingv3.LogV3(info)] -> Application Root: /home/namin/.local/bin
+--ID:1TS:1720189443260-7/5/24, 9:24:03 PM -  [org.appwork.loggingv3.LogV3(info)] -> Application Root: /home/namin/.local/bin
+--ID:1TS:1720189443275-7/5/24, 9:24:03 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> Prefer (merged) JSon Storage from File: /home/namin/.local/bin/cfg/org.jdownloader.settings.GraphicalUserInterfaceSettings.json
+--ID:1TS:1720189443298-7/5/24, 9:24:03 PM -  [org.appwork.loggingv3.LogV3(finer)] -> Load Translation file:/home/namin/.local/bin/translations/org/jdownloader/gui/translate/GuiTranslation.en.lng/null
+--ID:1TS:1720189443518-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> setExecutable:true
+--ID:1TS:1720189443519-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> LOG_INIT_DONE=2 instances
+--ID:1TS:1720189443519-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> classloader_00000000=org.jdownloader.update.launcher.ClassLoaderExtensionImpl
+--ID:1TS:1720189443519-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> classloader_00000001=org.jdownloader.update.launcher.CL2
+--ID:1TS:1720189443519-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> com.sun.jndi.cosnaming.object.trustURLCodebase=false
+--ID:1TS:1720189443519-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> com.sun.jndi.ldap.object.trustURLCodebase=false
+--ID:1TS:1720189443519-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> com.sun.jndi.rmi.object.trustURLCodebase=false
+--ID:1TS:1720189443519-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> extlogmanager.avoidsystemclassloader.hack=org.jdownloader.updatev2.JDClassLoaderLauncher$JDCustomRootClassLoader@5cad8086
+--ID:1TS:1720189443519-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> file.encoding=UTF-8
+--ID:1TS:1720189443519-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> file.separator=/
+--ID:1TS:1720189443519-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> ftpStyle=new
+--ID:1TS:1720189443519-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> java.class.path=/home/namin/.local/bin/JDownloader.jar
+--ID:1TS:1720189443519-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> java.class.version=65.0
+--ID:1TS:1720189443519-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> java.home=/nix/store/asnrgldc798hchczyj7f2jf9kp67vm08-openjdk-21.0.3+9/lib/openjdk
+--ID:1TS:1720189443519-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> java.io.tmpdir=/tmp
+--ID:1TS:1720189443520-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> java.library.path=/usr/java/packages/lib:/usr/lib64:/lib64:/lib:/usr/lib
+--ID:1TS:1720189443520-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> java.net.preferIPv6Addresses=system
+--ID:1TS:1720189443520-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> java.rmi.server.useCodebaseOnly=true
+--ID:1TS:1720189443520-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> java.runtime.name=OpenJDK Runtime Environment
+--ID:1TS:1720189443520-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> java.runtime.version=21.0.3+9-nixos
+--ID:1TS:1720189443520-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> java.specification.name=Java Platform API Specification
+--ID:1TS:1720189443520-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> java.specification.vendor=Oracle Corporation
+--ID:1TS:1720189443520-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> java.specification.version=21
+--ID:1TS:1720189443520-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> java.util.Arrays.useLegacyMergeSort=true
+--ID:1TS:1720189443520-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> java.util.logging.manager=org.appwork.utils.logging2.extmanager.ExtLogManager
+--ID:1TS:1720189443520-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> java.vendor=N/A
+--ID:1TS:1720189443520-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> java.vendor.url=https://openjdk.org/
+--ID:1TS:1720189443520-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> java.vendor.url.bug=https://bugreport.java.com/bugreport/
+--ID:1TS:1720189443520-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> java.version=21.0.3
+--ID:1TS:1720189443520-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> java.version.date=2024-04-16
+--ID:1TS:1720189443520-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> java.vm.compressedOopsMode=Zero based
+--ID:1TS:1720189443520-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> java.vm.info=mixed mode, sharing
+--ID:1TS:1720189443520-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> java.vm.name=OpenJDK 64-Bit Server VM
+--ID:1TS:1720189443520-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> java.vm.specification.name=Java Virtual Machine Specification
+--ID:1TS:1720189443520-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> java.vm.specification.vendor=Oracle Corporation
+--ID:1TS:1720189443520-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> java.vm.specification.version=21
+--ID:1TS:1720189443520-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> java.vm.vendor=Oracle Corporation
+--ID:1TS:1720189443520-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> java.vm.version=21.0.3+9-nixos
+--ID:1TS:1720189443521-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> jd.build.builddate=Fri Jul 05 14:59:39 CEST 2024
+--ID:1TS:1720189443521-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> jd.build.buildtimestamp=1720184379117
+--ID:1TS:1720189443521-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> jd.randomNumber=6004496724505809031
+--ID:1TS:1720189443521-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> jd.revision.appworkutilsrevision=4055
+--ID:1TS:1720189443521-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> jd.revision.jdbrowserrevision=48227
+--ID:1TS:1720189443521-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> jd.revision.jdclosedrevision=961
+--ID:1TS:1720189443521-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> jd.revision.jdownloaderrevision=48254
+--ID:1TS:1720189443521-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> jd.revision.jdownloaderserveroptionsrevision=5691
+--ID:1TS:1720189443521-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> jd.revision.jdownloaderupdaterrevision=5770
+--ID:1TS:1720189443521-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> jd.revision.myjdownloaderclientrevision=46032
+--ID:1TS:1720189443521-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> jd.revision.updateclientv2revision=1061
+--ID:1TS:1720189443521-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> jdk.debug=release
+--ID:1TS:1720189443521-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> k=0dd0ecf7f742873d745106adea00b64a
+--ID:1TS:1720189443521-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> line.separator=
+
+--ID:1TS:1720189443521-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> native.encoding=UTF-8
+--ID:1TS:1720189443521-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> org.appwork.LoggerFactory=org.appwork.utils.logging2.LogSourceRedirector
+--ID:1TS:1720189443521-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> org.jdownloader.revision=JDownloader2
+--ID:1TS:1720189443521-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> os.arch=amd64
+--ID:1TS:1720189443521-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> os.name=Linux
+--ID:1TS:1720189443521-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> os.version=6.6.35
+--ID:1TS:1720189443521-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> path.separator=:
+--ID:1TS:1720189443521-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> stderr.encoding=UTF-8
+--ID:1TS:1720189443521-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> stdout.encoding=UTF-8
+--ID:1TS:1720189443521-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> sun.arch.data.model=64
+--ID:1TS:1720189443521-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> sun.awt.enableExtraMouseButtons=true
+--ID:1TS:1720189443522-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> sun.boot.library.path=/nix/store/asnrgldc798hchczyj7f2jf9kp67vm08-openjdk-21.0.3+9/lib/openjdk/lib
+--ID:1TS:1720189443522-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> sun.cpu.endian=little
+--ID:1TS:1720189443522-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> sun.io.unicode.encoding=UnicodeLittle
+--ID:1TS:1720189443522-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> sun.java.command=/home/namin/.local/bin/JDownloader.jar
+--ID:1TS:1720189443522-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> sun.java.launcher=SUN_STANDARD
+--ID:1TS:1720189443522-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> sun.java2d.uiScale=2.5
+--ID:1TS:1720189443522-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> sun.jnu.encoding=UTF-8
+--ID:1TS:1720189443522-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> sun.management.compiler=HotSpot 64-Bit Tiered Compilers
+--ID:1TS:1720189443522-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> sun.swing.enableImprovedDragGesture=true
+--ID:1TS:1720189443522-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> user.country=US
+--ID:1TS:1720189443522-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> user.dir=/mnt/r/downloads/Ishigami Senki/01
+--ID:1TS:1720189443522-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> user.home=/home/namin
+--ID:1TS:1720189443522-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> user.language=en
+--ID:1TS:1720189443522-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> user.name=namin
+--ID:1TS:1720189443522-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> user.timezone=Asia/Bangkok
+--ID:1TS:1720189443522-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> OS:LINUX|NIXOS|64bit:true
+--ID:1TS:1720189443522-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> CPU:X86|64bit:true
+--ID:1TS:1720189443522-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> JVM:21000003000000|21.0.3+9-nixos|64bit:true
+--ID:1TS:1720189443526-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> VMArgs: [-Dsun.java2d.uiScale=2.5]
+--ID:1TS:1720189443526-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> MaxMemory=8350859264bytes (7964Megabytes)
+--ID:1TS:1720189443526-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(mainStart)] -> JDownloader2
+--ID:1TS:1720189443526-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch(go)] -> Initialize JDownloader2
+------------------------Thread: 34:Log.L.log-----------------------
+--ID:34TS:1720189443533-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch$8(edtRun)] -> LAF INIT
+------------------------Thread: 45:Log.L.log-----------------------
+--ID:45TS:1720189443533-7/5/24, 9:24:03 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> Prefer (merged) JSon Storage from File: /home/namin/.local/bin/cfg/org.jdownloader.settings.GeneralSettings.json
+------------------------Thread: 1:Log.L.log-----------------------
+--ID:1TS:1720189443534-7/5/24, 9:24:03 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> Prefer (merged) JSon Storage from File: /home/namin/.local/bin/cfg/org.jdownloader.settings.SilentModeSettings.json
+------------------------Thread: 34:Log.L.log-----------------------
+--ID:34TS:1720189443537-7/5/24, 9:24:03 PM -  [jd.gui.swing.laf.LookAndFeelController(setUIManager)] -> Use Look & Feel: org.jdownloader.gui.laf.jddefault.JDDefaultLookAndFeel
+--ID:34TS:1720189443541-7/5/24, 9:24:03 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> CFG File does not exist: /home/namin/.local/bin/cfg/laf/JDDefaultLookAndFeel.json
+------------------------Thread: 45:Log.L.log-----------------------
+--ID:45TS:1720189443612-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch$7(run)] -> Use 'JSSE' for default SSLSocketStreamFactory because: TLSv1.3 supported! Java-21000003000000
+--ID:45TS:1720189443613-7/5/24, 9:24:03 PM -  [org.appwork.loggingv3.LogV3(finer)] -> Read Config(File): /home/namin/.local/bin/cfg/org.jdownloader.settings.GeneralSettings.browsercommandline.json
+--ID:45TS:1720189443623-7/5/24, 9:24:03 PM -  [org.appwork.loggingv3.LogV3(finer)] -> Read Config(File): /home/namin/.local/bin/cfg/org.jdownloader.settings.InternetConnectionSettings.customproxylist.json
+------------------------Thread: 34:Log.L.log-----------------------
+--ID:34TS:1720189443674-7/5/24, 9:24:03 PM -  [org.appwork.loggingv3.LogV3(info)] -> LaF init: org.jdownloader.gui.laf.jddefault.JDDefaultLookAndFeel
+--ID:34TS:1720189443683-7/5/24, 9:24:03 PM -  [org.appwork.utils.logging2.extmanager.ExtLogManager(getLogger)] -> Ignored: de.javasoft.plaf.synthetica.SyntheticaLookAndFeel
+--ID:34TS:1720189443693-7/5/24, 9:24:03 PM -  [org.appwork.loggingv3.LogV3(finer)] -> Load Translation file:/home/namin/.local/bin/translations/org/appwork/swing/synthetica/LanguageFileSetup.en.lng/null
+--ID:34TS:1720189443698-7/5/24, 9:24:03 PM -  [org.jdownloader.gui.laf.jddefault.JDDefaultLookAndFeel(load)] -> Custom LAF XML: /home/namin/.local/bin/cfg/laf/JDDefaultLookAndFeel.xml
+--ID:34TS:1720189443782-7/5/24, 9:24:03 PM -  [org.appwork.utils.logging2.extmanager.ExtLogManager(getLogger)] -> Ignored: de.javasoft.plaf.synthetica.painter.ImagePainter
+--ID:34TS:1720189443918-7/5/24, 9:24:03 PM -  [org.appwork.loggingv3.LogV3(info)] -> LAF Init duration: 243ms
+--ID:34TS:1720189443919-7/5/24, 9:24:03 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> Prefer (merged) JSon Storage from File: /home/namin/.local/bin/cfg/ExtTooltipSettings_default.json
+--ID:34TS:1720189443920-7/5/24, 9:24:03 PM -  [jd.gui.swing.laf.LookAndFeelController(setUIManager)] -> LAF init: 383
+--ID:34TS:1720189443921-7/5/24, 9:24:03 PM -  [jd.SecondLevelLaunch$11(edtRun)] -> InitGUI->462
+--ID:34TS:1720189443938-7/5/24, 9:24:03 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> Prefer (merged) JSon Storage from File: /home/namin/.local/bin/cfg/jd.controlling.captcha.CaptchaSettings.json
+--ID:34TS:1720189443943-7/5/24, 9:24:03 PM -  [org.appwork.loggingv3.LogV3(finer)] -> Read Config(File): /home/namin/.local/bin/cfg/org.jdownloader.settings.GeneralSettings.domainrules.json
+--ID:34TS:1720189443944-7/5/24, 9:24:03 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> Prefer (merged) JSon Storage from File: /home/namin/.local/bin/cfg/jd.controlling.reconnect.ReconnectConfig.json
+--ID:34TS:1720189443955-7/5/24, 9:24:03 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> Prefer (merged) JSon Storage from File: /home/namin/.local/bin/cfg/jd.controlling.downloadcontroller.DownloadControllerConfig.json
+--ID:34TS:1720189444085-7/5/24, 9:24:04 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> Read Config: /home/namin/.local/bin/cfg/ExtTable_downloadstable3.json
+--ID:34TS:1720189444109-7/5/24, 9:24:04 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> CFG File does not exist: /home/namin/.local/bin/cfg/menus_v2/DownloadTabBottomBar.json
+--ID:34TS:1720189444126-7/5/24, 9:24:04 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> Prefer (merged) JSon Storage from File: /home/namin/.local/bin/cfg/org.jdownloader.gui.jdtrayicon.TrayExtension.json
+--ID:34TS:1720189444128-7/5/24, 9:24:04 PM -  [org.appwork.loggingv3.LogV3(finer)] -> Load Translation file:/home/namin/.local/bin/translations/org/jdownloader/gui/jdtrayicon/translate/TrayiconTranslation.en.lng/null
+--ID:34TS:1720189444135-7/5/24, 9:24:04 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> Prefer (merged) JSon Storage from File: /home/namin/.local/bin/cfg/org.jdownloader.controlling.filter.LinkFilterSettings.json
+--ID:34TS:1720189444138-7/5/24, 9:24:04 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> Prefer (merged) JSon Storage from File: /home/namin/.local/bin/cfg/org.jdownloader.api.myjdownloader.MyJDownloaderSettings.json
+--ID:34TS:1720189444143-7/5/24, 9:24:04 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> Prefer (merged) JSon Storage from File: /home/namin/.local/bin/cfg/org.jdownloader.settings.AccountSettings.json
+--ID:34TS:1720189444149-7/5/24, 9:24:04 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> Prefer (merged) JSon Storage from File: /home/namin/.local/bin/cfg/jd.controlling.linkchecker.LinkCheckerConfig.json
+--ID:34TS:1720189444150-7/5/24, 9:24:04 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> Prefer (merged) JSon Storage from File: /home/namin/.local/bin/cfg/jd.controlling.linkcrawler.LinkCrawlerConfig.json
+--ID:34TS:1720189444154-7/5/24, 9:24:04 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> Prefer (merged) JSon Storage from File: /home/namin/.local/bin/cfg/org.jdownloader.gui.views.linkgrabber.addlinksdialog.LinkgrabberSettings.json
+--ID:34TS:1720189444164-7/5/24, 9:24:04 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> Prefer (merged) JSon Storage from File: /home/namin/.local/bin/cfg/jd.controlling.linkcollector.LinkCollectorConfig.json
+--ID:34TS:1720189444167-7/5/24, 9:24:04 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> Prefer (merged) JSon Storage from File: /home/namin/.local/bin/cfg/org.jdownloader.api.RemoteAPIConfig.json
+--ID:34TS:1720189444169-7/5/24, 9:24:04 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> Prefer (merged) JSon Storage from File: /home/namin/.local/bin/cfg/org.jdownloader.controlling.packagizer.PackagizerSettings.json
+--ID:34TS:1720189444171-7/5/24, 9:24:04 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> CFG File does not exist: /home/namin/.local/bin/cfg/org.jdownloader.controlling.ffmpeg.FFmpegSetup.json
+--ID:34TS:1720189444176-7/5/24, 9:24:04 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> CFG File does not exist: /home/namin/.local/bin/cfg/org.jdownloader.gui.shortcuts.ShortcutSettings.json
+--ID:34TS:1720189444178-7/5/24, 9:24:04 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> CFG File does not exist: /home/namin/.local/bin/cfg/org.jdownloader.updatev2.LastChanceSettings.json
+--ID:34TS:1720189444179-7/5/24, 9:24:04 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> Prefer (merged) JSon Storage from File: /home/namin/.local/bin/cfg/org.appwork.utils.swing.dialog.ExtFileSystemViewSettings.json
+--ID:34TS:1720189444180-7/5/24, 9:24:04 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> Prefer (merged) JSon Storage from File: /home/namin/.local/bin/cfg/jd.controlling.faviconcontroller.FavIconsConfig.json
+--ID:34TS:1720189444182-7/5/24, 9:24:04 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> Prefer (merged) JSon Storage from File: /home/namin/.local/bin/cfg/org.jdownloader.settings.SoundSettings.json
+--ID:34TS:1720189444184-7/5/24, 9:24:04 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> CFG File does not exist: /home/namin/.local/bin/cfg/containerconfig.json
+--ID:34TS:1720189444187-7/5/24, 9:24:04 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> Prefer (merged) JSon Storage from File: /home/namin/.local/bin/cfg/org.jdownloader.gui.notify.gui.BubbleNotifyConfig.json
+--ID:34TS:1720189444241-7/5/24, 9:24:04 PM -  [org.appwork.loggingv3.LogV3(finer)] -> Load Translation file:/home/namin/.local/bin/translations/org/jdownloader/translate/JdownloaderTranslation.en.lng/null
+--ID:34TS:1720189444309-7/5/24, 9:24:04 PM -  [org.appwork.loggingv3.LogV3(finer)] -> Read Config(File): /home/namin/.local/bin/cfg/jd.controlling.captcha.CaptchaSettings.qualityensurancerules.json
+--ID:34TS:1720189444317-7/5/24, 9:24:04 PM -  [org.appwork.loggingv3.LogV3(finer)] -> Load Translation file:/home/namin/.local/bin/translations/org/appwork/utils/locale/AWUTranslation.en.lng/null
+--ID:34TS:1720189444329-7/5/24, 9:24:04 PM -  [jd.SecondLevelLaunch$11(edtRun)] -> GUIDONE->870
+--ID:34TS:1720189444331-7/5/24, 9:24:04 PM -  [org.appwork.loggingv3.LogV3(finer)] -> Read Config(File): /home/namin/.local/bin/cfg/org.jdownloader.settings.GraphicalUserInterfaceSettings.lastframestatus.json
+------------------------Thread: 1:Log.L.log-----------------------
+--ID:1TS:1720189444552-7/5/24, 9:24:04 PM -  [jd.SecondLevelLaunch(go)] -> Initialisation finished
+--ID:1TS:1720189444557-7/5/24, 9:24:04 PM -  [jd.SecondLevelLaunch(go)] -> fileChooserComboBoxFolders 3|1
+------------------------Thread: 64:Log.L.log-----------------------
+--ID:64TS:1720189444575-7/5/24, 9:24:04 PM -  [org.appwork.loggingv3.LogV3(finer)] -> Read Config(File): /home/namin/.local/bin/cfg/org.jdownloader.settings.AccountSettings.accounts.ejs
+------------------------Thread: 61:Log.L.log-----------------------
+--ID:61TS:1720189444630-7/5/24, 9:24:04 PM -  [org.appwork.loggingv3.LogV3(finer)] -> Read Config(File): /home/namin/.local/bin/cfg/org.jdownloader.controlling.packagizer.PackagizerSettings.rulelist.json
+--ID:61TS:1720189444689-7/5/24, 9:24:04 PM -  [org.appwork.loggingv3.LogV3(info)] -> Try to register API namespace /session = interface org.appwork.utils.net.httpserver.session.LoginAPIInterface
+------------------------Thread: 64:Log.L.log-----------------------
+--ID:64TS:1720189444692-7/5/24, 9:24:04 PM -  [org.jdownloader.plugins.controller.PluginClassLoader$PluginClassLoaderChild(mapStaticFields)] -> Class jd.plugins.hoster.KemonoParty has static immutable field: PROPERTY_TITLE
+--ID:64TS:1720189444692-7/5/24, 9:24:04 PM -  [org.jdownloader.plugins.controller.PluginClassLoader$PluginClassLoaderChild(mapStaticFields)] -> Class jd.plugins.hoster.KemonoParty has static immutable field: PROPERTY_BETTER_FILENAME
+--ID:64TS:1720189444692-7/5/24, 9:24:04 PM -  [org.jdownloader.plugins.controller.PluginClassLoader$PluginClassLoaderChild(mapStaticFields)] -> Class jd.plugins.hoster.KemonoParty has static immutable field: PROPERTY_TEXT
+--ID:64TS:1720189444692-7/5/24, 9:24:04 PM -  [org.jdownloader.plugins.controller.PluginClassLoader$PluginClassLoaderChild(mapStaticFields)] -> Class jd.plugins.hoster.KemonoParty has static immutable field: PROPERTY_PORTAL
+--ID:64TS:1720189444692-7/5/24, 9:24:04 PM -  [org.jdownloader.plugins.controller.PluginClassLoader$PluginClassLoaderChild(mapStaticFields)] -> Class jd.plugins.hoster.KemonoParty has static immutable field: PROPERTY_USERID
+--ID:64TS:1720189444692-7/5/24, 9:24:04 PM -  [org.jdownloader.plugins.controller.PluginClassLoader$PluginClassLoaderChild(mapStaticFields)] -> Class jd.plugins.hoster.KemonoParty has static immutable field: PROPERTY_POSTID
+--ID:64TS:1720189444692-7/5/24, 9:24:04 PM -  [org.jdownloader.plugins.controller.PluginClassLoader$PluginClassLoaderChild(mapStaticFields)] -> Class jd.plugins.hoster.KemonoParty has static immutable field: PROPERTY_DATE
+--ID:64TS:1720189444693-7/5/24, 9:24:04 PM -  [org.jdownloader.plugins.controller.PluginClassLoader$PluginClassLoaderChild(mapStaticFields)] -> Class jd.plugins.hoster.KemonoParty has static immutable field: PROPERTY_POST_CONTENT_INDEX
+------------------------Thread: 61:Log.L.log-----------------------
+--ID:61TS:1720189444693-7/5/24, 9:24:04 PM -  [org.appwork.loggingv3.LogV3(info)] -> Try to register API namespace /events = interface org.appwork.remoteapi.events.EventsAPIInterface
+--ID:61TS:1720189444695-7/5/24, 9:24:04 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> CFG File does not exist: /home/namin/.local/bin/cfg/org.jdownloader.api.captcha.CaptchaMyJDownloaderRemoteSolverSettings.json
+--ID:61TS:1720189444699-7/5/24, 9:24:04 PM -  [org.appwork.loggingv3.LogV3(info)] -> Try to register API namespace /captcha = interface org.jdownloader.api.captcha.CaptchaAPI
+--ID:61TS:1720189444699-7/5/24, 9:24:04 PM -  [org.appwork.loggingv3.LogV3(info)] -> Try to register API namespace /captchaforward = interface org.jdownloader.captcha.api.CaptchaForwarderAPIInterface
+--ID:61TS:1720189444700-7/5/24, 9:24:04 PM -  [org.appwork.loggingv3.LogV3(info)] -> Try to register API namespace /jd = interface org.jdownloader.api.jd.JDAPI
+--ID:61TS:1720189444701-7/5/24, 9:24:04 PM -  [org.appwork.loggingv3.LogV3(info)] -> Try to register API namespace /downloads = interface org.jdownloader.api.downloads.DownloadsAPI
+------------------------Thread: 34:Log.L.log-----------------------
+--ID:34TS:1720189444705-7/5/24, 9:24:04 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> Read Config: /home/namin/.local/bin/cfg/ExtTable_LinkGrabberTableModel.json
+------------------------Thread: 61:Log.L.log-----------------------
+--ID:61TS:1720189444705-7/5/24, 9:24:04 PM -  [org.appwork.loggingv3.LogV3(info)] -> Try to register API namespace /downloadsV2 = interface org.jdownloader.api.downloads.v2.DownloadsAPIV2
+--ID:61TS:1720189444706-7/5/24, 9:24:04 PM -  [org.appwork.loggingv3.LogV3(info)] -> Try to register API namespace /downloadcontroller = interface org.jdownloader.api.downloads.v2.DownloadWatchdogAPI
+--ID:61TS:1720189444709-7/5/24, 9:24:04 PM -  [org.appwork.loggingv3.LogV3(info)] -> Try to register API namespace /config = interface org.jdownloader.api.config.AdvancedConfigManagerAPI
+--ID:61TS:1720189444711-7/5/24, 9:24:04 PM -  [org.appwork.loggingv3.LogV3(info)] -> Try to register API namespace /toolbar = interface org.jdownloader.api.toolbar.JDownloaderToolBarAPI
+--ID:61TS:1720189444713-7/5/24, 9:24:04 PM -  [org.appwork.loggingv3.LogV3(info)] -> Try to register API namespace /accounts = interface org.jdownloader.api.accounts.AccountAPI
+--ID:61TS:1720189444714-7/5/24, 9:24:04 PM -  [org.appwork.loggingv3.LogV3(info)] -> Try to register API namespace /accountsV2 = interface org.jdownloader.api.accounts.v2.AccountAPIV2
+------------------------Thread: 64:Log.L.log-----------------------
+--ID:64TS:1720189444715-7/5/24, 9:24:04 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> Prefer (merged) JSon Storage from File: /home/namin/.local/bin/cfg/plugins/HOSTER/ddownload.com.json
+------------------------Thread: 61:Log.L.log-----------------------
+--ID:61TS:1720189444716-7/5/24, 9:24:04 PM -  [org.appwork.loggingv3.LogV3(info)] -> Try to register API namespace /system = interface org.jdownloader.api.system.SystemAPI
+--ID:61TS:1720189444717-7/5/24, 9:24:04 PM -  [org.appwork.loggingv3.LogV3(info)] -> Try to register API namespace /linkcollector = interface org.jdownloader.api.linkcollector.LinkCollectorAPI
+--ID:61TS:1720189444720-7/5/24, 9:24:04 PM -  [org.appwork.loggingv3.LogV3(info)] -> Try to register API namespace /linkgrabberv2 = interface org.jdownloader.api.linkcollector.v2.LinkCollectorAPIV2
+--ID:61TS:1720189444721-7/5/24, 9:24:04 PM -  [org.appwork.loggingv3.LogV3(info)] -> Try to register API namespace /content = interface org.jdownloader.api.content.ContentAPI
+------------------------Thread: 34:Log.L.log-----------------------
+--ID:34TS:1720189444722-7/5/24, 9:24:04 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> CFG File does not exist: /home/namin/.local/bin/cfg/menus_v2/LinkgrabberTabBottomBar.json
+------------------------Thread: 61:Log.L.log-----------------------
+--ID:61TS:1720189444723-7/5/24, 9:24:04 PM -  [org.appwork.loggingv3.LogV3(info)] -> Try to register API namespace /contentV2 = interface org.jdownloader.api.content.v2.ContentAPIV2
+--ID:61TS:1720189444724-7/5/24, 9:24:04 PM -  [org.appwork.loggingv3.LogV3(info)] -> Try to register API namespace /ui = interface org.jdownloader.api.ui.UIAPI
+--ID:61TS:1720189444724-7/5/24, 9:24:04 PM -  [org.appwork.loggingv3.LogV3(info)] -> Try to register API namespace /polling = interface org.jdownloader.api.polling.PollingAPI
+--ID:61TS:1720189444727-7/5/24, 9:24:04 PM -  [org.appwork.loggingv3.LogV3(info)] -> Try to register API namespace /extraction = interface org.jdownloader.api.extraction.ExtractionAPI
+--ID:61TS:1720189444727-7/5/24, 9:24:04 PM -  [org.appwork.loggingv3.LogV3(info)] -> Try to register API namespace /linkcrawler = interface org.jdownloader.api.linkcrawler.LinkCrawlerAPI
+--ID:61TS:1720189444729-7/5/24, 9:24:04 PM -  [org.appwork.loggingv3.LogV3(info)] -> Try to register API namespace /plugins = interface org.jdownloader.api.plugins.PluginsAPI
+------------------------Thread: 34:Log.L.log-----------------------
+--ID:34TS:1720189444730-7/5/24, 9:24:04 PM -  [org.appwork.loggingv3.LogV3(finer)] -> Read Config(File): /home/namin/.local/bin/cfg/org.jdownloader.settings.GraphicalUserInterfaceSettings.overviewpositions.json
+------------------------Thread: 61:Log.L.log-----------------------
+--ID:61TS:1720189444730-7/5/24, 9:24:04 PM -  [org.appwork.loggingv3.LogV3(info)] -> Try to register API namespace / = interface org.jdownloader.api.cnl2.Cnl2APIBasics
+--ID:61TS:1720189444731-7/5/24, 9:24:04 PM -  [org.appwork.loggingv3.LogV3(info)] -> Try to register API namespace /flash = interface org.jdownloader.api.cnl2.Cnl2APIFlash
+------------------------Thread: 64:Log.L.log-----------------------
+--ID:64TS:1720189444736-7/5/24, 9:24:04 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> Prefer (merged) JSon Storage from File: /home/namin/.local/bin/cfg/plugins/HOSTER/drop.download.json
+------------------------Thread: 61:Log.L.log-----------------------
+--ID:61TS:1720189444736-7/5/24, 9:24:04 PM -  [org.appwork.loggingv3.LogV3(info)] -> Try to register API namespace /downloadevents = interface org.jdownloader.api.downloads.DownloadControllerEventPublisherInterface
+--ID:61TS:1720189444737-7/5/24, 9:24:04 PM -  [org.appwork.loggingv3.LogV3(info)] -> Try to register API namespace /extensions = interface org.jdownloader.api.extensions.ExtensionsAPI
+--ID:61TS:1720189444738-7/5/24, 9:24:04 PM -  [org.appwork.loggingv3.LogV3(info)] -> Try to register API namespace /update = interface org.jdownloader.api.update.UpdateAPI
+--ID:61TS:1720189444744-7/5/24, 9:24:04 PM -  [org.appwork.loggingv3.LogV3(info)] -> Try to register API namespace /device = interface org.jdownloader.api.device.DeviceAPI
+--ID:61TS:1720189444745-7/5/24, 9:24:04 PM -  [org.appwork.loggingv3.LogV3(info)] -> Try to register API namespace /reconnect = interface org.jdownloader.api.reconnect.ReconnectAPI
+--ID:61TS:1720189444749-7/5/24, 9:24:04 PM -  [org.appwork.loggingv3.LogV3(info)] -> Try to register API namespace /log = interface org.jdownloader.api.logs.LogAPI
+--ID:61TS:1720189444754-7/5/24, 9:24:04 PM -  [org.appwork.loggingv3.LogV3(info)] -> Try to register API namespace /dialogs = interface org.jdownloader.api.dialog.DialogApiInterface
+------------------------Thread: 74:Log.L.log-----------------------
+--ID:74TS:1720189444758-7/5/24, 9:24:04 PM -  [org.appwork.loggingv3.LogV3(info)] -> Try to register API namespace / = interface org.jdownloader.api.cnl2.Cnl2APIBasics
+--ID:74TS:1720189444759-7/5/24, 9:24:04 PM -  [org.appwork.loggingv3.LogV3(info)] -> Try to register API namespace /flash = interface org.jdownloader.api.cnl2.Cnl2APIFlash
+------------------------Thread: 75:Log.L.log-----------------------
+--ID:75TS:1720189444760-7/5/24, 9:24:04 PM -  [org.jdownloader.extensions.LazyExtension(_getClassLoader)] -> Use /home/namin/.local/bin/extensions/Extraction.jar classloader
+--ID:75TS:1720189444761-7/5/24, 9:24:04 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> Prefer (merged) JSon Storage from File: /home/namin/.local/bin/cfg/org.jdownloader.extensions.extraction.ExtractionExtension.json
+------------------------Thread: 77:Log.L.log-----------------------
+--ID:77TS:1720189444864-7/5/24, 9:24:04 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> CFG File does not exist: /home/namin/.local/bin/cfg/org.jdownloader.captcha.v2.solver.jac.JACSolverConfig.json
+------------------------Thread: 61:Log.L.log-----------------------
+--ID:61TS:1720189444864-7/5/24, 9:24:04 PM -  [jd.controlling.DelayWriteController(init)] -> DelayWriteMode: AUTO
+--ID:61TS:1720189444865-7/5/24, 9:24:04 PM -  [jd.controlling.DelayWriteController(init)] -> DelayedWrites disabled!
+------------------------Thread: 74:Log.L.log-----------------------
+--ID:74TS:1720189444868-7/5/24, 9:24:04 PM -  [org.appwork.loggingv3.LogV3(fine)] -> Start HTTP Server. 9666->9666|LocalHost:true
+------------------------Thread: 34:Log.L.log-----------------------
+--ID:34TS:1720189444871-7/5/24, 9:24:04 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> Read Config: /home/namin/.local/bin/cfg/FILECHOOSER.ejs
+------------------------Thread: 77:Log.L.log-----------------------
+--ID:77TS:1720189444871-7/5/24, 9:24:04 PM -  [org.appwork.loggingv3.LogV3(finer)] -> Read Config(File): /home/namin/.local/bin/cfg/org.jdownloader.captcha.v2.solver.jac.JACSolverConfig.jacthreshold.json
+--ID:77TS:1720189444876-7/5/24, 9:24:04 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> Prefer (merged) JSon Storage from File: /home/namin/.local/bin/cfg/org.jdownloader.captcha.v2.solver.dbc.DeathByCaptchaSettings.json
+--ID:77TS:1720189444876-7/5/24, 9:24:04 PM -  [org.appwork.loggingv3.LogV3(info)] -> Overridden Config Key found public abstract boolean org.jdownloader.captcha.v2.solver.dbc.DeathByCaptchaSettings.isEnabled()<-->public abstract boolean org.jdownloader.captcha.v2.ChallengeSolverConfig.isEnabled()
+------------------------Thread: 75:Log.L.log-----------------------
+--ID:75TS:1720189444879-7/5/24, 9:24:04 PM -  [org.appwork.loggingv3.LogV3(finer)] -> Load Translation file:/home/namin/.local/bin/translations/org/jdownloader/extensions/extraction/translate/ExtractionTranslation.en.lng/null
+------------------------Thread: 77:Log.L.log-----------------------
+--ID:77TS:1720189444881-7/5/24, 9:24:04 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> Prefer (merged) JSon Storage from File: /home/namin/.local/bin/cfg/org.jdownloader.captcha.v2.solver.imagetyperz.ImageTyperzConfigInterface.json
+--ID:77TS:1720189444881-7/5/24, 9:24:04 PM -  [org.appwork.loggingv3.LogV3(info)] -> Overridden Config Key found public abstract boolean org.jdownloader.captcha.v2.solver.imagetyperz.ImageTyperzConfigInterface.isEnabled()<-->public abstract boolean org.jdownloader.captcha.v2.ChallengeSolverConfig.isEnabled()
+--ID:77TS:1720189444885-7/5/24, 9:24:04 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> Prefer (merged) JSon Storage from File: /home/namin/.local/bin/cfg/org.jdownloader.captcha.v2.solver.cheapcaptcha.CheapCaptchaConfigInterface.json
+--ID:77TS:1720189444886-7/5/24, 9:24:04 PM -  [org.appwork.loggingv3.LogV3(info)] -> Overridden Config Key found public abstract boolean org.jdownloader.captcha.v2.solver.cheapcaptcha.CheapCaptchaConfigInterface.isEnabled()<-->public abstract boolean org.jdownloader.captcha.v2.ChallengeSolverConfig.isEnabled()
+--ID:77TS:1720189444891-7/5/24, 9:24:04 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> Prefer (merged) JSon Storage from File: /home/namin/.local/bin/cfg/org.jdownloader.captcha.v2.solver.captchasolutions.CaptchaSolutionsConfigInterface.json
+--ID:77TS:1720189444892-7/5/24, 9:24:04 PM -  [org.appwork.loggingv3.LogV3(info)] -> Overridden Config Key found public abstract boolean org.jdownloader.captcha.v2.solver.captchasolutions.CaptchaSolutionsConfigInterface.isEnabled()<-->public abstract boolean org.jdownloader.captcha.v2.ChallengeSolverConfig.isEnabled()
+--ID:77TS:1720189444896-7/5/24, 9:24:04 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> Prefer (merged) JSon Storage from File: /home/namin/.local/bin/cfg/org.jdownloader.captcha.v2.solver.twocaptcha.TwoCaptchaConfigInterface.json
+--ID:77TS:1720189444897-7/5/24, 9:24:04 PM -  [org.appwork.loggingv3.LogV3(info)] -> Overridden Config Key found public abstract boolean org.jdownloader.captcha.v2.solver.twocaptcha.TwoCaptchaConfigInterface.isEnabled()<-->public abstract boolean org.jdownloader.captcha.v2.ChallengeSolverConfig.isEnabled()
+--ID:77TS:1720189444901-7/5/24, 9:24:04 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> Prefer (merged) JSon Storage from File: /home/namin/.local/bin/cfg/org.jdownloader.captcha.v2.solver.antiCaptchaCom.AntiCaptchaComConfigInterface.json
+--ID:77TS:1720189444901-7/5/24, 9:24:04 PM -  [org.appwork.loggingv3.LogV3(info)] -> Overridden Config Key found public abstract boolean org.jdownloader.captcha.v2.solver.antiCaptchaCom.AntiCaptchaComConfigInterface.isEnabled()<-->public abstract boolean org.jdownloader.captcha.v2.ChallengeSolverConfig.isEnabled()
+------------------------Thread: 64:Log.L.log-----------------------
+--ID:64TS:1720189444906-7/5/24, 9:24:04 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> Prefer (merged) JSon Storage from File: /home/namin/.local/bin/cfg/plugins/HOSTER/maxstream.video.json
+------------------------Thread: 77:Log.L.log-----------------------
+--ID:77TS:1720189444907-7/5/24, 9:24:04 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> Prefer (merged) JSon Storage from File: /home/namin/.local/bin/cfg/org.jdownloader.captcha.v2.solver.endcaptcha.EndCaptchaConfigInterface.json
+--ID:77TS:1720189444907-7/5/24, 9:24:04 PM -  [org.appwork.loggingv3.LogV3(info)] -> Overridden Config Key found public abstract boolean org.jdownloader.captcha.v2.solver.endcaptcha.EndCaptchaConfigInterface.isEnabled()<-->public abstract boolean org.jdownloader.captcha.v2.ChallengeSolverConfig.isEnabled()
+--ID:77TS:1720189444914-7/5/24, 9:24:04 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> Prefer (merged) JSon Storage from File: /home/namin/.local/bin/cfg/org.jdownloader.captcha.v2.solver.solver9kw.Captcha9kwSettings.json
+--ID:77TS:1720189444914-7/5/24, 9:24:04 PM -  [org.appwork.loggingv3.LogV3(info)] -> Overridden Config Key found public abstract boolean org.jdownloader.captcha.v2.solver.solver9kw.Captcha9kwSettings.isEnabled()<-->public abstract boolean org.jdownloader.captcha.v2.ChallengeSolverConfig.isEnabled()
+--ID:77TS:1720189444928-7/5/24, 9:24:04 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> CFG File does not exist: /home/namin/.local/bin/cfg/org.jdownloader.captcha.v2.solver.gui.DialogCaptchaSolverConfig.json
+------------------------Thread: 75:Log.L.log-----------------------
+--ID:75TS:1720189444929-7/5/24, 9:24:04 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> CFG File does not exist: /home/namin/.local/bin/cfg/menus_v2/DownloadTableContext.json
+------------------------Thread: 34:Log.L.log-----------------------
+--ID:34TS:1720189444931-7/5/24, 9:24:04 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> Read Config: /home/namin/.local/bin/cfg/ExtTable_FilterTableModel.json
+------------------------Thread: 75:Log.L.log-----------------------
+--ID:75TS:1720189444932-7/5/24, 9:24:04 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> CFG File does not exist: /home/namin/.local/bin/cfg/menus_v2/LinkgrabberContext.json
+------------------------Thread: 77:Log.L.log-----------------------
+--ID:77TS:1720189444932-7/5/24, 9:24:04 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> CFG File does not exist: /home/namin/.local/bin/cfg/org.jdownloader.captcha.v2.solver.browser.BrowserCaptchaSolverConfig.json
+------------------------Thread: 75:Log.L.log-----------------------
+--ID:75TS:1720189444933-7/5/24, 9:24:04 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> CFG File does not exist: /home/namin/.local/bin/cfg/menus_v2/MainMenu.json
+--ID:75TS:1720189444934-7/5/24, 9:24:04 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> CFG File does not exist: /home/namin/.local/bin/cfg/menus_v2/MainToolbar.json
+------------------------Thread: 84:Log.L.log-----------------------
+--ID:84TS:1720189444939-7/5/24, 9:24:04 PM -  [org.appwork.loggingv3.LogV3(finer)] -> Load Translation file:/home/namin/.local/bin/translations/org/jdownloader/updatev2/UpdaterTranslation.en.lng/null
+------------------------Thread: 34:Log.L.log-----------------------
+--ID:34TS:1720189444939-7/5/24, 9:24:04 PM -  [org.appwork.loggingv3.LogV3(finer)] -> Read Config(File): /home/namin/.local/bin/cfg/org.jdownloader.controlling.filter.LinkFilterSettings.filterlist.json
+--ID:34TS:1720189444945-7/5/24, 9:24:04 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> Read Config: /home/namin/.local/bin/cfg/quickfilters.json
+------------------------Thread: 64:Log.L.log-----------------------
+--ID:64TS:1720189444948-7/5/24, 9:24:04 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> Prefer (merged) JSon Storage from File: /home/namin/.local/bin/cfg/plugins/HOSTER/send.cm.json
+--ID:64TS:1720189444953-7/5/24, 9:24:04 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> Prefer (merged) JSon Storage from File: /home/namin/.local/bin/cfg/plugins/HOSTER/supervideo.tv.json
+--ID:64TS:1720189444973-7/5/24, 9:24:04 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> Prefer (merged) JSon Storage from File: /home/namin/.local/bin/cfg/plugins/HOSTER/wolfstream.tv.json
+------------------------Thread: 89:Log.L.log-----------------------
+--ID:89TS:1720189444990-7/5/24, 9:24:04 PM -  [org.appwork.loggingv3.LogV3(finer)] -> Read Config(File): /home/namin/.local/bin/cfg/jd.controlling.faviconcontroller.FavIconsConfig.failedhosts.json
+------------------------Thread: 34:Log.L.log-----------------------
+--ID:34TS:1720189445127-7/5/24, 9:24:05 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> Read Config: /home/namin/.local/bin/cfg/ExtTable_ExtractionJobTableModel4.json
+--ID:34TS:1720189445143-7/5/24, 9:24:05 PM -  [org.appwork.loggingv3.LogV3(finer)] -> Read Config(File): /home/namin/.local/bin/cfg/menus_v2/MainMenu.menu.json
+--ID:34TS:1720189445154-7/5/24, 9:24:05 PM -  [org.appwork.loggingv3.LogV3(warning)] -> Default missing for: public abstract java.lang.String org.jdownloader.gui.translate.GuiTranslation.action_help_tooltip()
+--ID:34TS:1720189445155-7/5/24, 9:24:05 PM -  [org.appwork.loggingv3.LogV3(warning)] -> Default missing for: public abstract java.lang.String org.jdownloader.gui.translate.GuiTranslation.action_changelog_tooltip()
+--ID:34TS:1720189445177-7/5/24, 9:24:05 PM -  [org.appwork.loggingv3.LogV3(finer)] -> Read Config(File): /home/namin/.local/bin/cfg/menus_v2/MainToolbar.menu.json
+--ID:34TS:1720189445211-7/5/24, 9:24:05 PM -  [org.appwork.loggingv3.LogV3(finer)] -> Read Config(File): /home/namin/.local/bin/cfg/menus_v2/DownloadTabBottomBar.menu.json
+--ID:34TS:1720189445227-7/5/24, 9:24:05 PM -  [org.appwork.loggingv3.LogV3(finer)] -> Read Config(File): /home/namin/.local/bin/cfg/menus_v2/DownloadTableContext.menu.json
+--ID:34TS:1720189445232-7/5/24, 9:24:05 PM -  [org.appwork.loggingv3.LogV3(warning)] -> Default missing for: public abstract java.lang.String org.jdownloader.gui.translate.GuiTranslation.action_addcontainer_tooltip()
+------------------------Thread: 84:Log.L.log-----------------------
+--ID:84TS:1720189445249-7/5/24, 9:24:05 PM -  [org.appwork.loggingv3.LogV3(finer)] -> Read Config(URL): jar:file:/home/namin/.local/bin/JDownloader.jar!/cfg/updateclient/Setup.updateservers.json
+------------------------Thread: 34:Log.L.log-----------------------
+--ID:34TS:1720189445405-7/5/24, 9:24:05 PM -  [org.appwork.loggingv3.LogV3(finer)] -> Read Config(File): /home/namin/.local/bin/cfg/menus_v2/LinkgrabberContext.menu.json
+--ID:34TS:1720189445434-7/5/24, 9:24:05 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> CFG File does not exist: /home/namin/.local/bin/cfg/jd.controlling.reconnect.pluginsinc.upnp.UPUPReconnectSettings.json
+--ID:34TS:1720189445438-7/5/24, 9:24:05 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> Prefer (merged) JSon Storage from File: /home/namin/.local/bin/cfg/jd.controlling.reconnect.pluginsinc.liveheader.LiveHeaderReconnectSettings.json
+--ID:34TS:1720189445441-7/5/24, 9:24:05 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> CFG File does not exist: /home/namin/.local/bin/cfg/jd.controlling.reconnect.pluginsinc.speedporthybrid.SpeedPortHybridReconnectConfig.ejs
+--ID:34TS:1720189445443-7/5/24, 9:24:05 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> CFG File does not exist: /home/namin/.local/bin/cfg/jd.controlling.reconnect.pluginsinc.easybox804.EasyBox804ReconnectConfig.ejs
+--ID:34TS:1720189445499-7/5/24, 9:24:05 PM -  [org.appwork.loggingv3.LogV3(finer)] -> Read Config(File): /home/namin/.local/bin/cfg/menus_v2/LinkgrabberTabBottomBar.menu.json
+--ID:34TS:1720189445558-7/5/24, 9:24:05 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> Read Config: /home/namin/.local/bin/cfg/ExtTable_proxyTable3.json
+--ID:34TS:1720189445585-7/5/24, 9:24:05 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> Read Config: /home/namin/.local/bin/cfg/ExtTable_HosterRuleTableModel.json
+--ID:34TS:1720189445592-7/5/24, 9:24:05 PM -  [org.appwork.loggingv3.LogV3(finer)] -> Init StorageHandler for Interface:org.jdownloader.controlling.hosterrule.HosterRuleConfig|Path:null
+--ID:34TS:1720189445603-7/5/24, 9:24:05 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> Read Config: /home/namin/.local/bin/cfg/ExtTable_PremiumAccountTableModel2.json
+--ID:34TS:1720189445618-7/5/24, 9:24:05 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> Read Config: /home/namin/.local/bin/cfg/ExtTable_AuthTableModel.json
+--ID:34TS:1720189445620-7/5/24, 9:24:05 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> CFG File does not exist: /home/namin/.local/bin/cfg/jd.controlling.authentication.AuthenticationControllerSettings.json
+--ID:34TS:1720189445621-7/5/24, 9:24:05 PM -  [org.appwork.loggingv3.LogV3(finer)] -> Read Config(File): /home/namin/.local/bin/cfg/jd.controlling.authentication.AuthenticationControllerSettings.list.ejs
+--ID:34TS:1720189445640-7/5/24, 9:24:05 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> Read Config: /home/namin/.local/bin/cfg/ExtTable_SolverOrderTableModel.json
+--ID:34TS:1720189445642-7/5/24, 9:24:05 PM -  [org.appwork.loggingv3.LogV3(severe)] -> Bad Column Implementation: jd.gui.swing.jdgui.views.settings.panels.anticaptcha.SolverOrderTableModel/Timeouts Min: 15 Max: 2147483647 IS:3
+--ID:34TS:1720189445659-7/5/24, 9:24:05 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> Read Config: /home/namin/.local/bin/cfg/ExtTable_UrlOrderTableModel.json
+--ID:34TS:1720189445660-7/5/24, 9:24:05 PM -  [org.appwork.loggingv3.LogV3(finer)] -> Read Config(File): /home/namin/.local/bin/cfg/org.jdownloader.settings.GeneralSettings.urlorder.json
+--ID:34TS:1720189445661-7/5/24, 9:24:05 PM -  [org.appwork.loggingv3.LogV3(finer)] -> Read Config(File): /home/namin/.local/bin/cfg/org.jdownloader.settings.GeneralSettings.urldisplayorder.json
+--ID:34TS:1720189445707-7/5/24, 9:24:05 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> Read Config: /home/namin/.local/bin/cfg/ExtTable_FilterTable2.json
+--ID:34TS:1720189445711-7/5/24, 9:24:05 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> Read Config: /home/namin/.local/bin/cfg/ExtTable_ExceptionsTableModel.json
+--ID:34TS:1720189445724-7/5/24, 9:24:05 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> Read Config: /home/namin/.local/bin/cfg/ExtTable_PackagizerFilterTable.json
+--ID:34TS:1720189445753-7/5/24, 9:24:05 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> Read Config: /home/namin/.local/bin/cfg/ExtTable_AdvancedTable.json
+--ID:34TS:1720189445769-7/5/24, 9:24:05 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> Read Config: /home/namin/.local/bin/cfg/ExtTable_optionalsExtensionTable.json
+------------------------Thread: 49:Log.L.log-----------------------
+--ID:49TS:1720189448662-7/5/24, 9:24:08 PM -  [org.appwork.utils.logging2.extmanager.ExtLogManager(getLogger)] -> Ignored: org.bouncycastle.crypto.CryptoServicesRegistrar
+------------------------Thread: 92:Log.L.log-----------------------
+--ID:92TS:1720189486470-7/5/24, 9:24:46 PM -  [org.appwork.loggingv3.LogV3(finer)] -> Read Config(File): /home/namin/.local/bin/cfg/org.jdownloader.settings.GeneralSettings.crawlerhostpluginblacklist.json
+--ID:92TS:1720189486474-7/5/24, 9:24:46 PM -  [org.appwork.loggingv3.LogV3(finer)] -> Read Config(File): /home/namin/.local/bin/cfg/org.jdownloader.settings.GeneralSettings.crawlercrawlerpluginblacklist.json
+------------------------Thread: 103:Log.L.log-----------------------
+--ID:103TS:1720189486486-7/5/24, 9:24:46 PM -  [org.appwork.loggingv3.LogV3(finer)] -> Read Config(File): /home/namin/.local/bin/cfg/jd.controlling.linkcrawler.LinkCrawlerConfig.linkcrawlerrules.json
+------------------------Thread: 104:Log.L.log-----------------------
+--ID:104TS:1720189486912-7/5/24, 9:24:46 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> CFG File does not exist: /home/namin/.local/bin/cfg/plugins/HOSTER/e-hentai.org.json
+------------------------Thread: 107:Log.L.log-----------------------
+--ID:107TS:1720189504989-7/5/24, 9:25:04 PM -  [org.appwork.storage.JsonKeyValueStorage(<init>)] -> Prefer (merged) JSon Storage from File: /home/namin/.local/bin/cfg/plugins/HOSTER/rapidgator.net.json
+------------------------Thread: 154:Log.L.log-----------------------
+--ID:154TS:1720190194800-7/5/24, 9:36:34 PM -  [org.appwork.loggingv3.LogV3(info)] -> No Vetos
+--ID:154TS:1720190194800-7/5/24, 9:36:34 PM -  [org.appwork.loggingv3.LogV3(info)] -> Fire onShutDownEvents:3
+--ID:154TS:1720190194800-7/5/24, 9:36:34 PM -  [org.appwork.loggingv3.LogV3(info)] -> Call onShutdown: jd.controlling.downloadcontroller.DownloadWatchDog@29984d7e
+--ID:154TS:1720190194800-7/5/24, 9:36:34 PM -  [org.appwork.loggingv3.LogV3(info)] -> Call onShutdown done: jd.controlling.downloadcontroller.DownloadWatchDog@29984d7e
+--ID:154TS:1720190194800-7/5/24, 9:36:34 PM -  [org.appwork.loggingv3.LogV3(info)] -> Call onShutdown: jd.controlling.linkcollector.LinkCollector@e17bfc1
+--ID:154TS:1720190194800-7/5/24, 9:36:34 PM -  [org.appwork.loggingv3.LogV3(info)] -> Call onShutdown done: jd.controlling.linkcollector.LinkCollector@e17bfc1
+--ID:154TS:1720190194800-7/5/24, 9:36:34 PM -  [org.appwork.loggingv3.LogV3(info)] -> Call onShutdown: org.jdownloader.extensions.extraction.ExtractionExtension$3@4f67a454
+--ID:154TS:1720190194800-7/5/24, 9:36:34 PM -  [org.appwork.loggingv3.LogV3(info)] -> Call onShutdown done: org.jdownloader.extensions.extraction.ExtractionExtension$3@4f67a454
+--ID:154TS:1720190194800-7/5/24, 9:36:34 PM -  [org.appwork.loggingv3.LogV3(info)] -> Create ExitThread

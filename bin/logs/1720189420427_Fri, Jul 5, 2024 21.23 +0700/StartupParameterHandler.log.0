@@ -1,0 +1,5 @@
+------------------------Thread: 1:StartupParameterHandler.log-----------------------
+--ID:1TS:1720189420908-7/5/24, 9:23:40 PM -  [org.jdownloader.startup.ParameterHandler(onStartup)] -> Startup: []
+--ID:1TS:1720189420908-7/5/24, 9:23:40 PM -  [org.jdownloader.startup.ParameterHandler(onStartup)] -> Remove ConsoleHandler
+------------------------Thread: 100:StartupParameterHandler.log-----------------------
+--ID:100TS:1720189434852-7/5/24, 9:23:54 PM -  [org.jdownloader.startup.ParameterHandler(onIncommingMessage)] -> Incomming Message: [--focus]

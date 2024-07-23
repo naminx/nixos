@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+# cmd="${@@Q} 2> /dev/null"
+# script -qc "$cmd" /dev/null < /dev/null | less -RFX
+
+cmd="${@@Q}"
+script -qc "$cmd" /dev/null < /dev/null

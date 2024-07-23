@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+/mnt/c/Program\ Files/Hidden\ Start/hstart64.exe /noconsole /nouac /wait "C:\\Windows\\System32\\wsl.exe --mount \\\\.\\PHYSICALDRIVE2 --partition 1 --name q"
+/mnt/c/Program\ Files/Hidden\ Start/hstart64.exe /noconsole /nouac /wait "C:\\Windows\\System32\\wsl.exe --mount \\\\.\\PHYSICALDRIVE4 --partition 1 --name r"
+/mnt/c/Program\ Files/Hidden\ Start/hstart64.exe /noconsole /nouac /wait "C:\\Windows\\System32\\wsl.exe --mount \\\\.\\PHYSICALDRIVE6 --partition 2 --name u"
+
+sleep 1
+
+cd /mnt/c/
+if [ "$(/mnt/c/Windows/System32/cmd.exe /c subst | grep "^Q:" | wc -l)" == "0" ]; then
+  /mnt/c/Windows/System32/cmd.exe /c subst Q: "$(wslpath -w /mnt/wsl/r)"
+fi
+
+if [ "$(/mnt/c/Windows/System32/cmd.exe /c subst | grep "^R:" | wc -l)" == "0" ]; then
+  /mnt/c/Windows/System32/cmd.exe /c subst R: "$(wslpath -w /mnt/wsl/r)"
+fi
+
+if [ "$(/mnt/c/Windows/System32/cmd.exe /c subst | grep "^U:" | wc -l)" == "0" ]; then
+  /mnt/c/Windows/System32/cmd.exe /c subst U: "$(wslpath -w /mnt/wsl/u)"
+fi

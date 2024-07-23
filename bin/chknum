@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+RED='\033[1;31m'
+GREEN='\033[0;32m'
+NC='\033[0m' # No Color
+
+for arg in "$@"; do
+    last_line=$(ls "$arg" | tail -1)
+    LEFT=$(ls "$arg" | wc -l)
+    RIGHT=$((10#${last_line%.*}))
+    if [ "$LEFT" = "$RIGHT" ]; then
+        echo -e ${GREEN}${arg}: $LEFT == ${RIGHT}${NC}
+    else
+        echo -e ${RED}${arg}: $LEFT != ${RIGHT}${NC}
+    fi
+done

@@ -1,0 +1,19 @@
+Wed Mar 06 17:02:37 ICT 2024
+Package: updatePackage
+   JD: JDownloader.jar/org/appwork/net/protocol/http/HTTPConstants$ResponseCode.class
+   JD: JDownloader.jar/org/appwork/net/protocol/http/HTTPConstants.class
+   JD: JDownloader.jar/org/appwork/utils/net/httpconnection/HTTPProxyHTTPConnectionImpl$1.class
+   JD: JDownloader.jar/org/appwork/utils/net/httpconnection/HTTPProxyHTTPConnectionImpl.class
+   JD: JDownloader.jar/org/appwork/utils/os/CrossSystem$1.class
+   JD: JDownloader.jar/org/appwork/utils/os/CrossSystem$2.class
+   JD: JDownloader.jar/org/appwork/utils/os/CrossSystem$3.class
+   JD: JDownloader.jar/org/appwork/utils/os/CrossSystem$4.class
+   JD: JDownloader.jar/org/appwork/utils/os/CrossSystem$ARCHFamily.class
+   JD: JDownloader.jar/org/appwork/utils/os/CrossSystem$OSFamily.class
+   JD: JDownloader.jar/org/appwork/utils/os/CrossSystem$OperatingSystem.class
+   JD: JDownloader.jar/org/appwork/utils/os/CrossSystem.class
+   JD: JDownloader.jar/org/appwork/utils/os/hardware/RaspberryPi$1.class
+   JD: JDownloader.jar/org/appwork/utils/os/hardware/RaspberryPi$MANUFACTURER.class
+   JD: JDownloader.jar/org/appwork/utils/os/hardware/RaspberryPi$PROCESSOR.class
+   JD: JDownloader.jar/org/appwork/utils/os/hardware/RaspberryPi$TYPE.class
+   JD: JDownloader.jar/org/appwork/utils/os/hardware/RaspberryPi.class

@@ -119,18 +119,11 @@
     ++ (
       if (!config.wsl.enable)
       then [
+        google-chrome
         chromium
-        (microsoft-edge.override {
-          commandLineArgs = [
-            "--enable-wayland-ime"
-            "--disable-features=WaylandFractionalScaleV1"
-            "--enable-chrome-browser-cloud-management"
-            "--gtk-version=4"
-          ];
-        })
+        microsoft-edge
         krita
         expressvpn
-        ntfs3g
         qbittorrent
         telegram-desktop
         zoom-us
