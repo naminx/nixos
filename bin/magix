@@ -1,60 +1,61 @@
-#!/usr/bin/env bash
+#!/usr/bin/env fish
 
 # Check if there are any arguments
-if [ "$#" -eq 0 ]; then
-    echo "Usage: $0 [options] file"
-    echo "       $0 [options] -- file1 [file2 [...]]"
-    echo ""
-    echo "  Call 'magic file options' for each file, and produces the smallest output file"
-    echo "  in WEBP/JPEG format."
-    exit 1
-fi
+if test (count {$argv}) -eq 0 || test {$argv[1]} = "--" -a (count {$argv}) -eq 1
+  echo Usage: (basename (status filename)) [options] file
+  echo        (basename (status filename)) [options] -- file1 [file2 [...]]
+  echo
+  echo    Call \'magic file options\' for each file, and
+  echo    produce the smallest output file in WEBP/JPEG format.
+  exit 1
+end
 
-args=("$@")
-# Find the index of the "--" argument
-for arg in "${args[@]}"; do
-    if [ "$arg" == "--" ]; then
-        break
-    fi
-    index=$((index + 1))
-done
-
-# Split the arguments into opts and files
-if [ "$arg" == "--" ]; then
-    opts=("${args[@]:0:$index}")
-    files=("${args[@]:$((index + 1))}")
+if contains -- -- {$argv}
+  # We have checked that {$argv} contains "--", so {$index} will never be empty.
+  set index (contains --index -- -- {$argv})
+  if test {$index} = "1"
+    # handle the edge case when the $arg[1] is "--", i.e. no options given
+    set --erase opts
+    set files {$argv[2..]}
+  else
+    set opts {$argv[..(math {$index}-1)]}
+    set files {$argv[(math {$index}+1)..]}
+  end
 else
-    opts=("${args[@]:0:$((${#args[@]} - 1))}")
-    files=("${args[${#args[@]} - 1]}")
-fi
+  set opts {$argv[..-2]}
+  set files {$argv[-1]}
+end
 
-if [ "${#files[@]}" -gt "0" ]; then
-    tmp_dir1=$(mktemp -d --tmpdir)
-    tmp_dir2=$(mktemp -d --tmpdir)
-    for file in "${files[@]}"; do
-        if [ -f "$file" ]; then
-            file_base=$(basename "$file")
-            name="${file_base%.[^.]*}"
-            ext="${file_base:${#name}+1}"
-            if [[ -z "$name" && -n "$ext" ]]; then
-                base=".$ext"
-                ext=""
-            fi
-            magick "$file" "${opts[@]}" "$tmp_dir1/$name.jpg"
-            magick "$file" "${opts[@]}" "$tmp_dir1/$name.webp"
-            output=$(keepsmallest \
-                "$tmp_dir1/$name.jpg" \
-                "$tmp_dir1/$name.webp" \
-                "$(magick "$file" "${opts[@]}" miff:- |
-                    minify "$tmp_dir2/$name")")
-            output=$(replace "$file" "$output")
-            if [ "$(dirname "$output")" = "." ]; then
-                echo "$(basename "$output")"
-            else
-                echo "$output"
-            fi
-        fi
-    done
-    rm -r "$tmp_dir1"
-    rm -r "$tmp_dir2"
-fi
+if test (count {$files}) -eq 1
+  set file {$files}
+  if test -e {$file}
+    set tmp_dir (mktemp --directory)
+    mkdir {$tmp_dir}/miff
+    set file_base (basename {$file})
+    set name (string split --fields 1 --max 1 --right -- . {$file_base})
+    set ext (string split --fields 2 --max 1 --right -- . {$file_base})
+    if test -z {$name} && test -n {$ext}
+      set name .{$ext}
+      set --erase ext
+    end
+    magick {$file} {$opts} {$tmp_dir}/{$name}.jpg
+    magick {$file} {$opts} {$tmp_dir}/{$name}.webp
+    set output (keepsmallest \
+      {$tmp_dir}/{$name}.jpg \
+      {$tmp_dir}/{$name}.webp \
+      (magick {$file} {$opts} miff:- | minify {$tmp_dir}/miff/{$name}))
+    set output (replace {$file} {$output})
+    if test (dirname {$output}) = "."
+      echo (basename {$output})
+    else
+      echo {$output}
+    end
+    rmdir {$tmp_dir}/miff
+    rmdir {$tmp_dir}
+  else
+    echo \"{$file}\" not found >&2
+  end
+else
+  string join0 -- {$files} \
+      | parallel --null (realpath (status current-filename)) {$opts} --
+end

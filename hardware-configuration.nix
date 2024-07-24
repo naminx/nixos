@@ -18,7 +18,7 @@
   boot.extraModulePackages = [];
 
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/03539db8-08d2-425e-98e6-435d5657f2e0";
+    device = "/dev/disk/by-uuid/b53208ba-37f0-45d6-acdb-4e6a6236107a";
     fsType = "ext4";
   };
 
@@ -68,6 +68,11 @@
     device = "/dev/disk/by-partuuid/00016c1d-a940-4b26-c00b-da013ad80200";
     fsType = "ext4";
     options = ["nosuid" "nodev" "errors=remount-ro" "uhelper=udisks2"];
+  };
+
+  fileSystems."/mnt/u" = {
+    device = "/dev/disk/by-uuid/03539db8-08d2-425e-98e6-435d5657f2e0";
+    fsType = "ext4";
   };
 
   swapDevices = [];

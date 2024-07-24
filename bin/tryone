@@ -8,6 +8,7 @@ set options $options (fish_opt --short v --long crop-right --required-val)
 set options $options (fish_opt --short t --long trim --required-val)
 set options $options (fish_opt --short r --long trim-left --required-val)
 set options $options (fish_opt --short y --long trim-right --required-val)
+set options $options (fish_opt --short 2 --long two)
 
 if not argparse --min-args 1 $options -- $argv
   exit 1
@@ -93,6 +94,12 @@ if set --query _flag_trim_right
   end
 end
 
+if set --query _flag_two
+  if test not -e two
+    mkdir two
+  end
+end
+
 set tmp_dir (mktemp --directory --tmpdir)
 
 for arg in {$argv}
@@ -114,7 +121,11 @@ for arg in {$argv}
       end
       if [ (count {$left_files}) -ge 1 ]
         if [ (count {$right_files}) -eq 1 -a (count {$right_files}) -eq 1 ]
-          set output _{$right}b.jpg
+          if set --query _flag_two
+            set output _{$right}b.jpg
+          else
+            set output two/{$right}b.jpg
+          end
           magick {$left_files[1]} {$cropl} \( {$right_files[1]} {$cropr} \) +append {$tmp_dir}/{$output}
           mv {$tmp_dir}/{$output} {$output}
           echo {$left_files[1]} + {$right_files[1]} =\> {$output}

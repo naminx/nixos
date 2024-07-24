@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+
+# Check if there are any arguments
+if [ "$#" -eq 0 ]; then
+    echo "Usage: $0 [options] file"
+    echo "       $0 [options] -- file1 [file2 [...]]"
+    echo ""
+    echo "  Call 'magic file options' for each file, and produces the smallest output file"
+    echo "  in WEBP/JPEG format."
+    exit 1
+fi
+
+args=("$@")
+# Find the index of the "--" argument
+for arg in "${args[@]}"; do
+    if [ "$arg" == "--" ]; then
+        break
+    fi
+    index=$((index + 1))
+done
+
+# Split the arguments into opts and files
+if [ "$arg" == "--" ]; then
+    opts=("${args[@]:0:$index}")
+    files=("${args[@]:$((index + 1))}")
+else
+    opts=("${args[@]:0:$((${#args[@]} - 1))}")
+    files=("${args[${#args[@]} - 1]}")
+fi
+
+if [ "${#files[@]}" -gt "0" ]; then
+    tmp_dir1=$(mktemp -d --tmpdir)
+    tmp_dir2=$(mktemp -d --tmpdir)
+    for file in "${files[@]}"; do
+        if [ -f "$file" ]; then
+            file_base=$(basename "$file")
+            name="${file_base%.[^.]*}"
+            ext="${file_base:${#name}+1}"
+            if [[ -z "$name" && -n "$ext" ]]; then
+                base=".$ext"
+                ext=""
+            fi
+            magick "$file" "${opts[@]}" "$tmp_dir1/$name.jpg"
+            magick "$file" "${opts[@]}" "$tmp_dir1/$name.webp"
+            output=$(keepsmallest \
+                "$tmp_dir1/$name.jpg" \
+                "$tmp_dir1/$name.webp" \
+                "$(magick "$file" "${opts[@]}" miff:- |
+                    minify "$tmp_dir2/$name")")
+            output=$(replace "$file" "$output")
+            if [ "$(dirname "$output")" = "." ]; then
+                echo "$(basename "$output")"
+            else
+                echo "$output"
+            fi
+        fi
+    done
+    rm -r "$tmp_dir1"
+    rm -r "$tmp_dir2"
+fi
