@@ -1,14 +1,14 @@
 #!/usr/bin/env fish
 
 # Define option specifications
-set -l options (fish_opt --short h --long help)
+set --local options (fish_opt --short h --long help)
 set options $options (fish_opt --short c --long crop --required-val)
 set options $options (fish_opt --short x --long crop-left --required-val)
 set options $options (fish_opt --short v --long crop-right --required-val)
 set options $options (fish_opt --short t --long trim --required-val)
 set options $options (fish_opt --short r --long trim-left --required-val)
 set options $options (fish_opt --short y --long trim-right --required-val)
-set options $options (fish_opt --short 2 --long two)
+set options $options (fish_opt --short w --long two)
 
 if not argparse --min-args 1 $options -- $argv
   exit 1
@@ -33,8 +33,8 @@ end
 
 if set --query _flag_crop
   if string match --quiet --regex '^(?<geometry>[[:digit:]]+x[[:digit:]]+\+[[:digit:]]+\+[[:digit:]]+)$' -- "$_flag_crop"
-    set cropl -crop {$geometry}
-    set cropr -crop {$geometry}
+    set --local cropl -crop {$geometry}
+    set --local cropr -crop {$geometry}
   else
     echo crop: expected WIDTHxHEIGHT+LEFT+TOP\; got \"{$_flag_crop}\" >&2
     exit 1
@@ -43,7 +43,7 @@ end
 
 if set --query _flag_crop_left
   if string match --quiet --regex '^(?<geometry>[[:digit:]]+x[[:digit:]]+\+[[:digit:]]+\+[[:digit:]]+)$' -- "$_flag_crop"
-    set cropl -crop {$geometry}
+    set --local cropl -crop {$geometry}
   else
     echo crop-left: expected WIDTHxHEIGHT+LEFT+TOP\; got \"{$_flag_crop}\" >&2
     exit 1
@@ -52,7 +52,7 @@ end
 
 if set --query _flag_crop_right
   if string match --quiet --regex '^(?<geometry>[[:digit:]]+x[[:digit:]]+\+[[:digit:]]+\+[[:digit:]]+)$' -- "$_flag_crop"
-    set cropr -crop {$geometry}
+    set --local cropr -crop {$geometry}
   else
     echo crop-right: expected WIDTHxHEIGHT+LEFT+TOP\; got \"{$_flag_crop}\" >&2
     exit 1
@@ -61,11 +61,11 @@ end
 
 if set --query _flag_trim
   if string match --quiet --regex -- '^(?<pixel>[[:digit:]]+)$' {$_flag_trim}
-    set cropl -gravity west -chop {$pixel}x0
-    set cropr -gravity east -chop {$pixel}x0
+    set --local cropl -gravity west -chop {$pixel}x0
+    set --local cropr -gravity east -chop {$pixel}x0
   else if string match --quiet --regex -- '^-(?<pixel>[[:digit:]]+)$' {$_flag_trim}
-    set cropl -gravity east -chop {$pixel}x0
-    set cropr -gravity west -chop {$pixel}x0
+    set --local cropl -gravity east -chop {$pixel}x0
+    set --local cropr -gravity west -chop {$pixel}x0
   else
     echo trim: expected a positive/negative number\; got \"{$_flag_trim}\" >&2
     exit 1
@@ -74,9 +74,9 @@ end
 
 if set --query _flag_trim_left
   if string match --quiet --regex -- '^(?<pixel>[[:digit:]]+)$' {$_flag_trim_left}
-    set cropl -gravity west -chop {$pixel}x0
+    set --local cropl -gravity west -chop {$pixel}x0
   else if string match --quiet --regex -- '^-(?<pixel>[[:digit:]]+)$' {$_flag_trim_left}
-    set cropl -gravity east -chop {$pixel}x0
+    set --local cropl -gravity east -chop {$pixel}x0
   else
     echo trim-left: expected a positive/negative number\; got \"{$_flag_trim_left}\" >&2
     exit 1
@@ -85,9 +85,9 @@ end
 
 if set --query _flag_trim_right
   if string match --quiet --regex -- '^(?<pixel>[[:digit:]]+)$' {$_flag_trim_right}
-    set cropr -gravity east -chop {$pixel}x0
+    set --local cropr -gravity east -chop {$pixel}x0
   else if string match --quiet --regex -- '^-(?<pixel>[[:digit:]]+)$' {$_flag_trim_right}
-    set cropr -gravity west -chop {$pixel}x0
+    set --local cropr -gravity west -chop {$pixel}x0
   else
     echo trim-right: expected a positive/negative number\; got \"{$_flag_trim_right}\" >&2
     exit 1
@@ -100,31 +100,31 @@ if set --query _flag_two
   end
 end
 
-set tmp_dir (mktemp --directory --tmpdir)
+set --local tmp_dir (mktemp --directory --tmpdir)
 
 for arg in {$argv}
   if string match --quiet --regex -- '^0*(?<num>[[:digit:]]{1,3})$' {$arg}
-    set right (string pad --char 0 --width 3 {$num})
-    set left (string pad --char 0 --width 3 (math {$num}+1))
+    set --local right (string pad --char 0 --width 3 {$num})
+    set --local left (string pad --char 0 --width 3 (math {$num}+1))
     set --erase right_files
     for ext in png webp jpg
       if test -e {$right}.{$ext}
-        set right_files {$right_files} {$right}.{$ext}
+        set --local right_files {$right_files} {$right}.{$ext}
       end
     end
     if [ (count {$right_files}) -ge 1 ]
       set --erase left_files
       for ext in png webp jpg
         if test -e {$left}.{$ext}
-          set left_files {$left_files} {$left}.{$ext}
+          set --local left_files {$left_files} {$left}.{$ext}
         end
       end
       if [ (count {$left_files}) -ge 1 ]
         if [ (count {$right_files}) -eq 1 -a (count {$right_files}) -eq 1 ]
           if set --query _flag_two
-            set output _{$right}b.jpg
+            set --local output {$right}b.jpg
           else
-            set output two/{$right}b.jpg
+            set --local output _{$right}b.jpg
           end
           magick {$left_files[1]} {$cropl} \( {$right_files[1]} {$cropr} \) +append {$tmp_dir}/{$output}
           mv {$tmp_dir}/{$output} {$output}
@@ -132,9 +132,13 @@ for arg in {$argv}
         else
           for right_file in {$right_files}
             for left_file in {$left_files}
-              set output _{$left_file}+{$right_file}.jpg
+              set --local output _{$left_file}+{$right_file}.jpg
               magick \( {$left_file} {$cropl} \( {$right_file} {$cropr} \) +append {$tmp_dir}/{$output}
-              mv {$tmp_dir}/{$output} {$output}
+              if set --query _flag_two
+                mv {$tmp_dir}/{$output} two/{$output}
+              else
+                mv {$tmp_dir}/{$output} {$output}
+              end
               echo {$left_file} + {$right_file} =\> {$output}
             end
           end

@@ -15,7 +15,7 @@ if contains -- -- {$argv}
   set index (contains --index -- -- {$argv})
   if test {$index} = "1"
     # handle the edge case when the $arg[1] is "--", i.e. no options given
-    set --erase opts
+    set --erase --local opts
     set files {$argv[2..]}
   else
     set opts {$argv[..(math {$index}-1)]}
@@ -32,12 +32,8 @@ if test (count {$files}) -eq 1
     set tmp_dir (mktemp --directory)
     mkdir {$tmp_dir}/miff
     set file_base (basename {$file})
-    set name (string split --fields 1 --max 1 --right -- . {$file_base})
-    set ext (string split --fields 2 --max 1 --right -- . {$file_base})
-    if test -z {$name} && test -n {$ext}
-      set name .{$ext}
-      set --erase ext
-    end
+    set name (string split --fields 1 --max 1 --no-empty --right -- . {$file_base})
+    set ext (string split --fields 2 --max 1 --no-empty --right -- . {$file_base})
     magick {$file} {$opts} {$tmp_dir}/{$name}.jpg
     magick {$file} {$opts} {$tmp_dir}/{$name}.webp
     set output (keepsmallest \
