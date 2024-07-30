@@ -277,6 +277,7 @@
       alejandra # Nix file formatter
       bc # calculator for bash script
       cachix
+      efibootmgr
       git
       neovim
       nixd # Nix language server
@@ -437,6 +438,6 @@
 
     docker.enable = true;
     docker.enableOnBoot = false;
-    docker.extraOptions = "--data-root /mnt/q/docker";
+    docker.daemon.settings = { data-root = "/var/lib/docker"; };
   };
 }

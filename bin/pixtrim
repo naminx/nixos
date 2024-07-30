@@ -1,66 +1,28 @@
-#!/usr/bin/env bash
+#!/usr/bin/env fish
 
-nullglob=$(shopt -p nullglob); shopt -s nullglob
+if test (count {$argv}) -eq 0
+  echo usage:  [-LEFT | RIGHT- | --TOP | BOTTOM--] FILE1 ...
+  return
+end
 
-is_uint() { case $1 in '' | *[!0-9]* ) return 1;; esac ;}
+set --erase args
 
-if [ -z "$1" ]; then
-    echo usage: "${0##*/} [-left | right- | --top | bottom--] [...] files ..."
-    exit 1
-fi
+while test (count {$argv}) -gt 0
+  if string match --quiet --regex -- '^-(?<pixel>[[:digit:]]+)$' {$argv[1]}
+    set args {$args} -gravity west -chop {$pixel}x0
+    set argv {$argv[2..]}
+  else if string match --quiet --regex -- '^(?<pixel>[[:digit:]]+)-$' {$argv[1]}
+    set args {$args} -gravity east -chop {$pixel}x0
+    set argv {$argv[2..]}
+  else if string match --quiet --regex -- '^--(?<pixel>[[:digit:]]+)$' {$argv[1]}
+    set args {$args} -gravity north -chop 0x{$pixel}
+    set argv {$argv[2..]}
+  else if string match --quiet --regex -- '^(?<pixel>[[:digit:]]+)--$' {$argv[1]}
+    set args {$args} -gravity south -chop 0x{$pixel}
+    set argv {$argv[2..]}
+  else
+    break
+  end
+end
 
-args=""
-
-while true; do
-    if [ "${1:0:1}" = "-" ] && is_uint "${1:1}"; then
-        args="$args -gravity west -chop ${1:1}x0"
-        shift
-    elif [ "${1: -1}" = "-" ] && is_uint "${1:0:-1}"; then
-        args="$args -gravity east -chop ${1:0:-1}x0"
-        shift
-    elif [ "${1:0:2}" = "--" ] && is_uint "${1:2}"; then
-        args="$args -gravity north -chop 0x${1:2}"
-        shift
-    elif [ "${1: -2}" = "--" ] && is_uint "${1:0:-2}"; then
-        args="$args -gravity south -chop 0x${1:0:-2}"
-        shift
-   else
-        break
-    fi
-done
-
-if [ -z "$args" ]; then
-    echo usage: "${0##*/} [(-left) | (right-) | (--top) | (bottom--)] [...] files ..."
-    exit 1
-fi
-
-tmp_dir=$(mktemp -d --tmpdir)
-tmp_dir2=$(mktemp -d --tmpdir)
-for file in "$@"; do
-    if [ -f "$file" ]; then
-        file_base=$(basename "$file")
-        name="${file_base%.[^.]*}"
-        ext="${file_base:${#name} + 1}"
-        if [[ -z "$name" && -n "$ext" ]]; then
-            base=".$ext"
-            ext=""
-        fi
-        magick "$file" $args +repage "$tmp_dir/$name.jpg"
-        magick "$file" $args +repage "$tmp_dir/$name.webp"
-        output=$(keepsmallest \
-            "$tmp_dir/$name.jpg" \
-            "$tmp_dir/$name.webp" \
-            "$( magick "$file" $args +repage miff:- \
-              | minify "$tmp_dir2/$name")")
-        output=$(replace $file $output)
-        if [ "$(dirname "$output")" = "." ]; then
-            echo $(basename "$output")
-        else
-            echo $output
-        fi
-    fi
-done
-rmdir "$tmp_dir" "$tmp_dir2"
-
-$nullglob; unset nullglob
-
+magix {} {$args} -- {$argv}

@@ -1,57 +1,96 @@
 #!/usr/bin/env fish
 
-# Check if there are any arguments
-if test (count {$argv}) -eq 0 || test {$argv[1]} = "--" -a (count {$argv}) -eq 1
-  echo Usage: (basename (status filename)) [options] file
-  echo        (basename (status filename)) [options] -- file1 [file2 [...]]
+function display_help
+  echo usage: (basename (status filename)) [OPTIONS] -- FILE1 [FILE2 [...]]
   echo
-  echo    Call \'magic file options\' for each file, and
-  echo    produce the smallest output file in WEBP/JPEG format.
+  echo "   For each FILE given, replace {} in OPTIONS with FILE, then call"
+  echo "   'magick OPTIONS', and produce the smallest output file in WEBP"
+  echo "   or JPEG format."
+end
+
+if test (count {$argv}) -eq 0
+  display_help
+  return
+else if test (count {$argv}) -eq 1 && test {$argv} = --
+  display_help
+  return
+end
+
+if not contains -- -- {$argv}
+  echo (basename (status filename)): OPTIONS must contain \"--\" >&2
+  echo ''
+  display_help
   exit 1
 end
 
-if contains -- -- {$argv}
-  # We have checked that {$argv} contains "--", so {$index} will never be empty.
-  set index (contains --index -- -- {$argv})
-  if test {$index} = "1"
-    # handle the edge case when the $arg[1] is "--", i.e. no options given
-    set --erase --local opts
-    set files {$argv[2..]}
-  else
-    set opts {$argv[..(math {$index}-1)]}
-    set files {$argv[(math {$index}+1)..]}
+# We have checked that {$argv} contains "--", so {$index} will never be empty.
+set index (contains --index -- -- {$argv})
+
+# This test is safe because {$index} will never be empty.
+if test {$index} = "1"
+  echo (basename (status filename)): OPTIONS must contain \"{}\" >&2
+  echo ''
+  display_help
+  exit 1
+end
+
+set opts {$argv[..(math {$index}-1)]}
+
+if not contains -- {} {$opts}
+  echo (basename (status filename)): OPTIONS must contain \"{}\" >&2
+  echo ''
+  display_help
+  exit 1
+end
+
+set files {$argv[(math {$index}+1)..]}
+
+if test (count {$files}) -eq 0
+  display_help
+  return
+end
+
+if test (count {$files}) -ge 2
+  set --erase propagated_opts
+  for opt in {$opts}
+    if test {$opt} != "{}"
+      set propagated_opts {$propagated_opts} (string escape -- {$opt})
+    else
+      set propagated_opts {$propagated_opts} \\{\\}
+    end
   end
-else
-  set opts {$argv[..-2]}
-  set files {$argv[-1]}
+  string join0 -- {$files} \
+      | parallel --null (string escape -- (realpath (status current-filename))) {$propagated_opts} --
+  return
 end
 
 if test (count {$files}) -eq 1
   set file {$files}
-  if test -e {$file}
-    set tmp_dir (mktemp --directory)
-    mkdir {$tmp_dir}/miff
-    set file_base (basename {$file})
-    set name (string split --fields 1 --max 1 --no-empty --right -- . {$file_base})
-    set ext (string split --fields 2 --max 1 --no-empty --right -- . {$file_base})
-    magick {$file} {$opts} {$tmp_dir}/{$name}.jpg
-    magick {$file} {$opts} {$tmp_dir}/{$name}.webp
-    set output (keepsmallest \
-      {$tmp_dir}/{$name}.jpg \
-      {$tmp_dir}/{$name}.webp \
-      (magick {$file} {$opts} miff:- | minify {$tmp_dir}/miff/{$name}))
-    set output (replace {$file} {$output})
-    if test (dirname {$output}) = "."
-      echo (basename {$output})
-    else
-      echo {$output}
-    end
-    rmdir {$tmp_dir}/miff
-    rmdir {$tmp_dir}
-  else
+  if not test -e {$file}
     echo \"{$file}\" not found >&2
+    exit 1
   end
-else
-  string join0 -- {$files} \
-      | parallel --null (realpath (status current-filename)) {$opts} --
+  while contains -- {} {$opts}
+    set opts[(contains --index -- {} {$opts})] {$file}
+  end
+  set tmp_dir (mktemp --directory)
+  mkdir {$tmp_dir}/miff
+  set file_base (basename {$file})
+  set name (string split --fields 1 --max 1 --no-empty --right -- . {$file_base})
+  set ext (string split --fields 2 --max 1 --no-empty --right -- . {$file_base})
+  magick {$opts} {$tmp_dir}/{$name}.jpg
+  magick {$opts} {$tmp_dir}/{$name}.webp
+  set output (keepsmallest \
+    {$tmp_dir}/{$name}.jpg \
+    {$tmp_dir}/{$name}.webp \
+    (magick {$opts} miff:- | minify {$tmp_dir}/miff/{$name}))
+  set output (replace {$file} {$output})
+  if test (dirname {$output}) = "."
+    echo (basename {$output})
+  else
+    echo {$output}
+  end
+  rmdir {$tmp_dir}/miff
+  rmdir {$tmp_dir}
 end
+

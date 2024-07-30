@@ -1,92 +1,190 @@
-#!/usr/bin/env bash
+#!/usr/bin/env fish
 
-IFS=$'\n'; globs=( $(shopt -p nullglob extglob) ); unset IFS
-shopt -s nullglob extglob
+function display_help
+  echo usage: (basename (status filename)) [OPTIONS] NUMBER ...
+  echo options:
+  echo "  -h,--help           Show this help message."
+  echo "  -crop GEOMETRY      Crop both image by GEOMETRY."
+  echo "                      GEOMETRY format is WIDTHxHEIGHT+LEFT+TOP."
+  echo "                      Use -crop-left and -crop-right to specify"
+  echo "                      different GEOMETRY for left/right."
+  echo "  -trim=NUM_PIXELS    Trim both outer edges by NUM_PIXELS."
+  echo "                      Minus number of NUM_PIXELS trims inner edges."
+  echo "                      Use -trim-left and -trim-right to specify"
+  echo "                      different NUM_PIXELS for left/right."
+end
 
-is_uint() { case "$1" in '' | *[!0-9]* ) return 1;; esac; }
+set --erase crop_left
+set --erase crop_right
 
-cropl=
-cropr=
-rotate=
-while [ "${1:0:1}" = "-" ]; do
-    if [ "$1" = "-crop" ]; then
-        geometry=($(echo $2 | sed 's/\([0-9]\+\)x\([0-9]\+\)+\([0-9]\+\)+\([0-9]\+\)/\1 \2 \3 \4/'))
-        if [ "${#geometry[@]}" -eq 4 ] &&
-            is_uint "${geometry[0]}" &&
-            is_uint "${geometry[1]}" &&
-            is_uint "${geometry[2]}" &&
-            is_uint "${geometry[3]}"; then
-            cropl="-cropl $2"
-            cropr="-cropr $2"
-            shift 2
-        fi
-    elif [ "$1" = "-cropl" ]; then
-        geometry=($(echo $2 | sed 's/\([0-9]\+\)x\([0-9]\+\)+\([0-9]\+\)+\([0-9]\+\)/\1 \2 \3 \4/'))
-        if [ "${#geometry[@]}" -eq 4 ] &&
-            is_uint "${geometry[0]}" &&
-            is_uint "${geometry[1]}" &&
-            is_uint "${geometry[2]}" &&
-            is_uint "${geometry[3]}"; then
-            cropl="-cropl $2"
-            shift 2
-        fi
-    elif [ "$1" = "-cropr" ]; then
-        geometry=($(echo $2 | sed 's/\([0-9]\+\)x\([0-9]\+\)+\([0-9]\+\)+\([0-9]\+\)/\1 \2 \3 \4/'))
-        if [ "${#geometry[@]}" -eq 4 ] &&
-            is_uint "${geometry[0]}" &&
-            is_uint "${geometry[1]}" &&
-            is_uint "${geometry[2]}" &&
-            is_uint "${geometry[3]}"; then
-            cropr="-cropr $2"
-            shift 2
-        fi
-    elif [ "$1" = "-trim" ]; then
-        if is_uint "$2"; then
-            cropl="-triml $2"
-            cropr="-trimr $2"
-            shift 2
+while test (count {$argv}) -gt 0
+  switch $argv[1]
+    case '-crop'
+      if test (count {$argv}) -gt 1
+        if string match --quiet --regex -- '^(?<geometry>[[:digit:]]+x[[:digit:]]+\+[[:digit:]]+\+[[:digit:]]+)$' {$argv[2]}
+          set crop_left {$crop_left} -crop {$geometry}
+          set crop_right {$crop_right} -crop {$geometry}
+          set argv {$argv[3..]}
         else
-            if [ "${2:0:1}" = "-" ] && is_uint "${2:1}"; then
-                cropl="-triml $2"
-                cropr="-trimr $2"
-                shift 2
-            fi
-        fi
-    elif [ "$1" = "-triml" ]; then
-        if is_uint "$2"; then
-            cropl="-triml $2"
-            shift 2
+          echo crop: expected WIDTHxHEIGHT+LEFT+TOP\; got {$argv[2]}
+          exit 1
+        end
+      else
+        echo crop: required WIDTHxHEIGHT+LEFT+TOP
+        exit 1
+      end
+    case '-crop-left'
+      if test (count {$argv}) -gt 1
+        if string match --quiet --regex -- '^(?<geometry>[[:digit:]]+x[[:digit:]]+\+[[:digit:]]+\+[[:digit:]]+)$' {$argv[2]}
+          set crop_left {$crop_left} -crop {$geometry}
+          set argv {$argv[3..]}
         else
-            if [ "${2:0:1}" = "-" ] && is_uint "${2:1}"; then
-                cropl="-triml $2"
-                shift 2
-            fi
-        fi
-    elif [ "$1" = "-trimr" ]; then
-        if is_uint "$2"; then
-            cropr="-trimr $2"
-            shift 2
+          echo crop-left: expected WIDTHxHEIGHT+LEFT+TOP\; got {$argv[2]}
+          exit 1
+        end
+      else
+        echo crop-left: required WIDTHxHEIGHT+LEFT+TOP
+        exit 1
+      end
+    case '-crop-right'
+      if test (count {$argv}) -gt 1
+        if string match --quiet --regex -- '^(?<geometry>[[:digit:]]+x[[:digit:]]+\+[[:digit:]]+\+[[:digit:]]+)$' {$argv[2]}
+          set crop_right {$crop_right} -crop {$geometry}
+          set argv {$argv[3..]}
         else
-            if [ "${2:0:1}" = "-" ] && is_uint "${2:1}"; then
-                cropr="-trimr $2"
-                shift 2
-            fi
-        fi
-    elif [ "$1" = "-rotater" ]; then
-        rotate="-rotater"
-        shift
-    elif [ "$1" = "-rotatel" ]; then
-        rotate="-rotatel"
-        shift
+          echo crop-right: expected WIDTHxHEIGHT+LEFT+TOP\; got {$argv[2]}
+          exit 1
+        end
+      else
+        echo crop-right: required WIDTHxHEIGHT+LEFT+TOP
+        exit 1
+      end
+    case '-trim'
+      if test (count $argv) -gt 1
+        if string match --quiet --regex -- '^(?<pixel>[[:digit:]]+)$' {$argv[2]}
+          set crop_left {$crop_left} -gravity west -chop {$pixel}x0
+          set crop_right {$crop_right} -gravity east -chop {$pixel}x0
+          set argv {$argv[3..]}
+        else if string match --quiet --regex -- '^-(?<pixel>[[:digit:]]+)$' {$argv[2]}
+          set crop_left {$crop_left} -gravity east -chop {$pixel}x0
+          set crop_right {$crop_right} -gravity west -chop {$pixel}x0
+          set argv {$argv[3..]}
+        else
+          echo trim: expected a positive/negative number\; got \"{$argv[2]}\" >&2
+          exit 1
+        end
+      else
+        echo trim: expected a positive/negative number
+        exit 1
+      end
+    case '-trim-left'
+      if test (count $argv) -gt 1
+        if string match --quiet --regex -- '^(?<pixel>[[:digit:]]+)$' {$argv[2]}
+          set crop_left {$crop_left} -gravity west -chop {$pixel}x0
+          set argv {$argv[3..]}
+        else if string match --quiet --regex -- '^-(?<pixel>[[:digit:]]+)$' {$argv[2]}
+          set crop_left {$crop_left} -gravity east -chop {$pixel}x0
+          set argv {$argv[3..]}
+        else
+          echo trim-left: expected a positive/negative number\; got \"{$argv[2]}\" >&2
+          exit 1
+        end
+      else
+        echo trim-left: expected a positive/negative number
+        exit 1
+      end
+    case '-trim-right'
+      if test (count $argv) -gt 1
+        if string match --quiet --regex -- '^(?<pixel>[[:digit:]]+)$' {$argv[2]}
+          set crop_right {$crop_right} -gravity east -chop {$pixel}x0
+          set argv {$argv[3..]}
+        else if string match --quiet --regex -- '^-(?<pixel>[[:digit:]]+)$' {$argv[2]}
+          set crop_right {$crop_right} -gravity west -chop {$pixel}x0
+          set argv {$argv[3..]}
+        else
+          echo trim-right: expected a positive/negative number\; got \"{$argv[2]}\" >&2
+          exit 1
+        end
+      else
+        echo trim-right: expected a positive/negative number
+        exit 1
+      end
+    case '-two'
+      set two true
+      if not test -e two
+        mkdir two
+      end
+    case '-h' '--help'
+      display_help
+      return
+    case '*'
+      break
+  end
+end
+
+set tmp_dir (mktemp --directory --tmpdir)
+
+if test (count {$argv}) -eq 0
+  return
+end
+
+if test (count {$argv}) -ge 2
+  string join0 -- {$argv} \
+    | parallel --null (string escape (realpath (status current-filename))) {$crop_left} {$crop_right} {$two}
+end
+
+if test (count {$argv}) -eq 1
+  if not string match --quiet --regex -- '^0*(?<num>[[:digit:]]{1,3})$' {$argv}
+    echo (basename (status filename)): expected a number from 0 to 999\; got \"{$argv}\" >&2
+  else
+    set right (string pad --char 0 --width 3 {$num})
+    set left (string pad --char 0 --width 3 (math {$num}+1))
+    set --erase right_files
+    for ext in jpg png webp
+      if test -e {$right}.{$ext}
+        set right_files {$right_files} {$right}.{$ext}
+      end
+    end
+    if not test (count {$right_files}) -ge 1
+      echo (basename (status filename)): \"{$right}.\(jpg\|png\|webp\)\" not found >&2
     else
-        break
-    fi
-done
+      set --erase left_files
+      for ext in jpg png webp
+        if test -e {$left}.{$ext}
+          set left_files {$left_files} {$left}.{$ext}
+        end
+      end
+      if not test (count {$left_files}) -ge 1
+        echo (basename (status filename)): \"{$left}.\(jpg\|png\|webp\)\" not found >&2
+      else
+        echo {$crop_left},{$crop_right} > .param.tryone
+        if test (count {$right_files}) -eq 1 -a (count {$right_files}) -eq 1
+          set left_file {$left_files[1]}
+          set right_file {$right_files[1]}
+          if not set --query two
+            set output _{$right}b.jpg
+          else
+            set output tmp/{$right}b.jpg
+          end
+          cp {$left_file} {$output}
+          magix {} {$crop_left} \( {$right_file} {$crop_right} \) +append -- {$output}
+        else
+          for right_file in {$right_files}
+            for left_file in {$left_files}
+              if not set --query two
+                set output _{$left_file}+{$right_file}.jpg
+              else
+                set output two/{$left_file}+{$right_file}.jpg
+              end
+              cp {$left_file} {$output}
+              magick {} {$crop_left} \( {$right_file} {$crop_right} \) +append -- {$output}
+            end
+          end
+        end
+      end
+    end
+  end
+end
 
-for arg in "$@"; do
-    domontage 0-9 $cropl $cropr $rotate "$arg" "$arg"
-done
-
-for glob in "${globs[@]}"; do
-  $glob
-done
+# Clean up
+rmdir {$tmp_dir}

@@ -1,0 +1,10 @@
+#!/usr/bin/env fish
+
+if test (count {$argv}) -eq 0
+  set files *.{jpg,png}
+  if not test (count {$files}) -eq 0
+    magix {} -- {$files}
+  end
+else
+  magix {} -- {$argv}
+end
